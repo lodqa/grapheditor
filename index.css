@@ -1,15 +1,25 @@
+/* graph */
+
+#jsPlumb-container {
+  position: relative;
+  width: 600px;
+  height: 200px;
+}
+/* graph node */
+
 .node {
-  padding: 16px;
-  position: absolute;
-  z-index: 4;
   border: 1px solid #2e6f9a;
-  box-shadow: 2px 2px 19px #e0e0e0;
   border-radius: 8px;
-  opacity: 0.8;
+  box-shadow: 2px 2px 19px #e0e0e0;
+  box-sizing: border-box;
   cursor: move;
   font-size: 11px;
-  transition: background-color 0.25s ease-in;
+  opacity: 0.8;
+  padding: 16px;
+  position: absolute;
   max-width: 10em;
+  transition: background-color 0.25s ease-in;
+  z-index: 4;
 }
 .node:hover {
   background-color: #5c96bc;
@@ -18,7 +28,7 @@
 .nodeDragHover {
   border: 2px solid orange;
 }
- .endPoint {
+.endPoint {
   position: absolute;
   bottom: 37%;
   right: 5px;
@@ -34,6 +44,8 @@
 .endPoint:hover {
   box-shadow: 0px 0px 6px black;
 }
+/* graph edge */
+
 .edgeLabel {
   -webkit-transition: background-color 0.25s ease-in;
   -moz-transition: background-color 0.25s ease-in;

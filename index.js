@@ -5,35 +5,32 @@ import {
 }
 from 'stream'
 
+import extend from 'xtend'
+
 const option = {
   objectMode: true
 }
 
 class InputNodeControllerStream extends Readable {
-  constructor(selector) {
+  constructor(component) {
     super(option)
 
-    let component = document.querySelector(selector),
-      label = component.querySelector('.label'),
-      url = component.querySelector('.url'),
-      button = component.querySelector('.button')
-
-    button.addEventListener('click', e => this.push({
-      type: 'node',
-      action: 'add',
-      label: label.value,
-      url: url.value
-    }))
+    component.button.addEventListener('click', e => this.push(
+      extend(
+        component.value, {
+          type: 'node',
+          action: 'add'
+        }
+      )
+    ))
 
     let inputHandler = e => this.push({
       type: 'view',
-      action: 'input',
-      label: label.value,
-      url: url.value
+      action: 'input'
     })
 
-    label.addEventListener('input', inputHandler)
-    url.addEventListener('input', inputHandler)
+    component.label.addEventListener('input', inputHandler)
+    component.url.addEventListener('input', inputHandler)
   }
   _read() {}
 }
@@ -143,23 +140,18 @@ class GraphViewStream extends Transform {
 }
 
 class InputNodeViewStream extends Transform {
-  constructor(selector) {
+  constructor(component) {
     super(option)
-    let component = document.querySelector(selector)
 
-    this._label = component.querySelector('.label')
-    this._url = component.querySelector('.url')
-    this._button = component.querySelector('.button')
+    this._component = component
   }
   _transform(action, encoding, done) {
     if (action.type === 'node') {
-      this._label.value = ''
-      this._url.value = ''
-      this._button.disabled = true
+      this._component.reset()
     }
 
     if (action.type === 'view') {
-      this._button.disabled = !action.label || !action.url
+      this._component.updateDisable()
     }
 
     this.push(action)
@@ -169,10 +161,35 @@ class InputNodeViewStream extends Transform {
 
 let funnel = new FunnelStream()
 
-new InputNodeControllerStream('#input-node')
+let inputNodeComponent = function(selector) {
+  let component = document.querySelector(selector),
+    label = component.querySelector('.label'),
+    url = component.querySelector('.url'),
+    button = component.querySelector('.button')
+
+  return {
+    label: label,
+    url: url,
+    button: button,
+    get value() {
+      return {
+        label: label.value,
+        url: url.value
+      }
+    },
+    reset: () => {
+      label.value = ''
+      url.value = ''
+      button.disabled = true
+    },
+    updateDisable: () => button.disabled = !label.value || !url.value
+  }
+}('#input-node')
+
+new InputNodeControllerStream(inputNodeComponent)
   .pipe(funnel)
 
 dispatch
   .pipe(new ModelStream)
   .pipe(new GraphViewStream)
-  .pipe(new InputNodeViewStream('#input-node'))
+  .pipe(new InputNodeViewStream(inputNodeComponent))

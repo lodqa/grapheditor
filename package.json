@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "author": "shigeru.nakajima@luxiar.com",
   "dependencies": {
-    "stream-browserify": "^1.0.0"
+    "stream-browserify": "^1.0.0",
+    "xtend": "^4.0.0"
   },
   "devDependencies": {
     "babelify": "^6.0.2",

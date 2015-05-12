@@ -1,4 +1,5 @@
 import InputNodeControllerStream from './lib/stream/InputNodeControllerStream'
+import GraphControllerStream from './lib/stream/GraphControllerStream'
 import FunnelStream from './lib/stream/FunnelStream'
 import ModelStream from './lib/stream/ModelStream'
 import GraphViewStream from './lib/stream/GraphViewStream'
@@ -11,6 +12,9 @@ let funnel = new FunnelStream(),
   graph = graphComponent('#jsPlumb-container')
 
 new InputNodeControllerStream(inputNode)
+  .pipe(funnel)
+
+new GraphControllerStream(graph)
   .pipe(funnel)
 
 funnel

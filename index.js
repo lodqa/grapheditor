@@ -67,75 +67,18 @@ class ModelStream extends Transform {
 }
 
 class GraphViewStream extends Transform {
-  constructor() {
+  constructor(component) {
     super(option)
 
-    this._container = document.querySelector('#jsPlumb-container')
-    this._initJsPlumb()
+    this._component = component
   }
   _transform(action, encoding, done) {
     if (action.type === 'node') {
-      this._createNode(this._instance, this._container, action.url, action.label)
+      this._component.createNode(action.url, action.label)
     }
 
     this.push(action)
     done()
-  }
-  _initJsPlumb() {
-    this._instance = jsPlumb.getInstance({
-      Endpoint: ["Dot", {
-        radius: 2
-      }],
-      HoverPaintStyle: {
-        strokeStyle: "#1e8151",
-        lineWidth: 2
-      },
-      ConnectionOverlays: [
-        ["Arrow", {
-          location: 1,
-          id: "arrow",
-          length: 14,
-          foldback: 0.8
-        }],
-        ["Label", {
-          label: "FOO",
-          id: "label",
-          cssClass: "aLabel"
-        }]
-      ],
-      Container: "jsPlumb-container"
-    });
-  }
-  _createNode(instance, container, id, name) {
-    container.insertAdjacentHTML('beforeend', `
-    <div class="w" id="${id}">${name}
-        <div class="ep"></div>
-    </div>`)
-
-    let el = container.querySelector(`#${id}`)
-
-    instance
-      .draggable(el)
-      .makeSource(el, {
-        filter: ".ep",
-        anchor: "Continuous",
-        connector: ["StateMachine", {
-          curviness: 20
-        }],
-        connectorStyle: {
-          strokeStyle: "#5c96bc",
-          lineWidth: 2,
-          outlineColor: "transparent",
-          outlineWidth: 4
-        }
-      })
-      .makeTarget(el, {
-        dropOptions: {
-          hoverClass: "dragHover"
-        },
-        anchor: "Continuous",
-        allowLoopback: true
-      });
   }
 }
 
@@ -186,10 +129,71 @@ let inputNodeComponent = function(selector) {
   }
 }('#input-node')
 
+let graphComponent = function(selector) {
+  let instance = jsPlumb.getInstance({
+      Endpoint: ["Dot", {
+        radius: 2
+      }],
+      HoverPaintStyle: {
+        strokeStyle: "#1e8151",
+        lineWidth: 2
+      },
+      ConnectionOverlays: [
+        ["Arrow", {
+          location: 1,
+          id: "arrow",
+          length: 14,
+          foldback: 0.8
+        }],
+        ["Label", {
+          label: "FOO",
+          id: "label",
+          cssClass: "aLabel"
+        }]
+      ],
+      Container: "jsPlumb-container"
+    }),
+    container = document.querySelector('#jsPlumb-container')
+
+  return {
+    createNode: (id, name) => {
+      container.insertAdjacentHTML('beforeend', `
+      <div class="w" id="${id}">${name}
+          <div class="ep"></div>
+      </div>`)
+
+      let el = container.querySelector(`#${id}`)
+
+      instance
+        .draggable(el)
+        .makeSource(el, {
+          filter: ".ep",
+          anchor: "Continuous",
+          connector: ["StateMachine", {
+            curviness: 20
+          }],
+          connectorStyle: {
+            strokeStyle: "#5c96bc",
+            lineWidth: 2,
+            outlineColor: "transparent",
+            outlineWidth: 4
+          }
+        })
+        .makeTarget(el, {
+          dropOptions: {
+            hoverClass: "dragHover"
+          },
+          anchor: "Continuous",
+          allowLoopback: true
+        });
+    }
+  }
+}('#jsPlumb-container')
+
 new InputNodeControllerStream(inputNodeComponent)
   .pipe(funnel)
 
-dispatch
+funnel
   .pipe(new ModelStream)
-  .pipe(new GraphViewStream)
+  .pipe(new GraphViewStream(graphComponent))
   .pipe(new InputNodeViewStream(inputNodeComponent))

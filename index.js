@@ -167,10 +167,10 @@ class InputNodeViewStream extends Transform {
   }
 }
 
-let dispatch = new FunnelStream()
+let funnel = new FunnelStream()
 
 new InputNodeControllerStream('#input-node')
-  .pipe(dispatch)
+  .pipe(funnel)
 
 dispatch
   .pipe(new ModelStream)

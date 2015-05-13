@@ -5,6 +5,7 @@
   "author": "shigeru.nakajima@luxiar.com",
   "dependencies": {
     "stream-browserify": "^1.0.0",
+    "url-regex": "^2.1.2",
     "xtend": "^4.0.0"
   },
   "devDependencies": {

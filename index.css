@@ -1,3 +1,15 @@
+/* input node */
+
+.url {
+  width: 260px;
+}
+.button {
+  box-shadow: 0 0 15px 4px #42FFB2;
+  transition: box-shadow 0.3s ease-in;
+}
+.button:disabled {
+  box-shadow: none;
+}
 /* graph */
 
 #jsPlumb-container {

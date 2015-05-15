@@ -37,6 +37,9 @@
   background-color: #5c96bc;
   color: white;
 }
+.node.selected{
+  border-color: red
+}
 .nodeDragHover {
   border: 2px solid orange;
 }

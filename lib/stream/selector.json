@@ -1,0 +1,6 @@
+{
+  INPUT_NODE: '.input-node',
+  EDIT_NODE: '.edit-node',
+  MESSAGE: '.node-editor',
+  GRPAPH: '#jsPlumb-container'
+}

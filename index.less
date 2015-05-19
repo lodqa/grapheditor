@@ -5,15 +5,20 @@
   -o-transition: all @duration @ease;
   transition: all @duration @ease;
 }
-/* input node */
-.url {
-  width: 260px;
-}
-.button {
-  box-shadow: 0 0 15px 4px #42ffb2;
-  .transition(0.3s);
-  &:disabled {
-    box-shadow: none;
+/* node editor */
+.node-editor {
+  .url {
+    width: 260px;
+  }
+  .button {
+    box-shadow: 0 0 15px 4px #42ffb2;
+    .transition(0.3s);
+    &:disabled {
+      box-shadow: none;
+    }
+  }
+  .hidden {
+    display: none;
   }
 }
 /* graph */

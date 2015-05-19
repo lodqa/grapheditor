@@ -8,6 +8,7 @@
     "dom-delegate": "^2.0.3",
     "stream-browserify": "^1.0.0",
     "url-regex": "^2.1.2",
+    "uuid": "^2.0.1",
     "xtend": "^4.0.0"
   },
   "devDependencies": {

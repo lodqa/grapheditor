@@ -28,6 +28,6 @@
     "less": "lessc index.less > index.css",
     "start": "npm run browserify && npm run less",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "watchify index.js -t babelify -o bundle.js"
+    "watch": "watchify -d index.js -t babelify -o bundle.js"
   }
 }

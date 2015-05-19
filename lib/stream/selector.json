@@ -1,6 +1,7 @@
 {
   INPUT_NODE: '.input-node',
   EDIT_NODE: '.edit-node',
+  EDIT_EDGE: '.edit-edge',
   MESSAGE: '.node-editor',
   GRPAPH: '#jsPlumb-container'
 }

@@ -27,5 +27,6 @@ actionStream.push({
   target: 'edge',
   type: 'create',
   sourceUrl: 'http://google.com',
-  targetUrl: 'http://yahoo.com'
+  targetUrl: 'http://yahoo.com',
+  label: 'test'
 })

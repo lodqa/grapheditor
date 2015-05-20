@@ -28,5 +28,6 @@ actionStream.push({
   type: 'create',
   sourceUrl: 'http://google.com',
   targetUrl: 'http://yahoo.com',
-  label: 'test'
+  label: 'test',
+  url: 'http://github.com'
 })

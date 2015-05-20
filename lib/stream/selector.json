@@ -4,5 +4,6 @@
   EDIT_EDGE: '.edit-edge',
   MESSAGE: '.node-editor',
   GRPAPH: '#jsPlumb-container',
-  NODE_TABLE: '.node-table'
+  NODE_TABLE: '.node-table',
+  EDGE_TABLE: '.edge-table'
 }

@@ -104,3 +104,37 @@ path {
 //   width: 20px !important;
 //   height: 20px !important;
 // }
+/* node-tabel */
+.cell() {
+    border: 1px solid #b9b9b9;
+    padding: 3px;
+}
+
+.node-table {
+  table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    width: 300px;
+    th {
+      .cell;
+      background-color: #ddd;
+      color: #333;
+      &.id {
+        width: 32px;
+      }
+      &.range {
+        width: 50px;
+      }
+      &.referencedItem {
+        width: 100px;
+      }
+    }
+    td {
+      .cell;
+      background-color: #fff;
+      &.alert {
+        color: red;
+      }
+    }
+  }
+}

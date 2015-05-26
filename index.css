@@ -1,0 +1,129 @@
+/* node editor */
+.node-editor .url {
+  width: 260px;
+}
+.node-editor .button {
+  box-shadow: 0 0 15px 4px #42ffb2;
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+.node-editor .button:disabled {
+  box-shadow: none;
+}
+.node-editor .hidden {
+  display: none;
+}
+/* graph */
+#jsPlumb-container {
+  height: 200px;
+  position: relative;
+  width: 600px;
+}
+/* graph node */
+.node {
+  border: 1px solid #2e6f9a;
+  border-radius: 8px;
+  box-shadow: 2px 2px 19px #e0e0e0;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 11px;
+  opacity: 0.8;
+  padding: 16px;
+  position: absolute;
+  max-width: 10em;
+  -webkit-transition: all 0.25s ease-in;
+  -moz-transition: all 0.25s ease-in;
+  -o-transition: all 0.25s ease-in;
+  transition: all 0.25s ease-in;
+  z-index: 4;
+}
+.node:hover {
+  background-color: #5c96bc;
+  color: white;
+}
+.node.selected {
+  border-color: red;
+}
+.nodeDragHover {
+  border: 2px solid orange;
+}
+.endPoint {
+  background-color: orange;
+  bottom: 37%;
+  box-shadow: 0 0 2px black;
+  cursor: pointer;
+  height: 1em;
+  right: 5px;
+  position: absolute;
+  -webkit-transition: all 0.25s ease-in;
+  -moz-transition: all 0.25s ease-in;
+  -o-transition: all 0.25s ease-in;
+  transition: all 0.25s ease-in;
+  width: 1em;
+}
+.endPoint:hover {
+  box-shadow: 0 0 6px black;
+}
+/* graph edge */
+.edgeLabel {
+  -webkit-transition: all 0.25s ease-in;
+  -moz-transition: all 0.25s ease-in;
+  -o-transition: all 0.25s ease-in;
+  transition: all 0.25s ease-in;
+}
+.edgeLabel._jsPlumb_hover {
+  background-color: #1e8151;
+  color: white;
+}
+.edgeLabel.selected {
+  border-color: red;
+}
+._jsPlumb_source_hover {
+  background-color: #1e8151;
+  color: white;
+}
+._jsPlumb_target_hover {
+  background-color: #1e8151;
+  color: white;
+}
+.edgeLabel {
+  background-color: white;
+  border: 1px solid #346789;
+  border-radius: 0.5em;
+  cursor: pointer;
+  opacity: 0.8;
+  padding: 0.3em;
+}
+path {
+  cursor: pointer;
+}
+/* node-tabel */
+.table table {
+  border-collapse: collapse;
+  float: left;
+  font-size: 0.9em;
+  margin-right: 10px;
+  width: 300px;
+}
+.table table th {
+  border: 1px solid #b9b9b9;
+  padding: 3px;
+  background-color: #ddd;
+  color: #333;
+}
+.table table th.label {
+  width: 32px;
+}
+.table table th.url {
+  width: 50px;
+}
+.table table td {
+  border: 1px solid #b9b9b9;
+  padding: 3px;
+  background-color: #fff;
+}
+.table table td.selected {
+  color: red;
+}

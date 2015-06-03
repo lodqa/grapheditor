@@ -12,6 +12,13 @@
     font-size: 0.9em;
     margin-right: 10px;
     width: 300px;
+    tr {
+      height: 30px;
+      &.selected td {
+        color: white;
+        background-color: desaturate(@selectedColor, 25%);
+      }
+    }
     th {
       .cell;
       background-color: #ddd;
@@ -26,9 +33,6 @@
     td {
       .cell;
       background-color: #fff;
-      &.selected {
-        color: @selectedColor;
-      }
     }
   }
 }

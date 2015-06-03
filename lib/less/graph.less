@@ -1,0 +1,84 @@
+/* graph */
+#jsPlumb-container {
+  height: 200px;
+  position: relative;
+  width: 600px;
+}
+/* graph node */
+.node {
+  border: 1px solid #2e6f9a;
+  border-radius: 8px;
+  box-shadow: 2px 2px 19px #e0e0e0;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 11px;
+  opacity: 0.8;
+  padding: 16px;
+  position: absolute;
+  max-width: 10em;
+  .transition();
+  z-index: 4;
+  &:hover {
+    background-color: #5c96bc;
+    color: white;
+  }
+  &.selected {
+    border-color: red;
+  }
+}
+.nodeDragHover {
+  border: 2px solid orange;
+}
+.endPoint {
+  background-color: orange;
+  bottom: 37%;
+  box-shadow: 0 0 2px black;
+  cursor: pointer;
+  height: 1em;
+  right: 5px;
+  position: absolute;
+  .transition();
+  width: 1em;
+  &:hover {
+    box-shadow: 0 0 6px black;
+  }
+}
+/* graph edge */
+// mixin
+.edgehover() {
+  background-color: #1e8151;
+  color: white;
+}
+.edgeLabel {
+  .transition();
+  &._jsPlumb_hover {
+    .edgehover();
+  }
+  &.selected {
+    border-color: red;
+  }
+}
+._jsPlumb_source_hover {
+  .edgehover();
+}
+._jsPlumb_target_hover {
+  .edgehover();
+}
+.edgeLabel {
+  background-color: white;
+  border: 1px solid #346789;
+  border-radius: 0.5em;
+  cursor: pointer;
+  opacity: 0.8;
+  padding: 0.3em;
+}
+path {
+  cursor: pointer;
+}
+
+// to debug
+// ._jsPlumb_endpoint {
+//   background-color: red;
+//   width: 20px !important;
+//   height: 20px !important;
+// }

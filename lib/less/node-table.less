@@ -1,0 +1,32 @@
+/* node-tabel */
+.cell() {
+  border: 1px solid #b9b9b9;
+  padding: 3px;
+}
+.table {
+  table {
+    border-collapse: collapse;
+    float: left;
+    font-size: 0.9em;
+    margin-right: 10px;
+    width: 300px;
+    th {
+      .cell;
+      background-color: #ddd;
+      color: #333;
+      &.label {
+        width: 32px;
+      }
+      &.url {
+        width: 50px;
+      }
+    }
+    td {
+      .cell;
+      background-color: #fff;
+      &.selected {
+        color: red;
+      }
+    }
+  }
+}

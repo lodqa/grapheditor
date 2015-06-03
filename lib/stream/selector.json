@@ -1,9 +1,9 @@
 {
-  INPUT_NODE: '.input-node',
-  EDIT_NODE: '.edit-node',
-  EDIT_EDGE: '.edit-edge',
-  MESSAGE: '.node-editor',
-  GRPAPH: '#jsPlumb-container',
-  NODE_TABLE: '.node-table',
-  EDGE_TABLE: '.edge-table'
+  "INPUT_NODE": ".input-node",
+  "EDIT_NODE": ".edit-node",
+  "EDIT_EDGE": ".edit-edge",
+  "MESSAGE": ".node-editor",
+  "GRPAPH": "#jsPlumb-container",
+  "NODE_TABLE": ".node-table",
+  "EDGE_TABLE": ".edge-table"
 }

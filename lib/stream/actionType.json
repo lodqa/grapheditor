@@ -1,0 +1,11 @@
+{
+  "CANCEL": "cancel",
+  "CREATE": "create",
+  "DETACH": "detach",
+  "INPUT": "input",
+  "SELECT": "select",
+  "SNAPSHOT": "snapshot",
+  "UNSELECT": "unselect",
+  "UPDATE": "update",
+  "WARN": "warn"
+}

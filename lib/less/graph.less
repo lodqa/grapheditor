@@ -6,6 +6,11 @@
   position: relative;
   width: 600px;
 }
+.selected() {
+  background-color: desaturate(@selectedColor,25%);
+  border-color: @selectedColor;
+  color: white;
+}
 /* graph node */
 .node {
   border: 1px solid #2e6f9a;
@@ -25,7 +30,7 @@
     color: white;
   }
   &.selected {
-    border-color: @selectedColor;
+    .selected;
   }
 }
 .nodeDragHover {
@@ -57,7 +62,7 @@
     .edgehover();
   }
   &.selected {
-    border-color: @selectedColor;
+    .selected;
   }
 }
 ._jsPlumb_source_hover {

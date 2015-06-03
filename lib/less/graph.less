@@ -1,3 +1,5 @@
+@import "selected-color";
+
 /* graph */
 #jsPlumb-container {
   height: 200px;
@@ -23,7 +25,7 @@
     color: white;
   }
   &.selected {
-    border-color: red;
+    border-color: @selectedColor;
   }
 }
 .nodeDragHover {
@@ -55,7 +57,7 @@
     .edgehover();
   }
   &.selected {
-    border-color: red;
+    border-color: @selectedColor;
   }
 }
 ._jsPlumb_source_hover {
@@ -77,11 +79,11 @@ path {
 }
 .selected {
   path:nth-child(2) {
-    stroke: #f00;
+    stroke: @selectedColor;
   }
   path:nth-child(3) {
-    stroke: #f00;
-    fill: #f00;
+    stroke: @selectedColor;
+    fill: @selectedColor;
   }
 }
 

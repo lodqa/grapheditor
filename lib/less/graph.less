@@ -1,3 +1,4 @@
+@import "transition.less";
 @import "selected-color";
 
 /* graph */
@@ -23,7 +24,8 @@
   padding: 16px;
   position: absolute;
   max-width: 10em;
-  .transition();
+  .transition(0.25s ,background-color);
+  .transition(0.25s ,color);
   z-index: 4;
   &:hover {
     background-color: #5c96bc;
@@ -44,7 +46,7 @@
   height: 1em;
   right: 5px;
   position: absolute;
-  .transition();
+  .transition(0.25s, box-shadow);
   width: 1em;
   &:hover {
     box-shadow: 0 0 6px black;
@@ -57,7 +59,8 @@
   color: white;
 }
 .edgeLabel {
-  .transition();
+  .transition(0.25s ,background-color);
+  .transition(0.25s ,color);
   &._jsPlumb_hover {
     .edgehover();
   }

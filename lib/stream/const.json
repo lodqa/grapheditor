@@ -1,0 +1,33 @@
+{
+  "actionType": {
+    "AFTER_CREATE": "afterCreate",
+    "CANCEL": "cancel",
+    "CREATE": "create",
+    "DETACH": "detach",
+    "INPUT": "input",
+    "SELECT": "select",
+    "SNAPSHOT": "snapshot",
+    "UNSELECT": "unselect",
+    "UPDATE": "update",
+    "WARN": "warn"
+  },
+  "target": {
+    "MODEL_NODE": "model-node",
+    "MODEL_EDGE": "model-edge",
+    "VIEW_NODE": "view-node",
+    "VIEW_EDGE": "view-edge",
+    "MESSAGE": "message",
+    "INPUT_NODE": "input-node",
+    "EDIT_NODE": "edit-node",
+    "EDIT_EDGE": "edit-edge"
+  },
+  "selector": {
+    "INPUT_NODE": ".input-node",
+    "EDIT_NODE": ".edit-node",
+    "EDIT_EDGE": ".edit-edge",
+    "MESSAGE": ".node-editor",
+    "GRPAPH": "#jsPlumb-container",
+    "NODE_TABLE": ".node-table",
+    "EDGE_TABLE": ".edge-table"
+  }
+}

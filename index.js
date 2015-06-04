@@ -14,6 +14,7 @@ actionStream
 
 // Add default nodes to development
 actionStream.push({
+  source: ['index.js'],
   target: target.MODEL_NODE,
   type: actionType.CREATE,
   label: 'google',
@@ -21,6 +22,7 @@ actionStream.push({
 })
 
 actionStream.push({
+  source: ['index.js'],
   target: target.MODEL_NODE,
   type: actionType.CREATE,
   label: 'yahoo',
@@ -28,6 +30,7 @@ actionStream.push({
 })
 
 actionStream.push({
+  source: ['index.js'],
   target: target.MODEL_EDGE,
   type: actionType.CREATE,
   sourceUrl: 'http://google.com',

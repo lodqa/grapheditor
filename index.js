@@ -31,10 +31,28 @@ actionStream.push({
 
 actionStream.push({
   source: ['index.js'],
+  target: target.MODEL_NODE,
+  type: actionType.CREATE,
+  label: 'bing',
+  url: 'http://bing.com'
+})
+
+actionStream.push({
+  source: ['index.js'],
   target: target.MODEL_EDGE,
   type: actionType.CREATE,
   sourceUrl: 'http://google.com',
   targetUrl: 'http://yahoo.com',
   label: 'test',
   url: 'http://github.com'
+})
+
+actionStream.push({
+  source: ['index.js'],
+  target: target.MODEL_EDGE,
+  type: actionType.CREATE,
+  sourceUrl: 'http://google.com',
+  targetUrl: 'http://bing.com',
+  label: 'path2',
+  url: 'http://mozila.com'
 })

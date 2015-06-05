@@ -1,5 +1,5 @@
 @import "transition.less";
-@import "selected-color";
+@import "color.less";
 
 /* graph */
 #jsPlumb-container {
@@ -11,6 +11,10 @@
   background-color: desaturate(@selectedColor,25%);
   border-color: @selectedColor;
   color: white;
+}
+.hover() {
+  background-color: desaturate(@hoverColer, 10%);
+  border-color: @hoverColer;
 }
 /* graph node */
 .node {
@@ -28,8 +32,7 @@
   .transition(0.25s ,color);
   z-index: 4;
   &:hover {
-    background-color: #5c96bc;
-    color: white;
+    .hover;
   }
   &.selected {
     .selected;
@@ -53,26 +56,21 @@
   }
 }
 /* graph edge */
-// mixin
-.edgehover() {
-  background-color: #1e8151;
-  color: white;
-}
 .edgeLabel {
-  .transition(0.25s ,background-color);
-  .transition(0.25s ,color);
+  .transition(0.1s ,background-color);
+  .transition(0.1s ,color);
   &._jsPlumb_hover {
-    .edgehover();
+    .hover;
   }
   &.selected {
     .selected;
   }
 }
 ._jsPlumb_source_hover {
-  .edgehover();
+  .hover;
 }
 ._jsPlumb_target_hover {
-  .edgehover();
+  .hover;
 }
 .edgeLabel {
   background-color: white;
@@ -92,6 +90,15 @@ path {
   path:nth-child(3) {
     stroke: @selectedColor;
     fill: @selectedColor;
+  }
+}
+._jsPlumb_hover {
+  path:nth-child(2) {
+    stroke: @hoverColer;
+  }
+  path:nth-child(3) {
+    stroke: @hoverColer;
+    fill: @hoverColer;
   }
 }
 

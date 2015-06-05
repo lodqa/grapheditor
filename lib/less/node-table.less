@@ -1,4 +1,4 @@
-@import "selected-color.less";
+@import "color.less";
 
 /* node-tabel */
 .cell() {
@@ -19,7 +19,7 @@
         background-color: desaturate(@selectedColor, 25%);
       }
       &.hover td {
-          background-color: pink;
+          background-color: @hoverColer;
       }
     }
     th {

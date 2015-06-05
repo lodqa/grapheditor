@@ -9,15 +9,13 @@
     "SNAPSHOT": "snapshot",
     "UNSELECT": "unselect",
     "UPDATE": "update",
-    "VALIDATE": "validate",
-    "WARN": "warn"
+    "VALIDATE": "validate"
   },
   "target": {
     "MODEL_NODE": "model-node",
     "MODEL_EDGE": "model-edge",
     "VIEW_NODE": "view-node",
-    "VIEW_EDGE": "view-edge",
-    "MESSAGE": "message"
+    "VIEW_EDGE": "view-edge"
   },
   "selector": {
     "INPUT_NODE": ".input-node",

@@ -4,9 +4,11 @@
     "CANCEL": "cancel",
     "CREATE": "create",
     "DETACH": "detach",
+    "HOVER": "hover",
     "INPUT": "input",
     "SELECT": "select",
     "SNAPSHOT": "snapshot",
+    "UNHOVER": "unhover",
     "UNSELECT": "unselect",
     "UPDATE": "update",
     "VALIDATE": "validate"

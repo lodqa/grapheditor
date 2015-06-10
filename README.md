@@ -17,7 +17,7 @@ open index.html
 ```
 
 # Test
-[User Acceptance Test](https://github.com/ledsun/graph-editor/wiki/User-Acceptance-Test)
+[User Acceptance Test](https://developer.luxiar.jp/dbcls/graph-editor/wikis/home)
 
 # Commands for Development
 Watch JavaScript files.

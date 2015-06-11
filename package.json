@@ -6,6 +6,7 @@
   "dependencies": {
     "babel": "^5.4.7",
     "dom-delegate": "^2.0.3",
+    "duplexer": "^0.1.1",
     "handlebars": "^3.0.3",
     "stream-browserify": "^1.0.0",
     "url-regex": "^2.1.2",

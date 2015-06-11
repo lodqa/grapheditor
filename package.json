@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "shigeru.nakajima@luxiar.com",
   "dependencies": {
-    "babel": "^5.4.7",
+    "babel": "^5.5.6",
     "dom-delegate": "^2.0.3",
     "duplexer": "^0.1.1",
     "handlebars": "^3.0.3",
@@ -15,9 +15,9 @@
   },
   "devDependencies": {
     "babelify": "^6.1.2",
-    "browserify": "^10.2.3",
+    "browserify": "^10.2.4",
     "less": "^2.5.1",
-    "watchify": "^3.2.1"
+    "watchify": "^3.2.2"
   },
   "keywords": [
     "graph",

@@ -41,18 +41,15 @@ actionStream.push({
   source: ['index.js'],
   target: target.MODEL_EDGE,
   type: actionType.CREATE,
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://yahoo.com',
-  label: 'test',
-  url: 'http://github.com'
-})
-
-actionStream.push({
-  source: ['index.js'],
-  target: target.MODEL_EDGE,
-  type: actionType.CREATE,
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://bing.com',
-  label: 'path2',
-  url: 'http://mozila.com'
+  edges: [{
+    sourceUrl: 'http://google.com',
+    targetUrl: 'http://yahoo.com',
+    label: 'test',
+    url: 'http://github.com'
+  }, {
+    sourceUrl: 'http://google.com',
+    targetUrl: 'http://bing.com',
+    label: 'path2',
+    url: 'http://mozila.com'
+  }]
 })

@@ -5,7 +5,7 @@
   "author": "shigeru.nakajima@luxiar.com",
   "dependencies": {
     "action-stream": "^0.1.1",
-    "babel": "^5.5.6",
+    "babel": "^5.5.8",
     "dom-delegate": "^2.0.3",
     "duplexer": "^0.1.1",
     "handlebars": "^3.0.3",

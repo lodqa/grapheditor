@@ -1,13 +1,16 @@
 /* node editor */
+.node-editor label {
+  font-size: 13px;
+}
 .node-editor .url {
   width: 260px;
 }
 .node-editor .button {
   box-shadow: 0 0 15px 4px #42ffb2;
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
+  -webkit-transition: box-shadow 0.3s ease-in;
+  -moz-transition: box-shadow 0.3s ease-in;
+  -o-transition: box-shadow 0.3s ease-in;
+  transition: box-shadow 0.3s ease-in;
 }
 .node-editor .button:disabled {
   box-shadow: none;
@@ -33,18 +36,31 @@
   padding: 16px;
   position: absolute;
   max-width: 10em;
-  -webkit-transition: all 0.25s ease-in;
-  -moz-transition: all 0.25s ease-in;
-  -o-transition: all 0.25s ease-in;
-  transition: all 0.25s ease-in;
+  -webkit-transition: background-color 0.25s ease-in;
+  -moz-transition: background-color 0.25s ease-in;
+  -o-transition: background-color 0.25s ease-in;
+  transition: background-color 0.25s ease-in;
+  -webkit-transition: color 0.25s ease-in;
+  -moz-transition: color 0.25s ease-in;
+  -o-transition: color 0.25s ease-in;
+  transition: color 0.25s ease-in;
   z-index: 4;
 }
 .node:hover {
-  background-color: #5c96bc;
-  color: white;
+  background-color: #fcc3cd;
+  border-color: #ffc0cb;
 }
 .node.selected {
-  border-color: red;
+  background-color: #df2020;
+  border-color: #ff0000;
+  color: white;
+}
+.node.selected path:nth-child(2) {
+  stroke: #ff0000;
+}
+.node.selected path:nth-child(3) {
+  stroke: #ff0000;
+  fill: #ff0000;
 }
 .nodeDragHover {
   border: 2px solid orange;
@@ -57,36 +73,39 @@
   height: 1em;
   right: 5px;
   position: absolute;
-  -webkit-transition: all 0.25s ease-in;
-  -moz-transition: all 0.25s ease-in;
-  -o-transition: all 0.25s ease-in;
-  transition: all 0.25s ease-in;
+  -webkit-transition: box-shadow 0.25s ease-in;
+  -moz-transition: box-shadow 0.25s ease-in;
+  -o-transition: box-shadow 0.25s ease-in;
+  transition: box-shadow 0.25s ease-in;
   width: 1em;
 }
 .endPoint:hover {
   box-shadow: 0 0 6px black;
 }
 /* graph edge */
-.edgeLabel {
-  -webkit-transition: all 0.25s ease-in;
-  -moz-transition: all 0.25s ease-in;
-  -o-transition: all 0.25s ease-in;
-  transition: all 0.25s ease-in;
-}
 .edgeLabel._jsPlumb_hover {
-  background-color: #1e8151;
-  color: white;
+  background-color: #fcc3cd;
+  border-color: #ffc0cb;
 }
 .edgeLabel.selected {
-  border-color: red;
+  background-color: #df2020;
+  border-color: #ff0000;
+  color: white;
+}
+.edgeLabel.selected path:nth-child(2) {
+  stroke: #ff0000;
+}
+.edgeLabel.selected path:nth-child(3) {
+  stroke: #ff0000;
+  fill: #ff0000;
 }
 ._jsPlumb_source_hover {
-  background-color: #1e8151;
-  color: white;
+  background-color: #fcc3cd;
+  border-color: #ffc0cb;
 }
 ._jsPlumb_target_hover {
-  background-color: #1e8151;
-  color: white;
+  background-color: #fcc3cd;
+  border-color: #ffc0cb;
 }
 .edgeLabel {
   background-color: white;
@@ -99,6 +118,20 @@
 path {
   cursor: pointer;
 }
+.selected path:nth-child(2) {
+  stroke: #ff0000;
+}
+.selected path:nth-child(3) {
+  stroke: #ff0000;
+  fill: #ff0000;
+}
+._jsPlumb_hover path:nth-child(2) {
+  stroke: #ffc0cb;
+}
+._jsPlumb_hover path:nth-child(3) {
+  stroke: #ffc0cb;
+  fill: #ffc0cb;
+}
 /* node-tabel */
 .table table {
   border-collapse: collapse;
@@ -106,6 +139,16 @@ path {
   font-size: 0.9em;
   margin-right: 10px;
   width: 300px;
+}
+.table table tr {
+  height: 30px;
+}
+.table table tr.selected td {
+  color: white;
+  background-color: #df2020;
+}
+.table table tr.hover td {
+  background-color: #ffc0cb;
 }
 .table table th {
   border: 1px solid #b9b9b9;
@@ -123,7 +166,4 @@ path {
   border: 1px solid #b9b9b9;
   padding: 3px;
   background-color: #fff;
-}
-.table table td.selected {
-  color: red;
 }

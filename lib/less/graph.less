@@ -57,6 +57,9 @@
 }
 /* graph edge */
 .edgeLabel {
+  &.node_hover {
+    .hover;
+  }
   &._jsPlumb_hover {
     .hover;
   }
@@ -91,6 +94,14 @@
       fill: @selectedColor;
     }
   }
+  &.node_hover {
+    path:nth-child(2) {
+      stroke: @hoverColor;
+    }
+    path:nth-child(3) {
+      stroke: @hoverColor;
+      fill: @hoverColor;
+    }
   }
 }
 ._jsPlumb_hover {

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "shigeru.nakajima@luxiar.com",
   "dependencies": {
-    "action-stream": "^0.1.1",
+    "action-stream": "^0.1.2",
     "babel": "^5.5.8",
     "dom-delegate": "^2.0.3",
     "duplexer": "^0.1.1",

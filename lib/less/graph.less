@@ -13,8 +13,8 @@
   color: white;
 }
 .hover() {
-  background-color: desaturate(@hoverColer, 10%);
-  border-color: @hoverColer;
+  background-color: desaturate(@hoverColor, 10%);
+  border-color: @hoverColor;
 }
 /* graph node */
 .node {
@@ -92,11 +92,11 @@ path {
 }
 ._jsPlumb_hover {
   path:nth-child(2) {
-    stroke: @hoverColer;
+    stroke: @hoverColor;
   }
   path:nth-child(3) {
-    stroke: @hoverColer;
-    fill: @hoverColer;
+    stroke: @hoverColor;
+    fill: @hoverColor;
   }
 }
 

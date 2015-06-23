@@ -50,22 +50,61 @@ _libStreamActionStream2['default'].push({
 
 _libStreamActionStream2['default'].push({
   source: ['index.js'],
+  target: _libStreamConst.target.MODEL_NODE,
+  type: _libStreamConst.actionType.CREATE,
+  label: 'bang',
+  url: 'http://bang.com'
+});
+
+_libStreamActionStream2['default'].push({
+  source: ['index.js'],
+  target: _libStreamConst.target.MODEL_NODE,
+  type: _libStreamConst.actionType.CREATE,
+  label: 'bong',
+  url: 'http://bong.com'
+});
+
+_libStreamActionStream2['default'].push({
+  source: ['index.js'],
+  target: _libStreamConst.target.MODEL_NODE,
+  type: _libStreamConst.actionType.CREATE,
+  label: 'song',
+  url: 'http://song.com'
+});
+
+_libStreamActionStream2['default'].push({
+  source: ['index.js'],
   target: _libStreamConst.target.MODEL_EDGE,
   type: _libStreamConst.actionType.CREATE,
   edges: [{
     sourceUrl: 'http://google.com',
     targetUrl: 'http://yahoo.com',
-    label: 'test',
-    url: 'http://github.com'
+    label: 'path1',
+    url: 'http://github.com/path1'
   }, {
     sourceUrl: 'http://google.com',
     targetUrl: 'http://bing.com',
     label: 'path2',
-    url: 'http://mozila.com'
+    url: 'http://path2.com'
+  }, {
+    sourceUrl: 'http://google.com',
+    targetUrl: 'http://bang.com',
+    label: 'path3',
+    url: 'http://path3.com'
+  }, {
+    sourceUrl: 'http://google.com',
+    targetUrl: 'http://bong.com',
+    label: 'path4',
+    url: 'http://path4.com'
+  }, {
+    sourceUrl: 'http://bing.com',
+    targetUrl: 'http://song.com',
+    label: 'path5',
+    url: 'http://path5.com'
   }]
 });
 
-},{"./lib/stream/actionStream":14,"./lib/stream/const":16,"./lib/stream/modelStream":22,"./lib/stream/renderStream":29,"babel/polyfill":152}],2:[function(require,module,exports){
+},{"./lib/stream/actionStream":15,"./lib/stream/const":17,"./lib/stream/modelStream":23,"./lib/stream/renderStream":31,"babel/polyfill":156}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -78,8 +117,8 @@ var _toEdgeId = require('./toEdgeId');
 
 var _toEdgeId2 = _interopRequireDefault(_toEdgeId);
 
-exports['default'] = function (edges, nodes, action) {
-  return edges.has((0, _toEdgeId2['default'])(nodes, action));
+exports['default'] = function (edges, action) {
+  return edges.has((0, _toEdgeId2['default'])(action));
 };
 
 module.exports = exports['default'];
@@ -114,18 +153,18 @@ var _toEdgeId = require('./toEdgeId');
 var _toEdgeId2 = _interopRequireDefault(_toEdgeId);
 
 exports['default'] = function () {
-  var edges = new Map();
+  var edgeMap = new Map();
 
   return {
     name: 'Edge Map',
-    verify: function verify(nodes, action) {
-      return (0, _verify3['default'])(edges, nodes, action);
+    verify: function verify(action) {
+      return (0, _verify3['default'])(edgeMap, action);
     },
-    has: function has(nodes, action) {
-      return (0, _has3['default'])(edges, nodes, action);
+    has: function has(action) {
+      return (0, _has3['default'])(edgeMap, action);
     },
     add: (function (_add) {
-      function add(_x, _x2) {
+      function add(_x) {
         return _add.apply(this, arguments);
       }
 
@@ -134,14 +173,27 @@ exports['default'] = function () {
       };
 
       return add;
-    })(function (nodes, action) {
-      return add(edges, nodes, action);
+    })(function (action) {
+      return add(edgeMap, action);
+    }),
+    del: (function (_del) {
+      function del(_x2) {
+        return _del.apply(this, arguments);
+      }
+
+      del.toString = function () {
+        return _del.toString();
+      };
+
+      return del;
+    })(function (id) {
+      return del(edgeMap, id);
     }),
     get: function get(id) {
-      return edges.get(id);
+      return edgeMap.get(id);
     },
     getId: (function (_getId) {
-      function getId(_x3, _x4) {
+      function getId(_x3) {
         return _getId.apply(this, arguments);
       }
 
@@ -150,17 +202,17 @@ exports['default'] = function () {
       };
 
       return getId;
-    })(function (nodes, action) {
-      return getId(edges, nodes, action);
+    })(function (action) {
+      return getId(edgeMap, action);
     }),
-    set: function set(nodes, action) {
-      return update(edges, nodes, action);
+    set: function set(action) {
+      return update(edgeMap, action);
     },
     taArray: function taArray() {
-      return (0, _toArray2['default'])(edges);
+      return (0, _toArray2['default'])(edgeMap);
     },
     arms: (function (_arms) {
-      function arms(_x5) {
+      function arms(_x4) {
         return _arms.apply(this, arguments);
       }
 
@@ -170,14 +222,14 @@ exports['default'] = function () {
 
       return arms;
     })(function (nodeId) {
-      return arms(edges, nodeId);
+      return arms(edgeMap, nodeId);
     })
   };
 };
 
-function arms(edges, nodeId) {
+function arms(edgeMap, nodeId) {
   var ret = [];
-  edges.forEach(function (edge) {
+  edgeMap.forEach(function (edge) {
     if (edge.sourceId === nodeId) ret.push(edge);
 
     if (edge.targetId === nodeId) ret.push(edge);
@@ -186,14 +238,14 @@ function arms(edges, nodeId) {
   return ret;
 }
 
-function getId(edges, nodes, action) {
-  var id = (0, _toEdgeId2['default'])(nodes, action);
+function getId(edgeMap, action) {
+  var id = (0, _toEdgeId2['default'])(action);
 
-  if (edges.get(id)) return (0, _toEdgeId2['default'])(nodes, action);
+  if (edgeMap.get(id)) return (0, _toEdgeId2['default'])(action);
 }
 
-function add(edges, nodes, action) {
-  var id = (0, _toEdgeId2['default'])(nodes, action),
+function add(edgeMap, action) {
+  var id = (0, _toEdgeId2['default'])(action),
       value = {
     id: id,
     label: action.label,
@@ -201,32 +253,35 @@ function add(edges, nodes, action) {
     sourceId: action.sourceId,
     targetId: action.targetId
   };
-  edges.set(id, value);
+  edgeMap.set(id, value);
 }
 
-function update(edges, nodes, action) {
+function del(edgeMap, id) {
+  var edge = edgeMap.get(id);
+  edgeMap['delete'](id);
+  return [edge.sourceId, edge.targetId];
+}
+
+function update(edgeMap, action) {
   console.assert(action.id, 'id is required to update a edge.');
 
-  var value = (0, _xtend2['default'])(edges.get(action.id), {
+  var value = (0, _xtend2['default'])(edgeMap.get(action.id), {
     label: action.label,
     url: action.url
   });
-  edges.set(action.id, value);
+  edgeMap.set(action.id, value);
 }
 module.exports = exports['default'];
 
-},{"../toArray":8,"./has":2,"./toEdgeId":4,"./verify":5,"xtend":215}],4:[function(require,module,exports){
+},{"../toArray":8,"./has":2,"./toEdgeId":4,"./verify":5,"xtend":219}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports["default"] = function (nodes, action) {
-  var sourceUrl = action.sourceUrl || nodes.get(action.sourceId).url,
-      targetUrl = action.targetUrl || nodes.get(action.targetId).url;
-
-  return "" + sourceUrl + "|" + targetUrl;
+exports["default"] = function (action) {
+  return "edge:" + action.sourceId + ":" + action.targetId;
 };
 
 module.exports = exports["default"];
@@ -244,11 +299,7 @@ var _isUrl = require('../isUrl');
 
 var _isUrl2 = _interopRequireDefault(_isUrl);
 
-var _toEdgeId = require('./toEdgeId');
-
-var _toEdgeId2 = _interopRequireDefault(_toEdgeId);
-
-exports['default'] = function (edges, nodes, action) {
+exports['default'] = function (edges, action) {
   var old = edges.get(action.id);
   // update?
   if (old && !isChange(old, action)) return {
@@ -281,7 +332,7 @@ function isChange(old, action) {
 }
 module.exports = exports['default'];
 
-},{"../isUrl":6,"./toEdgeId":4}],6:[function(require,module,exports){
+},{"../isUrl":6}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -304,7 +355,7 @@ exports['default'] = function (url) {
 
 module.exports = exports['default'];
 
-},{"url-regex":210}],7:[function(require,module,exports){
+},{"url-regex":214}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -332,7 +383,7 @@ var _isUrl = require('./isUrl');
 var _isUrl2 = _interopRequireDefault(_isUrl);
 
 exports['default'] = function () {
-  var nodes = new Map();
+  var nodeMap = new Map();
 
   return {
     name: 'Nade Map',
@@ -347,7 +398,7 @@ exports['default'] = function () {
 
       return verify;
     })(function (action) {
-      return verify(nodes, action);
+      return verify(nodeMap, action);
     }),
     add: (function (_add) {
       function add(_x2) {
@@ -360,7 +411,7 @@ exports['default'] = function () {
 
       return add;
     })(function (action) {
-      return add(nodes, action);
+      return add(nodeMap, action);
     }),
     get: (function (_get) {
       function get(_x3) {
@@ -373,7 +424,7 @@ exports['default'] = function () {
 
       return get;
     })(function (id) {
-      return get(nodes, id);
+      return get(nodeMap, id);
     }),
     getId: (function (_getId) {
       function getId(_x4) {
@@ -386,18 +437,18 @@ exports['default'] = function () {
 
       return getId;
     })(function (url) {
-      return getId(nodes, url);
+      return getId(nodeMap, url);
     }),
     set: function set(action) {
-      return update(nodes, action);
+      return update(nodeMap, action);
     },
     taArray: function taArray() {
-      return (0, _toArray2['default'])(nodes);
+      return (0, _toArray2['default'])(nodeMap);
     }
   };
 };
 
-function verify(nodes, action) {
+function verify(nodeMap, action) {
   if (action.id) {
     if (!action.label) return {
       isValid: false,
@@ -414,7 +465,7 @@ function verify(nodes, action) {
       reason: 'url is no URL.'
     };
 
-    var other = nodes.get(action.url);
+    var other = nodeMap.get(action.url);
     if (other && other.id !== action.id) return {
       isValid: false,
       reason: 'dupulicate edge.'
@@ -435,7 +486,7 @@ function verify(nodes, action) {
       reason: 'url is no URL.'
     };
 
-    if (nodes.has(action.url)) return {
+    if (nodeMap.has(action.url)) return {
       isValid: false,
       reason: 'dupulicate node.'
     };
@@ -446,10 +497,10 @@ function verify(nodes, action) {
   };
 }
 
-function add(nodes, action) {
-  var id = 'node' + _uuid2['default'].v1();
+function add(nodeMap, action) {
+  var id = 'node-' + _uuid2['default'].v1();
 
-  nodes.set(action.url, {
+  nodeMap.set(action.url, {
     id: id,
     label: action.label,
     url: action.url
@@ -458,13 +509,13 @@ function add(nodes, action) {
   return id;
 }
 
-function get(nodes, id) {
+function get(nodeMap, id) {
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
 
   try {
-    for (var _iterator = nodes[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (var _iterator = nodeMap[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var _step$value = _slicedToArray(_step.value, 2);
 
       var url = _step$value[0];
@@ -491,26 +542,26 @@ function get(nodes, id) {
   }
 }
 
-function getId(nodes, url) {
-  return nodes.get(url).id;
+function getId(nodeMap, url) {
+  return nodeMap.get(url).id;
 }
 
-function update(nodes, action) {
+function update(nodeMap, action) {
   console.assert(action.id, 'id is required to update a node.');
 
-  var old = get(nodes, action.id),
+  var old = get(nodeMap, action.id),
       value = (0, _xtend2['default'])(old, {
     id: action.id,
     label: action.label,
     url: action.url
   });
 
-  nodes['delete'](old.url);
-  nodes.set(action.url, value);
+  nodeMap['delete'](old.url);
+  nodeMap.set(action.url, value);
 }
 module.exports = exports['default'];
 
-},{"./isUrl":6,"./toArray":8,"uuid":214,"xtend":215}],8:[function(require,module,exports){
+},{"./isUrl":6,"./toArray":8,"uuid":218,"xtend":219}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -637,7 +688,7 @@ function toValue(connection) {
 }
 module.exports = exports['default'];
 
-},{"../../view/graphComponent":37,"../const":16,"action-stream":54,"xtend":215}],10:[function(require,module,exports){
+},{"../../view/graphComponent":41,"../const":17,"action-stream":58,"xtend":219}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -670,9 +721,9 @@ var _viewNodeEditorEditEdgeComponent2 = _interopRequireDefault(_viewNodeEditorEd
 
 var _const = require('../const');
 
-var _onSubmit = require('./onSubmit');
+var _putValue = require('./putValue');
 
-var _onSubmit2 = _interopRequireDefault(_onSubmit);
+var _putValue2 = _interopRequireDefault(_putValue);
 
 var _default = (function (_ActionReadable) {
   var _class = function _default(selector) {
@@ -691,18 +742,18 @@ var _default = (function (_ActionReadable) {
           container = (0, _domDelegate2['default'])(component.component);
 
       container.on('click', '.button', function (e) {
-        return (0, _onSubmit2['default'])(component, _const.target.MODEL_EDGE, _const.actionType.UPDATE, push);
+        return (0, _putValue2['default'])(component, _const.target.MODEL_EDGE, _const.actionType.UPDATE, push);
       });
 
       var inputHandler = function inputHandler(e) {
-        push((0, _xtend2['default'])({
-          target: _const.target.MODEL_EDGE,
-          type: _const.actionType.VALIDATE
-        }, component.value));
+        return (0, _putValue2['default'])(component, _const.target.MODEL_EDGE, _const.actionType.VALIDATE, push);
       };
 
       container.on('input', '.label', inputHandler);
       container.on('input', '.url', inputHandler);
+      container.on('click', '.delete-button', function (e) {
+        return (0, _putValue2['default'])(component, _const.target.MODEL_EDGE, _const.actionType.DELETE, push);
+      });
       container.on('click', '.cancel-button', function (e) {
         return push({
           target: _const.target.VIEW_EDGE,
@@ -718,7 +769,7 @@ var _default = (function (_ActionReadable) {
 exports['default'] = _default;
 module.exports = exports['default'];
 
-},{"../../view/nodeEditor/editEdgeComponent":42,"../const":16,"./onSubmit":15,"action-stream":54,"dom-delegate":163,"xtend":215}],11:[function(require,module,exports){
+},{"../../view/nodeEditor/editEdgeComponent":45,"../const":17,"./putValue":16,"action-stream":58,"dom-delegate":167,"xtend":219}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -751,9 +802,9 @@ var _viewNodeEditorEditNodeComponent2 = _interopRequireDefault(_viewNodeEditorEd
 
 var _const = require('../const');
 
-var _onSubmit = require('./onSubmit');
+var _putValue = require('./putValue');
 
-var _onSubmit2 = _interopRequireDefault(_onSubmit);
+var _putValue2 = _interopRequireDefault(_putValue);
 
 var _default = (function (_ActionReadable) {
   var _class = function _default(selector) {
@@ -772,14 +823,11 @@ var _default = (function (_ActionReadable) {
           container = (0, _domDelegate2['default'])(component.component);
 
       container.on('click', '.button', function (e) {
-        return (0, _onSubmit2['default'])(component, _const.target.MODEL_NODE, _const.actionType.UPDATE, push);
+        return (0, _putValue2['default'])(component, _const.target.MODEL_NODE, _const.actionType.UPDATE, push);
       });
 
       var inputHandler = function inputHandler(e) {
-        push((0, _xtend2['default'])({
-          target: _const.target.MODEL_NODE,
-          type: _const.actionType.VALIDATE
-        }, component.value));
+        return (0, _putValue2['default'])(component, _const.target.MODEL_NODE, _const.actionType.VALIDATE, push);
       };
 
       container.on('input', '.label', inputHandler);
@@ -799,7 +847,7 @@ var _default = (function (_ActionReadable) {
 exports['default'] = _default;
 module.exports = exports['default'];
 
-},{"../../view/nodeEditor/editNodeComponent":43,"../const":16,"./onSubmit":15,"action-stream":54,"dom-delegate":163,"xtend":215}],12:[function(require,module,exports){
+},{"../../view/nodeEditor/editNodeComponent":46,"../const":17,"./putValue":16,"action-stream":58,"dom-delegate":167,"xtend":219}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -832,9 +880,9 @@ var _viewNodeEditorInputNodeComponent2 = _interopRequireDefault(_viewNodeEditorI
 
 var _const = require('../const');
 
-var _onSubmit = require('./onSubmit');
+var _putValue = require('./putValue');
 
-var _onSubmit2 = _interopRequireDefault(_onSubmit);
+var _putValue2 = _interopRequireDefault(_putValue);
 
 var _default = (function (_ActionReadable) {
   var _class = function _default(selector) {
@@ -853,14 +901,11 @@ var _default = (function (_ActionReadable) {
           container = (0, _domDelegate2['default'])(component.component);
 
       container.on('click', '.button', function (e) {
-        return (0, _onSubmit2['default'])(component, _const.target.MODEL_NODE, _const.actionType.CREATE, push);
+        return (0, _putValue2['default'])(component, _const.target.MODEL_NODE, _const.actionType.CREATE, push);
       });
 
       var inputHandler = function inputHandler(e) {
-        push((0, _xtend2['default'])({
-          target: _const.target.MODEL_NODE,
-          type: _const.actionType.VALIDATE
-        }, component.value));
+        return (0, _putValue2['default'])(component, _const.target.MODEL_NODE, _const.actionType.VALIDATE, push);
       };
 
       container.on('input', '.label', inputHandler);
@@ -874,7 +919,66 @@ var _default = (function (_ActionReadable) {
 exports['default'] = _default;
 module.exports = exports['default'];
 
-},{"../../view/nodeEditor/inputNodeComponent":45,"../const":16,"./onSubmit":15,"action-stream":54,"dom-delegate":163,"xtend":215}],13:[function(require,module,exports){
+},{"../../view/nodeEditor/inputNodeComponent":48,"../const":17,"./putValue":16,"action-stream":58,"dom-delegate":167,"xtend":219}],13:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var _actionStream = require('action-stream');
+
+var _xtend = require('xtend');
+
+var _xtend2 = _interopRequireDefault(_xtend);
+
+var _const = require('../const');
+
+var _viewForceDirectedLayoutComponent = require('../../view/forceDirectedLayoutComponent');
+
+var _viewForceDirectedLayoutComponent2 = _interopRequireDefault(_viewForceDirectedLayoutComponent);
+
+var _default = (function (_ActionReadable) {
+  var _class = function _default(selector) {
+    _classCallCheck(this, _class);
+
+    _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this, selector);
+    this.name = 'ForceDirectedLayoutActionStream';
+  };
+
+  _inherits(_class, _ActionReadable);
+
+  _createClass(_class, [{
+    key: '_bindComponent',
+    value: function _bindComponent(selector, push) {
+      var component = (0, _viewForceDirectedLayoutComponent2['default'])();
+
+      component.setOnMove(function (val) {
+        return push((0, _xtend2['default'])(val, {
+          target: _const.target.VIEW_NODE,
+          type: _const.actionType.MOVE
+        }));
+      });
+    }
+  }]);
+
+  return _class;
+})(_actionStream.ActionReadable);
+
+exports['default'] = _default;
+module.exports = exports['default'];
+
+},{"../../view/forceDirectedLayoutComponent":38,"../const":17,"action-stream":58,"xtend":219}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -896,6 +1000,10 @@ var _domDelegate = require('dom-delegate');
 var _domDelegate2 = _interopRequireDefault(_domDelegate);
 
 var _actionStream = require('action-stream');
+
+var _xtend = require('xtend');
+
+var _xtend2 = _interopRequireDefault(_xtend);
 
 var _const = require('../const');
 
@@ -944,6 +1052,12 @@ var _default = (function (_ActionReadable) {
           id: e.target.id
         });
       });
+      component.emitter.on('dragging', function (e) {
+        return push((0, _xtend2['default'])({
+          target: _const.target.VIEW_NODE,
+          type: _const.actionType.DRAG
+        }, e));
+      });
     }
   }]);
 
@@ -953,7 +1067,7 @@ var _default = (function (_ActionReadable) {
 exports['default'] = _default;
 module.exports = exports['default'];
 
-},{"../../view/graphComponent":37,"../const":16,"action-stream":54,"dom-delegate":163}],14:[function(require,module,exports){
+},{"../../view/graphComponent":41,"../const":17,"action-stream":58,"dom-delegate":167,"xtend":219}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -986,6 +1100,10 @@ var _NodeActionStream = require('./NodeActionStream');
 
 var _NodeActionStream2 = _interopRequireDefault(_NodeActionStream);
 
+var _LayoutActionStream = require('./LayoutActionStream');
+
+var _LayoutActionStream2 = _interopRequireDefault(_LayoutActionStream);
+
 var funnel = new _actionStream.FunnelStream(true);
 
 new _InputNodeActionStream2['default'](_const.selector.INPUT_NODE).pipe(funnel);
@@ -993,11 +1111,12 @@ new _EditNodeActionStream2['default'](_const.selector.EDIT_NODE).pipe(funnel);
 new _EditEdgeActionStream2['default'](_const.selector.EDIT_EDGE).pipe(funnel);
 new _EdgeActionStream2['default'](_const.selector.GRPAPH).pipe(funnel);
 new _NodeActionStream2['default'](_const.selector.GRPAPH).pipe(funnel);
+new _LayoutActionStream2['default']('').pipe(funnel);
 
 exports['default'] = funnel;
 module.exports = exports['default'];
 
-},{"../const":16,"./EdgeActionStream":9,"./EditEdgeActionStream":10,"./EditNodeActionStream":11,"./InputNodeActionStream":12,"./NodeActionStream":13,"action-stream":54}],15:[function(require,module,exports){
+},{"../const":17,"./EdgeActionStream":9,"./EditEdgeActionStream":10,"./EditNodeActionStream":11,"./InputNodeActionStream":12,"./LayoutActionStream":13,"./NodeActionStream":14,"action-stream":58}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1019,15 +1138,18 @@ exports['default'] = function (component, target, type, push) {
 
 module.exports = exports['default'];
 
-},{"xtend":215}],16:[function(require,module,exports){
+},{"xtend":219}],17:[function(require,module,exports){
 module.exports={
   "actionType": {
     "AFTER_CREATE": "afterCreate",
+    "DELETE": "delete",
     "CANCEL": "cancel",
     "CREATE": "create",
+    "DRAG": "drag",
     "DETACH": "detach",
     "HOVER": "hover",
     "INPUT": "input",
+    "MOVE": "move",
     "SELECT": "select",
     "SNAPSHOT": "snapshot",
     "UNHOVER": "unhover",
@@ -1052,7 +1174,7 @@ module.exports={
   }
 }
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1072,10 +1194,10 @@ handelers[_const.actionType.HOVER] = search;
 handelers[_const.actionType.UNHOVER] = search;
 
 exports['default'] = function (edges, nodes, action, push) {
-  if (handelers[action.type]) handelers[action.type](edges, nodes, action, push);
+  if (handelers[action.type]) handelers[action.type](edges, action, push);
 };
 
-function search(edges, nodes, action, push) {
+function search(edges, action, push) {
   var es = edges.arms(action.id);
 
   es.forEach(function (e) {
@@ -1086,7 +1208,7 @@ function search(edges, nodes, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../const":16,"xtend":215}],18:[function(require,module,exports){
+},{"../../const":17,"xtend":219}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1099,7 +1221,7 @@ exports['default'] = function (edges, nodes, action, push) {
   checkDuplicate(action.edges);
 
   action.edges.forEach(function (e) {
-    var ret = edges.verify(nodes, e);
+    var ret = edges.verify(e);
     console.assert(ret.isValid, ret.reason, action);
 
     push({
@@ -1124,7 +1246,7 @@ function checkDuplicate(edges) {
 }
 module.exports = exports['default'];
 
-},{"../../../const":16}],19:[function(require,module,exports){
+},{"../../../const":17}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1132,6 +1254,8 @@ Object.defineProperty(exports, '__esModule', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
 
 var _xtend = require('xtend');
 
@@ -1149,19 +1273,24 @@ handelers[_const.actionType.CREATE] = _createEdge2['default'];
 handelers[_const.actionType.SELECT] = selectEdge;
 handelers[_const.actionType.UPDATE] = updateEdge;
 handelers[_const.actionType.VALIDATE] = validateEdge;
+handelers[_const.actionType.DELETE] = deleteEdge;
 
 exports['default'] = function (edges, nodes, action, push) {
   if (handelers[action.type]) handelers[action.type](edges, nodes, action, push);
 };
 
 function afterCreateEdge(edges, nodes, action, push) {
-  if (edges.has(nodes, action)) {
+  if (edges.has(action)) {
     push({
       target: _const.target.VIEW_EDGE,
       type: _const.actionType.DETACH
     });
   } else {
-    edges.add(nodes, action);
+    edges.add(action);
+
+    push({
+      target: _const.target.VIEW_EDGE
+    });
 
     push({
       target: _const.target.VIEW_EDGE,
@@ -1173,26 +1302,49 @@ function afterCreateEdge(edges, nodes, action, push) {
       push({
         target: _const.target.VIEW_EDGE,
         type: _const.actionType.SELECT,
-        id: edges.getId(nodes, action)
+        id: edges.getId(action)
       });
     }
   }
 }
 
 function selectEdge(edges, nodes, action, push) {
+  var id = edges.getId(action);
+  console.assert(id, 'No id of the edge.', action);
+
   push({
     target: _const.target.VIEW_EDGE,
-    id: edges.getId(nodes, action)
+    id: id
   });
 }
 
 function updateEdge(edges, nodes, action, push) {
-  edges.set(nodes, action);
+  edges.set(action);
 
   push((0, _xtend2['default'])(edges.get(action.id), {
     target: _const.target.VIEW_EDGE
   }));
+  push({
+    target: _const.target.VIEW_EDGE,
+    type: _const.actionType.SNAPSHOT,
+    edges: edges.taArray()
+  });
+}
 
+function deleteEdge(edges, nodes, action, push) {
+  var _edges$del = edges.del(action.id);
+
+  var _edges$del2 = _slicedToArray(_edges$del, 2);
+
+  var sourceId = _edges$del2[0];
+  var targetId = _edges$del2[1];
+
+  push({
+    sourceId: sourceId,
+    targetId: targetId,
+    target: _const.target.VIEW_EDGE,
+    type: _const.actionType.DELETE
+  });
   push({
     target: _const.target.VIEW_EDGE,
     type: _const.actionType.SNAPSHOT,
@@ -1203,11 +1355,11 @@ function updateEdge(edges, nodes, action, push) {
 function validateEdge(edges, nodes, action, push) {
   push((0, _xtend2['default'])({
     target: _const.target.VIEW_EDGE
-  }, edges.verify(nodes, action)));
+  }, edges.verify(action)));
 }
 module.exports = exports['default'];
 
-},{"../../../const":16,"./createEdge":18,"xtend":215}],20:[function(require,module,exports){
+},{"../../../const":17,"./createEdge":19,"xtend":219}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1285,7 +1437,7 @@ function validateNode(nodes, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../const":16,"xtend":215}],21:[function(require,module,exports){
+},{"../../const":17,"xtend":219}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1350,7 +1502,7 @@ var _default = (function (_ActionTransform) {
 exports['default'] = _default;
 module.exports = exports['default'];
 
-},{"../../const":16,"./handleAssociatedEdge":17,"./handleEdge":19,"./handleNode":20,"action-stream":54}],22:[function(require,module,exports){
+},{"../../const":17,"./handleAssociatedEdge":18,"./handleEdge":20,"./handleNode":21,"action-stream":58}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1374,7 +1526,7 @@ var _modelEdges2 = _interopRequireDefault(_modelEdges);
 exports['default'] = new _DataModelStream2['default']((0, _modelNodes2['default'])(), (0, _modelEdges2['default'])());
 module.exports = exports['default'];
 
-},{"../../model/edges":3,"../../model/nodes":7,"./DataModelStream":21}],23:[function(require,module,exports){
+},{"../../model/edges":3,"../../model/nodes":7,"./DataModelStream":22}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1435,16 +1587,25 @@ function handleEdge(component, action, push) {
     case _const.actionType.DETACH:
       component.detachEdge(action.connection);
       break;
+    case _const.actionType.DELETE:
+      component.deleteEdge(action.sourceId, action.targetId);
+      break;
     case _const.actionType.UPDATE:
       component.updateEdge(action.sourceId, action.targetId, action.label, action.url);
       break;
     case _const.actionType.UNSELECT:
       component.unselectEdge();
+      break;
+    case _const.actionType.HOVER:
+      component.hoverNode(action.sourceId, action.targetId);
+      break;
+    case _const.actionType.UNHOVER:
+      component.unhoverNode();
   }
 }
 module.exports = exports['default'];
 
-},{"../../view/graphComponent":37,"../const":16,"action-stream":54}],24:[function(require,module,exports){
+},{"../../view/graphComponent":41,"../const":17,"action-stream":58}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1513,7 +1674,82 @@ function handleEdge(component, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../view/edgeTableComponent":35,"../const":16,"action-stream":54}],25:[function(require,module,exports){
+},{"../../view/edgeTableComponent":37,"../const":17,"action-stream":58}],26:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var _actionStream = require('action-stream');
+
+var _const = require('../const');
+
+var _viewForceDirectedLayoutComponent = require('../../view/forceDirectedLayoutComponent');
+
+var _viewForceDirectedLayoutComponent2 = _interopRequireDefault(_viewForceDirectedLayoutComponent);
+
+var _default = (function (_ActionTransform) {
+  var _class = function _default() {
+    _classCallCheck(this, _class);
+
+    _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this);
+
+    this._component = (0, _viewForceDirectedLayoutComponent2['default'])();
+  };
+
+  _inherits(_class, _ActionTransform);
+
+  _createClass(_class, [{
+    key: '_transformAction',
+    value: function _transformAction(action, push) {
+      if (action.target === _const.target.VIEW_NODE) {
+        handleNode(this._component, action, push);
+      }
+
+      if (action.target === _const.target.VIEW_EDGE) {
+        handleEdge(this._component, action, push);
+      }
+    }
+  }]);
+
+  return _class;
+})(_actionStream.ActionTransform);
+
+exports['default'] = _default;
+
+function handleNode(component, action, push) {
+  switch (action.type) {
+    case _const.actionType.CREATE:
+      component.addNode(action.id);
+      break;
+    case _const.actionType.DRAG:
+      component.drag(action.id, action.x, action.y);
+  }
+}
+
+function handleEdge(component, action, push) {
+  switch (action.type) {
+    case _const.actionType.AFTER_CREATE:
+      component.addEdge(action.sourceId, action.targetId);
+      break;
+    case _const.actionType.DELETE:
+      component.delEdge(action.sourceId, action.targetId);
+  }
+}
+module.exports = exports['default'];
+
+},{"../../view/forceDirectedLayoutComponent":38,"../const":17,"action-stream":58}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1587,7 +1823,7 @@ function handleEdge(component, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../view/messageComponent":40,"../const":16,"action-stream":54}],26:[function(require,module,exports){
+},{"../../view/messageComponent":43,"../const":17,"action-stream":58}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1645,6 +1881,9 @@ function handleNode(component, action, push) {
     case _const.actionType.UPDATE:
       component.updateNode(action.id, action.label, action.url);
       break;
+    case _const.actionType.MOVE:
+      component.moveNode(action.id, action.x, action.y);
+      break;
     case _const.actionType.SELECT:
       component.selectNode(action.id);
       break;
@@ -1654,7 +1893,7 @@ function handleNode(component, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../view/graphComponent":37,"../const":16,"action-stream":54}],27:[function(require,module,exports){
+},{"../../view/graphComponent":41,"../const":17,"action-stream":58}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1723,7 +1962,7 @@ function handleNode(component, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../view/nodeTableComponent":52,"../const":16,"action-stream":54}],28:[function(require,module,exports){
+},{"../../view/nodeTableComponent":55,"../const":17,"action-stream":58}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1803,7 +2042,7 @@ function pushUnselect(push, target) {
 }
 module.exports = exports['default'];
 
-},{"../const":16,"action-stream":54}],29:[function(require,module,exports){
+},{"../const":17,"action-stream":58}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1819,6 +2058,10 @@ var _const = require('../const');
 var _UnselectRenderStream = require('./UnselectRenderStream');
 
 var _UnselectRenderStream2 = _interopRequireDefault(_UnselectRenderStream);
+
+var _LayoutStream = require('./LayoutStream');
+
+var _LayoutStream2 = _interopRequireDefault(_LayoutStream);
 
 var _EdgeRenderStream = require('./EdgeRenderStream');
 
@@ -1847,12 +2090,12 @@ var _EdgeTableRenderStream2 = _interopRequireDefault(_EdgeTableRenderStream);
 var stream = new _UnselectRenderStream2['default'](),
     tailStream = new _actionStream.TailStream(true);
 
-stream.pipe(new _EdgeRenderStream2['default'](_const.selector.GRPAPH)).pipe(new _NodeRenderStream2['default'](_const.selector.GRPAPH)).pipe(new _MessageRenderStream2['default'](_const.selector.MESSAGE)).pipe(_nodeEditorStream2['default']).pipe(new _NodeTableRenderStream2['default'](_const.selector.NODE_TABLE)).pipe(new _EdgeTableRenderStream2['default'](_const.selector.EDGE_TABLE)).pipe(tailStream);
+stream.pipe(new _EdgeRenderStream2['default'](_const.selector.GRPAPH)).pipe(new _NodeRenderStream2['default'](_const.selector.GRPAPH)).pipe(new _MessageRenderStream2['default'](_const.selector.MESSAGE)).pipe(_nodeEditorStream2['default']).pipe(new _NodeTableRenderStream2['default'](_const.selector.NODE_TABLE)).pipe(new _EdgeTableRenderStream2['default'](_const.selector.EDGE_TABLE)).pipe(new _LayoutStream2['default']()).pipe(tailStream);
 
 exports['default'] = stream;
 module.exports = exports['default'];
 
-},{"../const":16,"./EdgeRenderStream":23,"./EdgeTableRenderStream":24,"./MessageRenderStream":25,"./NodeRenderStream":26,"./NodeTableRenderStream":27,"./UnselectRenderStream":28,"./nodeEditorStream":34,"action-stream":54}],30:[function(require,module,exports){
+},{"../const":17,"./EdgeRenderStream":24,"./EdgeTableRenderStream":25,"./LayoutStream":26,"./MessageRenderStream":27,"./NodeRenderStream":28,"./NodeTableRenderStream":29,"./UnselectRenderStream":30,"./nodeEditorStream":36,"action-stream":58}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1915,7 +2158,7 @@ function handleEdge(component, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../../view/nodeEditor/editEdgeComponent":42,"../../const":16,"action-stream":54}],31:[function(require,module,exports){
+},{"../../../view/nodeEditor/editEdgeComponent":45,"../../const":17,"action-stream":58}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1978,7 +2221,7 @@ function handleNode(component, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../../view/nodeEditor/editNodeComponent":43,"../../const":16,"action-stream":54}],32:[function(require,module,exports){
+},{"../../../view/nodeEditor/editNodeComponent":46,"../../const":17,"action-stream":58}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2038,7 +2281,7 @@ function handleNode(component, action, push) {
 }
 module.exports = exports['default'];
 
-},{"../../../view/nodeEditor/inputNodeComponent":45,"../../const":16,"action-stream":54}],33:[function(require,module,exports){
+},{"../../../view/nodeEditor/inputNodeComponent":48,"../../const":17,"action-stream":58}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2124,6 +2367,7 @@ function handleEdge(inputNode, editNode, editEdge, action, push) {
     case _const.actionType.CANCEL:
     case _const.actionType.UPDATE:
     case _const.actionType.DETACH:
+    case _const.actionType.DELETE:
       reset(inputNode, editNode, editEdge);
   }
 }
@@ -2135,7 +2379,7 @@ function reset(inputNode, editNode, editEdge) {
 }
 module.exports = exports['default'];
 
-},{"../../../view/nodeEditor/editEdgeComponent":42,"../../../view/nodeEditor/editNodeComponent":43,"../../../view/nodeEditor/inputNodeComponent":45,"../../const":16,"action-stream":54}],34:[function(require,module,exports){
+},{"../../../view/nodeEditor/editEdgeComponent":45,"../../../view/nodeEditor/editNodeComponent":46,"../../../view/nodeEditor/inputNodeComponent":48,"../../const":17,"action-stream":58}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2172,7 +2416,7 @@ var writeStream = new _ModeRenderStream2['default'](_const.selector.INPUT_NODE, 
 exports['default'] = (0, _duplexer2['default'])(writeStream, readStream);
 module.exports = exports['default'];
 
-},{"../../const":16,"./EditEdgeRenderStream":30,"./EditNodeRenderStream":31,"./InputNodeRenderStream":32,"./ModeRenderStream":33,"duplexer":164}],35:[function(require,module,exports){
+},{"../../const":17,"./EditEdgeRenderStream":32,"./EditNodeRenderStream":33,"./InputNodeRenderStream":34,"./ModeRenderStream":35,"duplexer":168}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2314,7 +2558,7 @@ function updateDisplay(component, edges) {
 }
 module.exports = exports['default'];
 
-},{"./transform":53,"handlebars":183,"xtend":215}],36:[function(require,module,exports){
+},{"./transform":56,"handlebars":187,"xtend":219}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2323,35 +2567,174 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _moveNode = require('./moveNode');
+var _Springy = require('Springy');
 
-var _moveNode2 = _interopRequireDefault(_moveNode);
+var _Springy2 = _interopRequireDefault(_Springy);
 
-exports['default'] = function (container, instance, id, name, url) {
-  container.insertAdjacentHTML('beforeend', '\n  <div id="' + id + '" class="node" title="' + url + '">\n      ' + name + '\n      <div class="endPoint"></div>\n  </div>');
+// Singleton.
+var graph = new _Springy2['default'].Graph(),
+    layout = new _Springy2['default'].Layout.ForceDirected(graph, 400, 400, 0.5),
+    onMove = undefined,
+    renderer = new _Springy2['default'].Renderer(layout, function () {}, function () {}, function drawNode(node, p) {
+  var currentBB = layout.getBoundingBox(),
+      size = currentBB.topright.subtract(currentBB.bottomleft),
+      x = p.subtract(currentBB.bottomleft).divide(size.x).x,
+      y = p.subtract(currentBB.bottomleft).divide(size.y).y;
 
-  // Move node
-  (0, _moveNode2['default'])(container, id);
+  if (onMove) {
+    onMove({
+      id: node.id,
+      x: x,
+      y: y
+    });
+  }
+});
 
-  instance.draggable(id).makeSource(id, {
-    filter: '.endPoint',
+// For debug
+// graph.addGraphListener({
+//   graphChanged: () => console.log('Sprinfy Graph Changed', graph.edges, graph.nodes)
+// })
+
+exports['default'] = function () {
+  return {
+    setOnMove: function setOnMove(func) {
+      return onMove = func;
+    },
+    addNode: function addNode(id) {
+      return graph.addNode(new _Springy2['default'].Node(id));
+    },
+    drag: function drag(id, x, y) {
+      return dragging(graph, layout, id, x, y);
+    },
+    addEdge: (function (_addEdge) {
+      function addEdge(_x, _x2) {
+        return _addEdge.apply(this, arguments);
+      }
+
+      addEdge.toString = function () {
+        return _addEdge.toString();
+      };
+
+      return addEdge;
+    })(function (sourceId, targeId) {
+      return addEdge(graph, sourceId, targeId);
+    }),
+    delEdge: (function (_delEdge) {
+      function delEdge(_x3, _x4) {
+        return _delEdge.apply(this, arguments);
+      }
+
+      delEdge.toString = function () {
+        return _delEdge.toString();
+      };
+
+      return delEdge;
+    })(function (sourceId, targeId) {
+      return delEdge(graph, sourceId, targeId);
+    })
+  };
+};
+
+function addEdge(graph, sourceId, targeId) {
+  graph.addEdges([sourceId, targeId]);
+
+  renderer.start();
+}
+
+function delEdge(graph, sourceId, targeId) {
+  graph.filterEdges(function (edge) {
+    return edge.source.id !== sourceId || edge.target.id !== targeId;
+  });
+}
+
+function dragging(graph, layout, id, x, y) {
+  var currentBB = layout.getBoundingBox(),
+      size = currentBB.topright.subtract(currentBB.bottomleft),
+      px = x * size.x + currentBB.bottomleft.x,
+      py = y * size.y + currentBB.bottomleft.y,
+      draggingNodePoint = layout.point(graph.nodeSet[id]);
+
+  draggingNodePoint.p.x = px;
+  draggingNodePoint.p.y = py;
+
+  renderer.start();
+}
+module.exports = exports['default'];
+
+},{"Springy":57}],39:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = function (container, instance, id, name, url, callbacks) {
+  container.insertAdjacentHTML("beforeend", "\n  <div id=\"" + id + "\" class=\"node\" title=\"" + url + "\">\n      " + name + "\n      <div class=\"endPoint\"></div>\n  </div>");
+
+  instance.draggable(id, callbacks).makeSource(id, {
+    filter: ".endPoint",
     connectorStyle: {
-      strokeStyle: '#5c96bc',
+      strokeStyle: "#5c96bc",
       lineWidth: 2,
-      outlineColor: 'transparent',
+      outlineColor: "transparent",
       outlineWidth: 4
     }
   }).makeTarget(id, {
     dropOptions: {
-      hoverClass: 'nodeDragHover'
+      hoverClass: "nodeDragHover"
     },
     allowLoopback: false
   });
 };
 
+module.exports = exports["default"];
+
+},{}],40:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
+
+exports['default'] = function (emitter, container) {
+  return {
+    drag: function drag(e) {
+      try {
+        var _fromScreen = fromScreen(container, e.el.id, e.pos[0], e.pos[1]);
+
+        var _fromScreen2 = _slicedToArray(_fromScreen, 2);
+
+        var x = _fromScreen2[0];
+        var y = _fromScreen2[1];
+
+        emitter.emit('dragging', {
+          id: e.el.id,
+          x: x,
+          y: y
+        });
+      } catch (e) {
+        console.error(e, e.stack);
+      }
+    }
+  };
+};
+
+function fromScreen(container, id, left, top) {
+  var node = container.querySelector('#' + id),
+      containerStyle = window.getComputedStyle(container),
+      containerWidth = parseInt(containerStyle.width),
+      containerHeight = parseInt(containerStyle.height),
+      nodeStyle = window.getComputedStyle(node),
+      x = left / (containerWidth - parseInt(nodeStyle.width)),
+      y = top / (containerHeight - parseInt(nodeStyle.height));
+
+  return [x, y];
+}
 module.exports = exports['default'];
 
-},{"./moveNode":39}],37:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2359,6 +2742,8 @@ Object.defineProperty(exports, '__esModule', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _events = require('events');
 
 var _createNode2 = require('./createNode');
 
@@ -2368,18 +2753,25 @@ var _jsPlumbOption = require('./jsPlumbOption');
 
 var _jsPlumbOption2 = _interopRequireDefault(_jsPlumbOption);
 
-var instance = jsPlumb.getInstance(_jsPlumbOption2['default']);
+var _dragCallbacks = require('./dragCallbacks');
+
+var _dragCallbacks2 = _interopRequireDefault(_dragCallbacks);
+
+var instance = jsPlumb.getInstance(_jsPlumbOption2['default']),
+    emitter = new _events.EventEmitter();
 
 exports['default'] = function (selector) {
-  var container = document.querySelector(selector);
+  var container = document.querySelector(selector),
+      callbacks = (0, _dragCallbacks2['default'])(emitter, container);
 
   instance.setContainer(container);
 
   return {
     instance: instance,
     container: container,
+    emitter: emitter,
     createNode: function createNode(id, name, url) {
-      return (0, _createNode3['default'])(container, instance, id, name, url);
+      return (0, _createNode3['default'])(container, instance, id, name, url, callbacks);
     },
     updateNode: (function (_updateNode) {
       function updateNode(_x, _x2, _x3) {
@@ -2394,8 +2786,21 @@ exports['default'] = function (selector) {
     })(function (id, name, url) {
       return updateNode(container, id, name, url);
     }),
+    moveNode: (function (_moveNode) {
+      function moveNode(_x4, _x5, _x6) {
+        return _moveNode.apply(this, arguments);
+      }
+
+      moveNode.toString = function () {
+        return _moveNode.toString();
+      };
+
+      return moveNode;
+    })(function (id, x, y) {
+      return moveNode(container, instance, id, x, y);
+    }),
     selectNode: (function (_selectNode) {
-      function selectNode(_x4) {
+      function selectNode(_x7) {
         return _selectNode.apply(this, arguments);
       }
 
@@ -2420,8 +2825,34 @@ exports['default'] = function (selector) {
     })(function () {
       return unselectNode(container);
     }),
+    hoverNode: (function (_hoverNode) {
+      function hoverNode(_x8, _x9) {
+        return _hoverNode.apply(this, arguments);
+      }
+
+      hoverNode.toString = function () {
+        return _hoverNode.toString();
+      };
+
+      return hoverNode;
+    })(function (sourceId, targetId) {
+      return hoverNode(instance, sourceId, targetId);
+    }),
+    unhoverNode: (function (_unhoverNode) {
+      function unhoverNode() {
+        return _unhoverNode.apply(this, arguments);
+      }
+
+      unhoverNode.toString = function () {
+        return _unhoverNode.toString();
+      };
+
+      return unhoverNode;
+    })(function () {
+      return unhoverNode(container);
+    }),
     createEdge: (function (_createEdge) {
-      function createEdge(_x5, _x6, _x7, _x8) {
+      function createEdge(_x10, _x11, _x12, _x13) {
         return _createEdge.apply(this, arguments);
       }
 
@@ -2434,7 +2865,7 @@ exports['default'] = function (selector) {
       return createEdge(instance, sourceId, targetId, label, url);
     }),
     updateEdge: (function (_updateEdge) {
-      function updateEdge(_x9, _x10, _x11, _x12) {
+      function updateEdge(_x14, _x15, _x16, _x17) {
         return _updateEdge.apply(this, arguments);
       }
 
@@ -2447,7 +2878,7 @@ exports['default'] = function (selector) {
       return updateEdge(instance, sourceId, targetId, label, url);
     }),
     detachEdge: (function (_detachEdge) {
-      function detachEdge(_x13) {
+      function detachEdge(_x18) {
         return _detachEdge.apply(this, arguments);
       }
 
@@ -2459,8 +2890,21 @@ exports['default'] = function (selector) {
     })(function (connection) {
       return detachEdge(instance, connection);
     }),
+    deleteEdge: (function (_deleteEdge) {
+      function deleteEdge(_x19, _x20) {
+        return _deleteEdge.apply(this, arguments);
+      }
+
+      deleteEdge.toString = function () {
+        return _deleteEdge.toString();
+      };
+
+      return deleteEdge;
+    })(function (sourceId, targetId) {
+      return deleteEdge(instance, sourceId, targetId);
+    }),
     selectEdge: (function (_selectEdge) {
-      function selectEdge(_x14) {
+      function selectEdge(_x21) {
         return _selectEdge.apply(this, arguments);
       }
 
@@ -2488,6 +2932,18 @@ exports['default'] = function (selector) {
   };
 };
 
+function moveNode(container, instance, id, x, y) {
+  var node = container.querySelector('#' + id),
+      containerStyle = window.getComputedStyle(container),
+      containerWidth = parseInt(containerStyle.width),
+      containerHeight = parseInt(containerStyle.height),
+      nodeStyle = window.getComputedStyle(node);
+
+  node.style.left = (containerWidth - parseInt(nodeStyle.width)) * x + 'px';
+  node.style.top = (containerHeight - parseInt(nodeStyle.height)) * y + 'px';
+  instance.repaintEverything();
+}
+
 function updateNode(container, id, name, url) {
   var node = container.querySelector('#' + id);
   node.firstChild.nodeValue = name;
@@ -2501,6 +2957,26 @@ function selectNode(container, id) {
 
 function unselectNode(container) {
   unselect(container, '.node');
+}
+
+function hoverNode(instance, sourceId, targetId) {
+  var connections = instance.getConnections({ source: sourceId, target: targetId });
+  var connection = connections[0];
+  connection.canvas.classList.add('node_hover');
+
+  var labelOverlay = connection.getOverlay('label');
+  if (labelOverlay) labelOverlay.canvas.classList.add('node_hover');
+}
+
+function unhoverNode(container) {
+  unhover(container, '._jsPlumb_connector');
+  unhover(container, '.edgeLabel');
+}
+
+function unhover(container, selector) {
+  Array.from(container.querySelectorAll(selector)).forEach(function (el) {
+    return el.classList.remove('node_hover');
+  });
 }
 
 function createEdge(instance, sourceId, targetId, label, url) {
@@ -2547,6 +3023,16 @@ function detachEdge(instance, connection) {
   });
 }
 
+function deleteEdge(instance, sourceId, targetId) {
+  var connections = instance.getConnections({
+    source: sourceId,
+    target: targetId
+  }),
+      connection = connections[0];
+
+  instance.detach(connection);
+}
+
 function selectEdge(container, connection) {
   unselectEdge(container);
 
@@ -2568,7 +3054,7 @@ function unselect(container, selector) {
 }
 module.exports = exports['default'];
 
-},{"./createNode":36,"./jsPlumbOption":38}],38:[function(require,module,exports){
+},{"./createNode":39,"./dragCallbacks":40,"./jsPlumbOption":42,"events":163}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2596,30 +3082,7 @@ exports['default'] = {
 };
 module.exports = exports['default'];
 
-},{}],39:[function(require,module,exports){
-// set initial position of by percentage.
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-var positions = [[0, 0], [100, 0], [0, 100], [100, 100]];
-
-exports['default'] = function (container, id) {
-  var containerStyle = window.getComputedStyle(container),
-      containerWidth = parseInt(containerStyle.width),
-      containerHeight = parseInt(containerStyle.height),
-      node = container.querySelector('#' + id),
-      nodeStyle = window.getComputedStyle(node),
-      position = positions.length ? positions.shift() : [0, 0];
-
-  node.style.left = (containerWidth - parseInt(nodeStyle.width)) * position[0] / 100 + 'px';
-  node.style.top = (containerHeight - parseInt(nodeStyle.height)) * position[1] / 100 + 'px';
-};
-
-module.exports = exports['default'];
-
-},{}],40:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2645,7 +3108,7 @@ function updateMessage(warn, message) {
 }
 module.exports = exports['default'];
 
-},{}],41:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2668,7 +3131,7 @@ exports['default'] = function (name) {
 
 module.exports = exports['default'];
 
-},{}],42:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2752,7 +3215,7 @@ exports['default'] = function (selector) {
 
 module.exports = exports['default'];
 
-},{"./getElementValue":44,"./originalId":48,"./originalLabel":49,"./originalUrl":50,"./reset":51}],43:[function(require,module,exports){
+},{"./getElementValue":47,"./originalId":51,"./originalLabel":52,"./originalUrl":53,"./reset":54}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2847,7 +3310,7 @@ exports['default'] = function (selector) {
 
 module.exports = exports['default'];
 
-},{"./attr":41,"./getElementValue":44,"./isChange":46,"./isUrl":47,"./originalLabel":49,"./originalUrl":50,"./reset":51}],44:[function(require,module,exports){
+},{"./attr":44,"./getElementValue":47,"./isChange":49,"./isUrl":50,"./originalLabel":52,"./originalUrl":53,"./reset":54}],47:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2860,7 +3323,7 @@ exports["default"] = function (el) {
 
 module.exports = exports["default"];
 
-},{}],45:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2925,7 +3388,7 @@ exports['default'] = function (selector) {
 
 module.exports = exports['default'];
 
-},{"./isUrl":47,"./reset":51,"url-regex":210}],46:[function(require,module,exports){
+},{"./isUrl":50,"./reset":54,"url-regex":214}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2952,7 +3415,7 @@ exports['default'] = function (label, url, component) {
 
 module.exports = exports['default'];
 
-},{"./getElementValue":44,"./originalLabel":49,"./originalUrl":50}],47:[function(require,module,exports){
+},{"./getElementValue":47,"./originalLabel":52,"./originalUrl":53}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2979,7 +3442,7 @@ exports['default'] = function (url) {
 
 module.exports = exports['default'];
 
-},{"./getElementValue":44,"url-regex":210}],48:[function(require,module,exports){
+},{"./getElementValue":47,"url-regex":214}],51:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2995,7 +3458,7 @@ var _attr2 = _interopRequireDefault(_attr);
 exports['default'] = (0, _attr2['default'])('data-original-id');
 module.exports = exports['default'];
 
-},{"./attr":41}],49:[function(require,module,exports){
+},{"./attr":44}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3011,7 +3474,7 @@ var _attr2 = _interopRequireDefault(_attr);
 exports['default'] = (0, _attr2['default'])('data-original-label');
 module.exports = exports['default'];
 
-},{"./attr":41}],50:[function(require,module,exports){
+},{"./attr":44}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3027,7 +3490,7 @@ var _attr2 = _interopRequireDefault(_attr);
 exports['default'] = (0, _attr2['default'])('data-original-url');
 module.exports = exports['default'];
 
-},{"./attr":41}],51:[function(require,module,exports){
+},{"./attr":44}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3042,7 +3505,7 @@ exports['default'] = function (label, url, button) {
 
 module.exports = exports['default'];
 
-},{}],52:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3180,7 +3643,7 @@ function updateDisplay(component, nodes) {
 }
 module.exports = exports['default'];
 
-},{"./transform":53,"handlebars":183}],53:[function(require,module,exports){
+},{"./transform":56,"handlebars":187}],56:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3203,7 +3666,736 @@ exports['default'] = function (array, predicate, data) {
 
 module.exports = exports['default'];
 
-},{"xtend":215}],54:[function(require,module,exports){
+},{"xtend":219}],57:[function(require,module,exports){
+/**
+ * Springy v2.7.1
+ *
+ * Copyright (c) 2010-2013 Dennis Hotson
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(function () {
+            return (root.returnExportsGlobal = factory());
+        });
+    } else if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like enviroments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else {
+        // Browser globals
+        root.Springy = factory();
+    }
+}(this, function() {
+
+	var Springy = {};
+
+	var Graph = Springy.Graph = function() {
+		this.nodeSet = {};
+		this.nodes = [];
+		this.edges = [];
+		this.adjacency = {};
+
+		this.nextNodeId = 0;
+		this.nextEdgeId = 0;
+		this.eventListeners = [];
+	};
+
+	var Node = Springy.Node = function(id, data) {
+		this.id = id;
+		this.data = (data !== undefined) ? data : {};
+
+	// Data fields used by layout algorithm in this file:
+	// this.data.mass
+	// Data used by default renderer in springyui.js
+	// this.data.label
+	};
+
+	var Edge = Springy.Edge = function(id, source, target, data) {
+		this.id = id;
+		this.source = source;
+		this.target = target;
+		this.data = (data !== undefined) ? data : {};
+
+	// Edge data field used by layout alorithm
+	// this.data.length
+	// this.data.type
+	};
+
+	Graph.prototype.addNode = function(node) {
+		if (!(node.id in this.nodeSet)) {
+			this.nodes.push(node);
+		}
+
+		this.nodeSet[node.id] = node;
+
+		this.notify();
+		return node;
+	};
+
+	Graph.prototype.addNodes = function() {
+		// accepts variable number of arguments, where each argument
+		// is a string that becomes both node identifier and label
+		for (var i = 0; i < arguments.length; i++) {
+			var name = arguments[i];
+			var node = new Node(name, {label:name});
+			this.addNode(node);
+		}
+	};
+
+	Graph.prototype.addEdge = function(edge) {
+		var exists = false;
+		this.edges.forEach(function(e) {
+			if (edge.id === e.id) { exists = true; }
+		});
+
+		if (!exists) {
+			this.edges.push(edge);
+		}
+
+		if (!(edge.source.id in this.adjacency)) {
+			this.adjacency[edge.source.id] = {};
+		}
+		if (!(edge.target.id in this.adjacency[edge.source.id])) {
+			this.adjacency[edge.source.id][edge.target.id] = [];
+		}
+
+		exists = false;
+		this.adjacency[edge.source.id][edge.target.id].forEach(function(e) {
+				if (edge.id === e.id) { exists = true; }
+		});
+
+		if (!exists) {
+			this.adjacency[edge.source.id][edge.target.id].push(edge);
+		}
+
+		this.notify();
+		return edge;
+	};
+
+	Graph.prototype.addEdges = function() {
+		// accepts variable number of arguments, where each argument
+		// is a triple [nodeid1, nodeid2, attributes]
+		for (var i = 0; i < arguments.length; i++) {
+			var e = arguments[i];
+			var node1 = this.nodeSet[e[0]];
+			if (node1 == undefined) {
+				throw new TypeError("invalid node name: " + e[0]);
+			}
+			var node2 = this.nodeSet[e[1]];
+			if (node2 == undefined) {
+				throw new TypeError("invalid node name: " + e[1]);
+			}
+			var attr = e[2];
+
+			this.newEdge(node1, node2, attr);
+		}
+	};
+
+	Graph.prototype.newNode = function(data) {
+		var node = new Node(this.nextNodeId++, data);
+		this.addNode(node);
+		return node;
+	};
+
+	Graph.prototype.newEdge = function(source, target, data) {
+		var edge = new Edge(this.nextEdgeId++, source, target, data);
+		this.addEdge(edge);
+		return edge;
+	};
+
+
+	// add nodes and edges from JSON object
+	Graph.prototype.loadJSON = function(json) {
+	/**
+	Springy's simple JSON format for graphs.
+
+	historically, Springy uses separate lists
+	of nodes and edges:
+
+		{
+			"nodes": [
+				"center",
+				"left",
+				"right",
+				"up",
+				"satellite"
+			],
+			"edges": [
+				["center", "left"],
+				["center", "right"],
+				["center", "up"]
+			]
+		}
+
+	**/
+		// parse if a string is passed (EC5+ browsers)
+		if (typeof json == 'string' || json instanceof String) {
+			json = JSON.parse( json );
+		}
+
+		if ('nodes' in json || 'edges' in json) {
+			this.addNodes.apply(this, json['nodes']);
+			this.addEdges.apply(this, json['edges']);
+		}
+	}
+
+
+	// find the edges from node1 to node2
+	Graph.prototype.getEdges = function(node1, node2) {
+		if (node1.id in this.adjacency
+			&& node2.id in this.adjacency[node1.id]) {
+			return this.adjacency[node1.id][node2.id];
+		}
+
+		return [];
+	};
+
+	// remove a node and it's associated edges from the graph
+	Graph.prototype.removeNode = function(node) {
+		if (node.id in this.nodeSet) {
+			delete this.nodeSet[node.id];
+		}
+
+		for (var i = this.nodes.length - 1; i >= 0; i--) {
+			if (this.nodes[i].id === node.id) {
+				this.nodes.splice(i, 1);
+			}
+		}
+
+		this.detachNode(node);
+	};
+
+	// removes edges associated with a given node
+	Graph.prototype.detachNode = function(node) {
+		var tmpEdges = this.edges.slice();
+		tmpEdges.forEach(function(e) {
+			if (e.source.id === node.id || e.target.id === node.id) {
+				this.removeEdge(e);
+			}
+		}, this);
+
+		this.notify();
+	};
+
+	// remove a node and it's associated edges from the graph
+	Graph.prototype.removeEdge = function(edge) {
+		for (var i = this.edges.length - 1; i >= 0; i--) {
+			if (this.edges[i].id === edge.id) {
+				this.edges.splice(i, 1);
+			}
+		}
+
+		for (var x in this.adjacency) {
+			for (var y in this.adjacency[x]) {
+				var edges = this.adjacency[x][y];
+
+				for (var j=edges.length - 1; j>=0; j--) {
+					if (this.adjacency[x][y][j].id === edge.id) {
+						this.adjacency[x][y].splice(j, 1);
+					}
+				}
+
+				// Clean up empty edge arrays
+				if (this.adjacency[x][y].length == 0) {
+					delete this.adjacency[x][y];
+				}
+			}
+
+			// Clean up empty objects
+			if (isEmpty(this.adjacency[x])) {
+				delete this.adjacency[x];
+			}
+		}
+
+		this.notify();
+	};
+
+	/* Merge a list of nodes and edges into the current graph. eg.
+	var o = {
+		nodes: [
+			{id: 123, data: {type: 'user', userid: 123, displayname: 'aaa'}},
+			{id: 234, data: {type: 'user', userid: 234, displayname: 'bbb'}}
+		],
+		edges: [
+			{from: 0, to: 1, type: 'submitted_design', directed: true, data: {weight: }}
+		]
+	}
+	*/
+	Graph.prototype.merge = function(data) {
+		var nodes = [];
+		data.nodes.forEach(function(n) {
+			nodes.push(this.addNode(new Node(n.id, n.data)));
+		}, this);
+
+		data.edges.forEach(function(e) {
+			var from = nodes[e.from];
+			var to = nodes[e.to];
+
+			var id = (e.directed)
+				? (id = e.type + "-" + from.id + "-" + to.id)
+				: (from.id < to.id) // normalise id for non-directed edges
+					? e.type + "-" + from.id + "-" + to.id
+					: e.type + "-" + to.id + "-" + from.id;
+
+			var edge = this.addEdge(new Edge(id, from, to, e.data));
+			edge.data.type = e.type;
+		}, this);
+	};
+
+	Graph.prototype.filterNodes = function(fn) {
+		var tmpNodes = this.nodes.slice();
+		tmpNodes.forEach(function(n) {
+			if (!fn(n)) {
+				this.removeNode(n);
+			}
+		}, this);
+	};
+
+	Graph.prototype.filterEdges = function(fn) {
+		var tmpEdges = this.edges.slice();
+		tmpEdges.forEach(function(e) {
+			if (!fn(e)) {
+				this.removeEdge(e);
+			}
+		}, this);
+	};
+
+
+	Graph.prototype.addGraphListener = function(obj) {
+		this.eventListeners.push(obj);
+	};
+
+	Graph.prototype.notify = function() {
+		this.eventListeners.forEach(function(obj){
+			obj.graphChanged();
+		});
+	};
+
+	// -----------
+	var Layout = Springy.Layout = {};
+	Layout.ForceDirected = function(graph, stiffness, repulsion, damping, minEnergyThreshold) {
+		this.graph = graph;
+		this.stiffness = stiffness; // spring stiffness constant
+		this.repulsion = repulsion; // repulsion constant
+		this.damping = damping; // velocity damping factor
+		this.minEnergyThreshold = minEnergyThreshold || 0.01; //threshold used to determine render stop
+
+		this.nodePoints = {}; // keep track of points associated with nodes
+		this.edgeSprings = {}; // keep track of springs associated with edges
+	};
+
+	Layout.ForceDirected.prototype.point = function(node) {
+		if (!(node.id in this.nodePoints)) {
+			var mass = (node.data.mass !== undefined) ? node.data.mass : 1.0;
+			this.nodePoints[node.id] = new Layout.ForceDirected.Point(Vector.random(), mass);
+		}
+
+		return this.nodePoints[node.id];
+	};
+
+	Layout.ForceDirected.prototype.spring = function(edge) {
+		if (!(edge.id in this.edgeSprings)) {
+			var length = (edge.data.length !== undefined) ? edge.data.length : 1.0;
+
+			var existingSpring = false;
+
+			var from = this.graph.getEdges(edge.source, edge.target);
+			from.forEach(function(e) {
+				if (existingSpring === false && e.id in this.edgeSprings) {
+					existingSpring = this.edgeSprings[e.id];
+				}
+			}, this);
+
+			if (existingSpring !== false) {
+				return new Layout.ForceDirected.Spring(existingSpring.point1, existingSpring.point2, 0.0, 0.0);
+			}
+
+			var to = this.graph.getEdges(edge.target, edge.source);
+			from.forEach(function(e){
+				if (existingSpring === false && e.id in this.edgeSprings) {
+					existingSpring = this.edgeSprings[e.id];
+				}
+			}, this);
+
+			if (existingSpring !== false) {
+				return new Layout.ForceDirected.Spring(existingSpring.point2, existingSpring.point1, 0.0, 0.0);
+			}
+
+			this.edgeSprings[edge.id] = new Layout.ForceDirected.Spring(
+				this.point(edge.source), this.point(edge.target), length, this.stiffness
+			);
+		}
+
+		return this.edgeSprings[edge.id];
+	};
+
+	// callback should accept two arguments: Node, Point
+	Layout.ForceDirected.prototype.eachNode = function(callback) {
+		var t = this;
+		this.graph.nodes.forEach(function(n){
+			callback.call(t, n, t.point(n));
+		});
+	};
+
+	// callback should accept two arguments: Edge, Spring
+	Layout.ForceDirected.prototype.eachEdge = function(callback) {
+		var t = this;
+		this.graph.edges.forEach(function(e){
+			callback.call(t, e, t.spring(e));
+		});
+	};
+
+	// callback should accept one argument: Spring
+	Layout.ForceDirected.prototype.eachSpring = function(callback) {
+		var t = this;
+		this.graph.edges.forEach(function(e){
+			callback.call(t, t.spring(e));
+		});
+	};
+
+
+	// Physics stuff
+	Layout.ForceDirected.prototype.applyCoulombsLaw = function() {
+		this.eachNode(function(n1, point1) {
+			this.eachNode(function(n2, point2) {
+				if (point1 !== point2)
+				{
+					var d = point1.p.subtract(point2.p);
+					var distance = d.magnitude() + 0.1; // avoid massive forces at small distances (and divide by zero)
+					var direction = d.normalise();
+
+					// apply force to each end point
+					point1.applyForce(direction.multiply(this.repulsion).divide(distance * distance * 0.5));
+					point2.applyForce(direction.multiply(this.repulsion).divide(distance * distance * -0.5));
+				}
+			});
+		});
+	};
+
+	Layout.ForceDirected.prototype.applyHookesLaw = function() {
+		this.eachSpring(function(spring){
+			var d = spring.point2.p.subtract(spring.point1.p); // the direction of the spring
+			var displacement = spring.length - d.magnitude();
+			var direction = d.normalise();
+
+			// apply force to each end point
+			spring.point1.applyForce(direction.multiply(spring.k * displacement * -0.5));
+			spring.point2.applyForce(direction.multiply(spring.k * displacement * 0.5));
+		});
+	};
+
+	Layout.ForceDirected.prototype.attractToCentre = function() {
+		this.eachNode(function(node, point) {
+			var direction = point.p.multiply(-1.0);
+			point.applyForce(direction.multiply(this.repulsion / 50.0));
+		});
+	};
+
+
+	Layout.ForceDirected.prototype.updateVelocity = function(timestep) {
+		this.eachNode(function(node, point) {
+			// Is this, along with updatePosition below, the only places that your
+			// integration code exist?
+			point.v = point.v.add(point.a.multiply(timestep)).multiply(this.damping);
+			point.a = new Vector(0,0);
+		});
+	};
+
+	Layout.ForceDirected.prototype.updatePosition = function(timestep) {
+		this.eachNode(function(node, point) {
+			// Same question as above; along with updateVelocity, is this all of
+			// your integration code?
+			point.p = point.p.add(point.v.multiply(timestep));
+		});
+	};
+
+	// Calculate the total kinetic energy of the system
+	Layout.ForceDirected.prototype.totalEnergy = function(timestep) {
+		var energy = 0.0;
+		this.eachNode(function(node, point) {
+			var speed = point.v.magnitude();
+			energy += 0.5 * point.m * speed * speed;
+		});
+
+		return energy;
+	};
+
+	var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }; // stolen from coffeescript, thanks jashkenas! ;-)
+
+	Springy.requestAnimationFrame = __bind(this.requestAnimationFrame ||
+		this.webkitRequestAnimationFrame ||
+		this.mozRequestAnimationFrame ||
+		this.oRequestAnimationFrame ||
+		this.msRequestAnimationFrame ||
+		(function(callback, element) {
+			this.setTimeout(callback, 10);
+		}), this);
+
+
+	/**
+	 * Start simulation if it's not running already.
+	 * In case it's running then the call is ignored, and none of the callbacks passed is ever executed.
+	 */
+	Layout.ForceDirected.prototype.start = function(render, onRenderStop, onRenderStart) {
+		var t = this;
+
+		if (this._started) return;
+		this._started = true;
+		this._stop = false;
+
+		if (onRenderStart !== undefined) { onRenderStart(); }
+
+		Springy.requestAnimationFrame(function step() {
+			t.tick(0.03);
+
+			if (render !== undefined) {
+				render();
+			}
+
+			// stop simulation when energy of the system goes below a threshold
+			if (t._stop || t.totalEnergy() < t.minEnergyThreshold) {
+				t._started = false;
+				if (onRenderStop !== undefined) { onRenderStop(); }
+			} else {
+				Springy.requestAnimationFrame(step);
+			}
+		});
+	};
+
+	Layout.ForceDirected.prototype.stop = function() {
+		this._stop = true;
+	}
+
+	Layout.ForceDirected.prototype.tick = function(timestep) {
+		this.applyCoulombsLaw();
+		this.applyHookesLaw();
+		this.attractToCentre();
+		this.updateVelocity(timestep);
+		this.updatePosition(timestep);
+	};
+
+	// Find the nearest point to a particular position
+	Layout.ForceDirected.prototype.nearest = function(pos) {
+		var min = {node: null, point: null, distance: null};
+		var t = this;
+		this.graph.nodes.forEach(function(n){
+			var point = t.point(n);
+			var distance = point.p.subtract(pos).magnitude();
+
+			if (min.distance === null || distance < min.distance) {
+				min = {node: n, point: point, distance: distance};
+			}
+		});
+
+		return min;
+	};
+
+	// returns [bottomleft, topright]
+	Layout.ForceDirected.prototype.getBoundingBox = function() {
+		var bottomleft = new Vector(-2,-2);
+		var topright = new Vector(2,2);
+
+		this.eachNode(function(n, point) {
+			if (point.p.x < bottomleft.x) {
+				bottomleft.x = point.p.x;
+			}
+			if (point.p.y < bottomleft.y) {
+				bottomleft.y = point.p.y;
+			}
+			if (point.p.x > topright.x) {
+				topright.x = point.p.x;
+			}
+			if (point.p.y > topright.y) {
+				topright.y = point.p.y;
+			}
+		});
+
+		var padding = topright.subtract(bottomleft).multiply(0.07); // ~5% padding
+
+		return {bottomleft: bottomleft.subtract(padding), topright: topright.add(padding)};
+	};
+
+
+	// Vector
+	var Vector = Springy.Vector = function(x, y) {
+		this.x = x;
+		this.y = y;
+	};
+
+	Vector.random = function() {
+		return new Vector(10.0 * (Math.random() - 0.5), 10.0 * (Math.random() - 0.5));
+	};
+
+	Vector.prototype.add = function(v2) {
+		return new Vector(this.x + v2.x, this.y + v2.y);
+	};
+
+	Vector.prototype.subtract = function(v2) {
+		return new Vector(this.x - v2.x, this.y - v2.y);
+	};
+
+	Vector.prototype.multiply = function(n) {
+		return new Vector(this.x * n, this.y * n);
+	};
+
+	Vector.prototype.divide = function(n) {
+		return new Vector((this.x / n) || 0, (this.y / n) || 0); // Avoid divide by zero errors..
+	};
+
+	Vector.prototype.magnitude = function() {
+		return Math.sqrt(this.x*this.x + this.y*this.y);
+	};
+
+	Vector.prototype.normal = function() {
+		return new Vector(-this.y, this.x);
+	};
+
+	Vector.prototype.normalise = function() {
+		return this.divide(this.magnitude());
+	};
+
+	// Point
+	Layout.ForceDirected.Point = function(position, mass) {
+		this.p = position; // position
+		this.m = mass; // mass
+		this.v = new Vector(0, 0); // velocity
+		this.a = new Vector(0, 0); // acceleration
+	};
+
+	Layout.ForceDirected.Point.prototype.applyForce = function(force) {
+		this.a = this.a.add(force.divide(this.m));
+	};
+
+	// Spring
+	Layout.ForceDirected.Spring = function(point1, point2, length, k) {
+		this.point1 = point1;
+		this.point2 = point2;
+		this.length = length; // spring length at rest
+		this.k = k; // spring constant (See Hooke's law) .. how stiff the spring is
+	};
+
+	// Layout.ForceDirected.Spring.prototype.distanceToPoint = function(point)
+	// {
+	// 	// hardcore vector arithmetic.. ohh yeah!
+	// 	// .. see http://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment/865080#865080
+	// 	var n = this.point2.p.subtract(this.point1.p).normalise().normal();
+	// 	var ac = point.p.subtract(this.point1.p);
+	// 	return Math.abs(ac.x * n.x + ac.y * n.y);
+	// };
+
+	/**
+	 * Renderer handles the layout rendering loop
+	 * @param onRenderStop optional callback function that gets executed whenever rendering stops.
+	 * @param onRenderStart optional callback function that gets executed whenever rendering starts.
+	 */
+	var Renderer = Springy.Renderer = function(layout, clear, drawEdge, drawNode, onRenderStop, onRenderStart) {
+		this.layout = layout;
+		this.clear = clear;
+		this.drawEdge = drawEdge;
+		this.drawNode = drawNode;
+		this.onRenderStop = onRenderStop;
+		this.onRenderStart = onRenderStart;
+
+		this.layout.graph.addGraphListener(this);
+	}
+
+	Renderer.prototype.graphChanged = function(e) {
+		this.start();
+	};
+
+	/**
+	 * Starts the simulation of the layout in use.
+	 *
+	 * Note that in case the algorithm is still or already running then the layout that's in use
+	 * might silently ignore the call, and your optional <code>done</code> callback is never executed.
+	 * At least the built-in ForceDirected layout behaves in this way.
+	 *
+	 * @param done An optional callback function that gets executed when the springy algorithm stops,
+	 * either because it ended or because stop() was called.
+	 */
+	Renderer.prototype.start = function(done) {
+		var t = this;
+		this.layout.start(function render() {
+			t.clear();
+
+			t.layout.eachEdge(function(edge, spring) {
+				t.drawEdge(edge, spring.point1.p, spring.point2.p);
+			});
+
+			t.layout.eachNode(function(node, point) {
+				t.drawNode(node, point.p);
+			});
+		}, this.onRenderStop, this.onRenderStart);
+	};
+
+	Renderer.prototype.stop = function() {
+		this.layout.stop();
+	};
+
+	// Array.forEach implementation for IE support..
+	//https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach
+	if ( !Array.prototype.forEach ) {
+		Array.prototype.forEach = function( callback, thisArg ) {
+			var T, k;
+			if ( this == null ) {
+				throw new TypeError( " this is null or not defined" );
+			}
+			var O = Object(this);
+			var len = O.length >>> 0; // Hack to convert O.length to a UInt32
+			if ( {}.toString.call(callback) != "[object Function]" ) {
+				throw new TypeError( callback + " is not a function" );
+			}
+			if ( thisArg ) {
+				T = thisArg;
+			}
+			k = 0;
+			while( k < len ) {
+				var kValue;
+				if ( k in O ) {
+					kValue = O[ k ];
+					callback.call( T, kValue, k, O );
+				}
+				k++;
+			}
+		};
+	}
+
+	var isEmpty = function(obj) {
+		for (var k in obj) {
+			if (obj.hasOwnProperty(k)) {
+				return false;
+			}
+		}
+		return true;
+	};
+
+  return Springy;
+}));
+
+},{}],58:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3232,7 +4424,7 @@ exports.ActionReadable = _libActionReadable2['default'];
 exports.ActionTransform = _libActionTransform2['default'];
 exports.FunnelStream = _libFunnelStream2['default'];
 exports.TailStream = _libTailStream2['default'];
-},{"./lib/ActionReadable":55,"./lib/ActionTransform":56,"./lib/FunnelStream":57,"./lib/TailStream":58}],55:[function(require,module,exports){
+},{"./lib/ActionReadable":59,"./lib/ActionTransform":60,"./lib/FunnelStream":61,"./lib/TailStream":62}],59:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3260,12 +4452,13 @@ var _defaultOption = require('./defaultOption');
 var _defaultOption2 = _interopRequireDefault(_defaultOption);
 
 var _default = (function (_Readable) {
-  var _class = function _default(selector) {
+  var _class = function _default(selector, option) {
     var _this = this;
 
     _classCallCheck(this, _class);
 
-    _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this, _defaultOption2['default']);
+    _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this, (0, _xtend2['default'])(_defaultOption2['default'], option));
+
     this._bindComponent(selector, function (action) {
       console.assert(_this.name, '"Steram" MUST has the name property when push an "action".');
       console.assert(action.target, 'An "action" MUST has the "target" property.');
@@ -3294,7 +4487,7 @@ var _default = (function (_Readable) {
 
 exports['default'] = _default;
 module.exports = exports['default'];
-},{"./defaultOption":59,"stream":195,"xtend":215}],56:[function(require,module,exports){
+},{"./defaultOption":63,"stream":199,"xtend":219}],60:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3322,10 +4515,10 @@ var _defaultOption = require('./defaultOption');
 var _defaultOption2 = _interopRequireDefault(_defaultOption);
 
 var _default = (function (_Transform) {
-  var _class = function _default() {
+  var _class = function _default(option) {
     _classCallCheck(this, _class);
 
-    _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this, _defaultOption2['default']);
+    _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this, (0, _xtend2['default'])(_defaultOption2['default'], option));
   };
 
   _inherits(_class, _Transform);
@@ -3339,10 +4532,10 @@ var _default = (function (_Transform) {
       console.assert(action.target, 'An "action" MUST has the "target" property.');
       console.assert(action.type, 'An "action" MUST has the "type" property.');
 
-      if (!this.push((0, _xtend2['default'])(action))) throw new Error('The stream is clogged.');
-
       var results = [];
       this._transformAction(action, results.push.bind(results));
+
+      if (!this.push((0, _xtend2['default'])(action))) throw new Error('The stream is clogged.');
 
       if (results.length > 0) {
         console.assert(this.name, '"Steram" MUST has the name property when push another "action".');
@@ -3367,7 +4560,7 @@ var _default = (function (_Transform) {
 
 exports['default'] = _default;
 module.exports = exports['default'];
-},{"./defaultOption":59,"stream":195,"xtend":215}],57:[function(require,module,exports){
+},{"./defaultOption":63,"stream":199,"xtend":219}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3386,15 +4579,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 var _stream = require('stream');
 
+var _xtend = require('xtend');
+
+var _xtend2 = _interopRequireDefault(_xtend);
+
 var _defaultOption = require('./defaultOption');
 
 var _defaultOption2 = _interopRequireDefault(_defaultOption);
 
 var _default = (function (_Transform) {
-  var _class = function _default(debug) {
+  var _class = function _default(debug, option) {
     _classCallCheck(this, _class);
 
-    _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this, _defaultOption2['default']);
+    _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this, (0, _xtend2['default'])(_defaultOption2['default'], option));
 
     this._debug = debug;
   };
@@ -3417,7 +4614,7 @@ var _default = (function (_Transform) {
 
 exports['default'] = _default;
 module.exports = exports['default'];
-},{"./defaultOption":59,"stream":195}],58:[function(require,module,exports){
+},{"./defaultOption":63,"stream":199,"xtend":219}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3464,13 +4661,12 @@ var _default = (function (_Writable) {
 
 exports['default'] = _default;
 module.exports = exports['default'];
-},{"./defaultOption":59,"stream":195}],59:[function(require,module,exports){
+},{"./defaultOption":63,"stream":199}],63:[function(require,module,exports){
 module.exports={
-  "objectMode": true,
-  "highWaterMark": 2
+  "objectMode": true
 }
 
-},{}],60:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -3483,7 +4679,7 @@ if (global._babelPolyfill) {
 }
 global._babelPolyfill = true;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"core-js/shim":149,"regenerator/runtime":150}],61:[function(require,module,exports){
+},{"core-js/shim":153,"regenerator/runtime":154}],65:[function(require,module,exports){
 // false -> Array#indexOf
 // true  -> Array#includes
 var $ = require('./$');
@@ -3501,7 +4697,7 @@ module.exports = function(IS_INCLUDES){
     } return !IS_INCLUDES && -1;
   };
 };
-},{"./$":82}],62:[function(require,module,exports){
+},{"./$":86}],66:[function(require,module,exports){
 // 0 -> Array#forEach
 // 1 -> Array#map
 // 2 -> Array#filter
@@ -3542,7 +4738,7 @@ module.exports = function(TYPE){
     return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
   };
 };
-},{"./$":82,"./$.ctx":70}],63:[function(require,module,exports){
+},{"./$":86,"./$.ctx":74}],67:[function(require,module,exports){
 var $ = require('./$');
 function assert(condition, msg1, msg2){
   if(!condition)throw TypeError(msg2 ? msg1 + msg2 : msg1);
@@ -3561,7 +4757,7 @@ assert.inst = function(it, Constructor, name){
   return it;
 };
 module.exports = assert;
-},{"./$":82}],64:[function(require,module,exports){
+},{"./$":86}],68:[function(require,module,exports){
 var $        = require('./$')
   , enumKeys = require('./$.enum-keys');
 // 19.1.2.1 Object.assign(target, source, ...)
@@ -3581,7 +4777,7 @@ module.exports = Object.assign || function assign(target, source){
   }
   return T;
 };
-},{"./$":82,"./$.enum-keys":73}],65:[function(require,module,exports){
+},{"./$":86,"./$.enum-keys":77}],69:[function(require,module,exports){
 var $        = require('./$')
   , TAG      = require('./$.wks')('toStringTag')
   , toString = {}.toString;
@@ -3597,7 +4793,7 @@ cof.set = function(it, tag, stat){
   if(it && !$.has(it = stat ? it : it.prototype, TAG))$.hide(it, TAG, tag);
 };
 module.exports = cof;
-},{"./$":82,"./$.wks":100}],66:[function(require,module,exports){
+},{"./$":86,"./$.wks":104}],70:[function(require,module,exports){
 'use strict';
 var $        = require('./$')
   , ctx      = require('./$.ctx')
@@ -3753,7 +4949,7 @@ module.exports = {
     }, IS_MAP ? 'entries' : 'values' , !IS_MAP, true);
   }
 };
-},{"./$":82,"./$.assert":63,"./$.ctx":70,"./$.for-of":74,"./$.iter":81,"./$.iter-define":79,"./$.mix":84,"./$.uid":98}],67:[function(require,module,exports){
+},{"./$":86,"./$.assert":67,"./$.ctx":74,"./$.for-of":78,"./$.iter":85,"./$.iter-define":83,"./$.mix":88,"./$.uid":102}],71:[function(require,module,exports){
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 var $def  = require('./$.def')
   , forOf = require('./$.for-of');
@@ -3766,7 +4962,7 @@ module.exports = function(NAME){
     }
   });
 };
-},{"./$.def":71,"./$.for-of":74}],68:[function(require,module,exports){
+},{"./$.def":75,"./$.for-of":78}],72:[function(require,module,exports){
 'use strict';
 var $         = require('./$')
   , safe      = require('./$.uid').safe
@@ -3850,7 +5046,7 @@ module.exports = {
   WEAK: WEAK,
   ID: ID
 };
-},{"./$":82,"./$.array-methods":62,"./$.assert":63,"./$.for-of":74,"./$.mix":84,"./$.uid":98}],69:[function(require,module,exports){
+},{"./$":86,"./$.array-methods":66,"./$.assert":67,"./$.for-of":78,"./$.mix":88,"./$.uid":102}],73:[function(require,module,exports){
 'use strict';
 var $     = require('./$')
   , $def  = require('./$.def')
@@ -3918,7 +5114,7 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
 
   return C;
 };
-},{"./$":82,"./$.assert":63,"./$.cof":65,"./$.def":71,"./$.for-of":74,"./$.iter":81,"./$.iter-detect":80,"./$.mix":84,"./$.redef":87,"./$.species":92}],70:[function(require,module,exports){
+},{"./$":86,"./$.assert":67,"./$.cof":69,"./$.def":75,"./$.for-of":78,"./$.iter":85,"./$.iter-detect":84,"./$.mix":88,"./$.redef":91,"./$.species":96}],74:[function(require,module,exports){
 // Optional / simple context binding
 var assertFunction = require('./$.assert').fn;
 module.exports = function(fn, that, length){
@@ -3938,7 +5134,7 @@ module.exports = function(fn, that, length){
       return fn.apply(that, arguments);
     };
 };
-},{"./$.assert":63}],71:[function(require,module,exports){
+},{"./$.assert":67}],75:[function(require,module,exports){
 var $          = require('./$')
   , global     = $.g
   , core       = $.core
@@ -3981,7 +5177,7 @@ function $def(type, name, source){
   }
 }
 module.exports = $def;
-},{"./$":82,"./$.redef":87}],72:[function(require,module,exports){
+},{"./$":86,"./$.redef":91}],76:[function(require,module,exports){
 var $        = require('./$')
   , document = $.g.document
   , isObject = $.isObject
@@ -3990,7 +5186,7 @@ var $        = require('./$')
 module.exports = function(it){
   return is ? document.createElement(it) : {};
 };
-},{"./$":82}],73:[function(require,module,exports){
+},{"./$":86}],77:[function(require,module,exports){
 var $ = require('./$');
 module.exports = function(it){
   var keys       = $.getKeys(it)
@@ -4001,7 +5197,7 @@ module.exports = function(it){
   });
   return keys;
 };
-},{"./$":82}],74:[function(require,module,exports){
+},{"./$":86}],78:[function(require,module,exports){
 var ctx  = require('./$.ctx')
   , get  = require('./$.iter').get
   , call = require('./$.iter-call');
@@ -4015,13 +5211,13 @@ module.exports = function(iterable, entries, fn, that){
     }
   }
 };
-},{"./$.ctx":70,"./$.iter":81,"./$.iter-call":78}],75:[function(require,module,exports){
+},{"./$.ctx":74,"./$.iter":85,"./$.iter-call":82}],79:[function(require,module,exports){
 module.exports = function($){
   $.FW   = true;
   $.path = $.g;
   return $;
 };
-},{}],76:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 var $ = require('./$')
   , toString = {}.toString
@@ -4042,7 +5238,7 @@ module.exports.get = function getOwnPropertyNames(it){
   if(windowNames && toString.call(it) == '[object Window]')return getWindowNames(it);
   return getNames($.toObject(it));
 };
-},{"./$":82}],77:[function(require,module,exports){
+},{"./$":86}],81:[function(require,module,exports){
 // Fast apply
 // http://jsperf.lnkit.com/fast-apply/5
 module.exports = function(fn, args, that){
@@ -4062,7 +5258,7 @@ module.exports = function(fn, args, that){
                       : fn.call(that, args[0], args[1], args[2], args[3], args[4]);
   } return              fn.apply(that, args);
 };
-},{}],78:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 var assertObject = require('./$.assert').obj;
 function close(iterator){
   var ret = iterator['return'];
@@ -4078,7 +5274,7 @@ function call(iterator, fn, value, entries){
 }
 call.close = close;
 module.exports = call;
-},{"./$.assert":63}],79:[function(require,module,exports){
+},{"./$.assert":67}],83:[function(require,module,exports){
 var $def            = require('./$.def')
   , $redef          = require('./$.redef')
   , $               = require('./$')
@@ -4129,7 +5325,7 @@ module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE)
     } else $def($def.P + $def.F * $iter.BUGGY, NAME, methods);
   }
 };
-},{"./$":82,"./$.cof":65,"./$.def":71,"./$.iter":81,"./$.redef":87,"./$.wks":100}],80:[function(require,module,exports){
+},{"./$":86,"./$.cof":69,"./$.def":75,"./$.iter":85,"./$.redef":91,"./$.wks":104}],84:[function(require,module,exports){
 var SYMBOL_ITERATOR = require('./$.wks')('iterator')
   , SAFE_CLOSING    = false;
 try {
@@ -4149,7 +5345,7 @@ module.exports = function(exec){
   } catch(e){ /* empty */ }
   return safe;
 };
-},{"./$.wks":100}],81:[function(require,module,exports){
+},{"./$.wks":104}],85:[function(require,module,exports){
 'use strict';
 var $                 = require('./$')
   , cof               = require('./$.cof')
@@ -4199,7 +5395,7 @@ module.exports = {
     cof.set(Constructor, NAME + ' Iterator');
   }
 };
-},{"./$":82,"./$.assert":63,"./$.cof":65,"./$.shared":91,"./$.wks":100}],82:[function(require,module,exports){
+},{"./$":86,"./$.assert":67,"./$.cof":69,"./$.shared":95,"./$.wks":104}],86:[function(require,module,exports){
 'use strict';
 var global = typeof self != 'undefined' ? self : Function('return this')()
   , core   = {}
@@ -4296,7 +5492,7 @@ var $ = module.exports = require('./$.fw')({
 /* eslint-disable no-undef */
 if(typeof __e != 'undefined')__e = core;
 if(typeof __g != 'undefined')__g = global;
-},{"./$.fw":75}],83:[function(require,module,exports){
+},{"./$.fw":79}],87:[function(require,module,exports){
 var $ = require('./$');
 module.exports = function(object, el){
   var O      = $.toObject(object)
@@ -4306,13 +5502,13 @@ module.exports = function(object, el){
     , key;
   while(length > index)if(O[key = keys[index++]] === el)return key;
 };
-},{"./$":82}],84:[function(require,module,exports){
+},{"./$":86}],88:[function(require,module,exports){
 var $redef = require('./$.redef');
 module.exports = function(target, src){
   for(var key in src)$redef(target, key, src[key]);
   return target;
 };
-},{"./$.redef":87}],85:[function(require,module,exports){
+},{"./$.redef":91}],89:[function(require,module,exports){
 var $            = require('./$')
   , assertObject = require('./$.assert').obj;
 module.exports = function ownKeys(it){
@@ -4321,7 +5517,7 @@ module.exports = function ownKeys(it){
     , getSymbols = $.getSymbols;
   return getSymbols ? keys.concat(getSymbols(it)) : keys;
 };
-},{"./$":82,"./$.assert":63}],86:[function(require,module,exports){
+},{"./$":86,"./$.assert":67}],90:[function(require,module,exports){
 'use strict';
 var $      = require('./$')
   , invoke = require('./$.invoke')
@@ -4345,7 +5541,7 @@ module.exports = function(/* ...pargs */){
     return invoke(fn, args, that);
   };
 };
-},{"./$":82,"./$.assert":63,"./$.invoke":77}],87:[function(require,module,exports){
+},{"./$":86,"./$.assert":67,"./$.invoke":81}],91:[function(require,module,exports){
 var $   = require('./$')
   , tpl = String({}.hasOwnProperty)
   , SRC = require('./$.uid').safe('src')
@@ -4376,7 +5572,7 @@ $.core.inspectSource = function(it){
 };
 
 module.exports = $redef;
-},{"./$":82,"./$.uid":98}],88:[function(require,module,exports){
+},{"./$":86,"./$.uid":102}],92:[function(require,module,exports){
 'use strict';
 module.exports = function(regExp, replace, isStatic){
   var replacer = replace === Object(replace) ? function(part){
@@ -4386,11 +5582,11 @@ module.exports = function(regExp, replace, isStatic){
     return String(isStatic ? it : this).replace(regExp, replacer);
   };
 };
-},{}],89:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 module.exports = Object.is || function is(x, y){
   return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
 };
-},{}],90:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var $      = require('./$')
@@ -4416,14 +5612,14 @@ module.exports = {
     : undefined),
   check: check
 };
-},{"./$":82,"./$.assert":63,"./$.ctx":70}],91:[function(require,module,exports){
+},{"./$":86,"./$.assert":67,"./$.ctx":74}],95:[function(require,module,exports){
 var $      = require('./$')
   , SHARED = '__core-js_shared__'
-  , store  = $.g[SHARED] || $.hide($.g, SHARED, {})[SHARED];
+  , store  = $.g[SHARED] || ($.g[SHARED] = {});
 module.exports = function(key){
   return store[key] || (store[key] = {});
 };
-},{"./$":82}],92:[function(require,module,exports){
+},{"./$":86}],96:[function(require,module,exports){
 var $       = require('./$')
   , SPECIES = require('./$.wks')('species');
 module.exports = function(C){
@@ -4432,7 +5628,7 @@ module.exports = function(C){
     get: $.that
   });
 };
-},{"./$":82,"./$.wks":100}],93:[function(require,module,exports){
+},{"./$":86,"./$.wks":104}],97:[function(require,module,exports){
 // true  -> String#at
 // false -> String#codePointAt
 var $ = require('./$');
@@ -4450,7 +5646,7 @@ module.exports = function(TO_STRING){
         : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
   };
 };
-},{"./$":82}],94:[function(require,module,exports){
+},{"./$":86}],98:[function(require,module,exports){
 // http://wiki.ecmascript.org/doku.php?id=strawman:string_padding
 var $      = require('./$')
   , repeat = require('./$.string-repeat');
@@ -4483,7 +5679,7 @@ module.exports = function(that, minLength, fillChar, left){
   // 11. Return a String made from S, followed by sFillVal.
   return left ? sFillVal.concat(S) : S.concat(sFillVal);
 };
-},{"./$":82,"./$.string-repeat":95}],95:[function(require,module,exports){
+},{"./$":86,"./$.string-repeat":99}],99:[function(require,module,exports){
 'use strict';
 var $ = require('./$');
 
@@ -4495,7 +5691,7 @@ module.exports = function repeat(count){
   for(;n > 0; (n >>>= 1) && (str += str))if(n & 1)res += str;
   return res;
 };
-},{"./$":82}],96:[function(require,module,exports){
+},{"./$":86}],100:[function(require,module,exports){
 'use strict';
 var $      = require('./$')
   , ctx    = require('./$.ctx')
@@ -4508,8 +5704,6 @@ var $      = require('./$')
   , process            = global.process
   , setTask            = global.setImmediate
   , clearTask          = global.clearImmediate
-  , postMessage        = global.postMessage
-  , addEventListener   = global.addEventListener
   , MessageChannel     = global.MessageChannel
   , counter            = 0
   , queue              = {}
@@ -4547,11 +5741,11 @@ if(!isFunction(setTask) || !isFunction(clearTask)){
     };
   // Modern browsers, skip implementation for WebWorkers
   // IE8 has postMessage, but it's sync & typeof its postMessage is object
-  } else if(addEventListener && isFunction(postMessage) && !global.importScripts){
+  } else if(global.addEventListener && isFunction(global.postMessage) && !global.importScripts){
     defer = function(id){
-      postMessage(id, '*');
+      global.postMessage(id, '*');
     };
-    addEventListener('message', listner, false);
+    global.addEventListener('message', listner, false);
   // WebWorkers
   } else if(isFunction(MessageChannel)){
     channel = new MessageChannel;
@@ -4577,7 +5771,7 @@ module.exports = {
   set:   setTask,
   clear: clearTask
 };
-},{"./$":82,"./$.cof":65,"./$.ctx":70,"./$.dom-create":72,"./$.invoke":77}],97:[function(require,module,exports){
+},{"./$":86,"./$.cof":69,"./$.ctx":74,"./$.dom-create":76,"./$.invoke":81}],101:[function(require,module,exports){
 module.exports = function(exec){
   try {
     exec();
@@ -4586,28 +5780,28 @@ module.exports = function(exec){
     return true;
   }
 };
-},{}],98:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 var sid = 0;
 function uid(key){
   return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++sid + Math.random()).toString(36));
 }
 uid.safe = require('./$').g.Symbol || uid;
 module.exports = uid;
-},{"./$":82}],99:[function(require,module,exports){
+},{"./$":86}],103:[function(require,module,exports){
 // 22.1.3.31 Array.prototype[@@unscopables]
 var UNSCOPABLES = require('./$.wks')('unscopables');
 if(!(UNSCOPABLES in []))require('./$').hide(Array.prototype, UNSCOPABLES, {});
 module.exports = function(key){
   [][UNSCOPABLES][key] = true;
 };
-},{"./$":82,"./$.wks":100}],100:[function(require,module,exports){
+},{"./$":86,"./$.wks":104}],104:[function(require,module,exports){
 var global = require('./$').g
   , store  = require('./$.shared')('wks');
 module.exports = function(name){
   return store[name] || (store[name] =
     global.Symbol && global.Symbol[name] || require('./$.uid').safe('Symbol.' + name));
 };
-},{"./$":82,"./$.shared":91,"./$.uid":98}],101:[function(require,module,exports){
+},{"./$":86,"./$.shared":95,"./$.uid":102}],105:[function(require,module,exports){
 var $                = require('./$')
   , cel              = require('./$.dom-create')
   , cof              = require('./$.cof')
@@ -4928,7 +6122,7 @@ if(classof(function(){ return arguments; }()) == 'Object')cof.classof = function
   var tag = classof(it);
   return tag == 'Object' && isFunction(it.callee) ? 'Arguments' : tag;
 };
-},{"./$":82,"./$.array-includes":61,"./$.array-methods":62,"./$.assert":63,"./$.cof":65,"./$.def":71,"./$.dom-create":72,"./$.invoke":77,"./$.replacer":88,"./$.throws":97,"./$.uid":98}],102:[function(require,module,exports){
+},{"./$":86,"./$.array-includes":65,"./$.array-methods":66,"./$.assert":67,"./$.cof":69,"./$.def":75,"./$.dom-create":76,"./$.invoke":81,"./$.replacer":92,"./$.throws":101,"./$.uid":102}],106:[function(require,module,exports){
 'use strict';
 var $       = require('./$')
   , $def    = require('./$.def')
@@ -4958,7 +6152,7 @@ $def($def.P, 'Array', {
   }
 });
 require('./$.unscope')('copyWithin');
-},{"./$":82,"./$.def":71,"./$.unscope":99}],103:[function(require,module,exports){
+},{"./$":86,"./$.def":75,"./$.unscope":103}],107:[function(require,module,exports){
 'use strict';
 var $       = require('./$')
   , $def    = require('./$.def')
@@ -4976,7 +6170,7 @@ $def($def.P, 'Array', {
   }
 });
 require('./$.unscope')('fill');
-},{"./$":82,"./$.def":71,"./$.unscope":99}],104:[function(require,module,exports){
+},{"./$":86,"./$.def":75,"./$.unscope":103}],108:[function(require,module,exports){
 'use strict';
 // 22.1.3.9 Array.prototype.findIndex(predicate, thisArg = undefined)
 var KEY    = 'findIndex'
@@ -4991,7 +6185,7 @@ $def($def.P + $def.F * forced, 'Array', {
   }
 });
 require('./$.unscope')(KEY);
-},{"./$.array-methods":62,"./$.def":71,"./$.unscope":99}],105:[function(require,module,exports){
+},{"./$.array-methods":66,"./$.def":75,"./$.unscope":103}],109:[function(require,module,exports){
 'use strict';
 // 22.1.3.8 Array.prototype.find(predicate, thisArg = undefined)
 var KEY    = 'find'
@@ -5006,7 +6200,7 @@ $def($def.P + $def.F * forced, 'Array', {
   }
 });
 require('./$.unscope')(KEY);
-},{"./$.array-methods":62,"./$.def":71,"./$.unscope":99}],106:[function(require,module,exports){
+},{"./$.array-methods":66,"./$.def":75,"./$.unscope":103}],110:[function(require,module,exports){
 var $     = require('./$')
   , ctx   = require('./$.ctx')
   , $def  = require('./$.def')
@@ -5039,7 +6233,7 @@ $def($def.S + $def.F * !require('./$.iter-detect')(function(iter){ Array.from(it
     return result;
   }
 });
-},{"./$":82,"./$.ctx":70,"./$.def":71,"./$.iter":81,"./$.iter-call":78,"./$.iter-detect":80}],107:[function(require,module,exports){
+},{"./$":86,"./$.ctx":74,"./$.def":75,"./$.iter":85,"./$.iter-call":82,"./$.iter-detect":84}],111:[function(require,module,exports){
 var $          = require('./$')
   , setUnscope = require('./$.unscope')
   , ITER       = require('./$.uid').safe('iter')
@@ -5074,7 +6268,7 @@ Iterators.Arguments = Iterators.Array;
 setUnscope('keys');
 setUnscope('values');
 setUnscope('entries');
-},{"./$":82,"./$.iter":81,"./$.iter-define":79,"./$.uid":98,"./$.unscope":99}],108:[function(require,module,exports){
+},{"./$":86,"./$.iter":85,"./$.iter-define":83,"./$.uid":102,"./$.unscope":103}],112:[function(require,module,exports){
 var $def = require('./$.def');
 $def($def.S, 'Array', {
   // 22.1.2.3 Array.of( ...items)
@@ -5088,9 +6282,9 @@ $def($def.S, 'Array', {
     return result;
   }
 });
-},{"./$.def":71}],109:[function(require,module,exports){
+},{"./$.def":75}],113:[function(require,module,exports){
 require('./$.species')(Array);
-},{"./$.species":92}],110:[function(require,module,exports){
+},{"./$.species":96}],114:[function(require,module,exports){
 var $             = require('./$')
   , HAS_INSTANCE  = require('./$.wks')('hasInstance')
   , FunctionProto = Function.prototype;
@@ -5102,7 +6296,7 @@ if(!(HAS_INSTANCE in FunctionProto))$.setDesc(FunctionProto, HAS_INSTANCE, {valu
   while(O = $.getProto(O))if(this.prototype === O)return true;
   return false;
 }});
-},{"./$":82,"./$.wks":100}],111:[function(require,module,exports){
+},{"./$":86,"./$.wks":104}],115:[function(require,module,exports){
 'use strict';
 var $    = require('./$')
   , NAME = 'name'
@@ -5121,7 +6315,7 @@ NAME in FunctionProto || $.FW && $.DESC && setDesc(FunctionProto, NAME, {
     $.has(this, NAME) || setDesc(this, NAME, $.desc(0, value));
   }
 });
-},{"./$":82}],112:[function(require,module,exports){
+},{"./$":86}],116:[function(require,module,exports){
 'use strict';
 var strong = require('./$.collection-strong');
 
@@ -5139,7 +6333,7 @@ require('./$.collection')('Map', function(get){
     return strong.def(this, key === 0 ? 0 : key, value);
   }
 }, strong, true);
-},{"./$.collection":69,"./$.collection-strong":66}],113:[function(require,module,exports){
+},{"./$.collection":73,"./$.collection-strong":70}],117:[function(require,module,exports){
 var Infinity = 1 / 0
   , $def  = require('./$.def')
   , E     = Math.E
@@ -5265,7 +6459,7 @@ $def($def.S, 'Math', {
     return (it > 0 ? floor : ceil)(it);
   }
 });
-},{"./$.def":71}],114:[function(require,module,exports){
+},{"./$.def":75}],118:[function(require,module,exports){
 'use strict';
 var $          = require('./$')
   , isObject   = $.isObject
@@ -5310,7 +6504,7 @@ if($.FW && !($Number('0o1') && $Number('0b1'))){
   proto.constructor = $Number;
   require('./$.redef')($.g, NUMBER, $Number);
 }
-},{"./$":82,"./$.redef":87}],115:[function(require,module,exports){
+},{"./$":86,"./$.redef":91}],119:[function(require,module,exports){
 var $     = require('./$')
   , $def  = require('./$.def')
   , abs   = Math.abs
@@ -5346,21 +6540,21 @@ $def($def.S, 'Number', {
   // 20.1.2.13 Number.parseInt(string, radix)
   parseInt: parseInt
 });
-},{"./$":82,"./$.def":71}],116:[function(require,module,exports){
+},{"./$":86,"./$.def":75}],120:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
 var $def = require('./$.def');
 $def($def.S, 'Object', {assign: require('./$.assign')});
-},{"./$.assign":64,"./$.def":71}],117:[function(require,module,exports){
+},{"./$.assign":68,"./$.def":75}],121:[function(require,module,exports){
 // 19.1.3.10 Object.is(value1, value2)
 var $def = require('./$.def');
 $def($def.S, 'Object', {
   is: require('./$.same')
 });
-},{"./$.def":71,"./$.same":89}],118:[function(require,module,exports){
+},{"./$.def":75,"./$.same":93}],122:[function(require,module,exports){
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
 var $def = require('./$.def');
 $def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-},{"./$.def":71,"./$.set-proto":90}],119:[function(require,module,exports){
+},{"./$.def":75,"./$.set-proto":94}],123:[function(require,module,exports){
 var $        = require('./$')
   , $def     = require('./$.def')
   , isObject = $.isObject
@@ -5397,7 +6591,7 @@ $.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' +
   }
   $def($def.S + $def.F * forced, 'Object', method);
 });
-},{"./$":82,"./$.def":71,"./$.get-names":76}],120:[function(require,module,exports){
+},{"./$":86,"./$.def":75,"./$.get-names":80}],124:[function(require,module,exports){
 'use strict';
 // 19.1.3.6 Object.prototype.toString()
 var cof = require('./$.cof')
@@ -5408,7 +6602,7 @@ if(require('./$').FW && cof(tmp) != 'z'){
     return '[object ' + cof.classof(this) + ']';
   }, true);
 }
-},{"./$":82,"./$.cof":65,"./$.redef":87,"./$.wks":100}],121:[function(require,module,exports){
+},{"./$":86,"./$.cof":69,"./$.redef":91,"./$.wks":104}],125:[function(require,module,exports){
 'use strict';
 var $        = require('./$')
   , ctx      = require('./$.ctx')
@@ -5424,6 +6618,7 @@ var $        = require('./$')
   , PROMISE  = 'Promise'
   , global   = $.g
   , process  = global.process
+  , isNode   = cof(process) == 'process'
   , asap     = process && process.nextTick || require('./$.task').set
   , P        = global[PROMISE]
   , isFunction     = $.isFunction
@@ -5453,6 +6648,14 @@ var useNative = function(){
     if(!(P2.resolve(5).then(function(){}) instanceof P2)){
       works = false;
     }
+    // actual V8 bug, https://code.google.com/p/v8/issues/detail?id=4162
+    if(works && $.DESC){
+      var thenableThenGotten = false;
+      P.resolve($.setDesc({}, 'then', {
+        get: function(){ thenableThenGotten = true; }
+      }));
+      works = thenableThenGotten;
+    }
   } catch(e){ works = false; }
   return works;
 }();
@@ -5477,7 +6680,8 @@ function isThenable(it){
 }
 function notify(record){
   var chain = record.c;
-  if(chain.length)asap(function(){
+  // strange IE + webpack dev server bug - use .call(global)
+  if(chain.length)asap.call(global, function(){
     var value = record.v
       , ok    = record.s == 1
       , i     = 0;
@@ -5523,11 +6727,12 @@ function $reject(value){
   record.s = 2;
   record.a = record.c.slice();
   setTimeout(function(){
-    asap(function(){
+    // strange IE + webpack dev server bug - use .call(global)
+    asap.call(global, function(){
       if(isUnhandled(promise = record.p)){
-        if(cof(process) == 'process'){
+        if(isNode){
           process.emit('unhandledRejection', value, promise);
-        } else if(global.console && isFunction(console.error)){
+        } else if(global.console && console.error){
           console.error('Unhandled promise rejection', value);
         }
       }
@@ -5538,21 +6743,28 @@ function $reject(value){
 }
 function $resolve(value){
   var record = this
-    , then, wrapper;
+    , then;
   if(record.d)return;
   record.d = true;
   record = record.r || record; // unwrap
   try {
     if(then = isThenable(value)){
-      wrapper = {r: record, d: false}; // wrap
-      then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+      // strange IE + webpack dev server bug - use .call(global)
+      asap.call(global, function(){
+        var wrapper = {r: record, d: false}; // wrap
+        try {
+          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+        } catch(e){
+          $reject.call(wrapper, e);
+        }
+      });
     } else {
       record.v = value;
       record.s = 1;
       notify(record);
     }
-  } catch(err){
-    $reject.call(wrapper || {r: record, d: false}, err); // wrap
+  } catch(e){
+    $reject.call({r: record, d: false}, e); // wrap
   }
 }
 
@@ -5652,7 +6864,7 @@ $def($def.S + $def.F * !(useNative && require('./$.iter-detect')(function(iter){
     });
   }
 });
-},{"./$":82,"./$.assert":63,"./$.cof":65,"./$.ctx":70,"./$.def":71,"./$.for-of":74,"./$.iter-detect":80,"./$.mix":84,"./$.same":89,"./$.set-proto":90,"./$.species":92,"./$.task":96,"./$.uid":98,"./$.wks":100}],122:[function(require,module,exports){
+},{"./$":86,"./$.assert":67,"./$.cof":69,"./$.ctx":74,"./$.def":75,"./$.for-of":78,"./$.iter-detect":84,"./$.mix":88,"./$.same":93,"./$.set-proto":94,"./$.species":96,"./$.task":100,"./$.uid":102,"./$.wks":104}],126:[function(require,module,exports){
 var $         = require('./$')
   , $def      = require('./$.def')
   , setProto  = require('./$.set-proto')
@@ -5798,7 +7010,7 @@ $def($def.S + $def.F * buggyEnumerate, 'Reflect', {
 });
 
 $def($def.S, 'Reflect', reflect);
-},{"./$":82,"./$.assert":63,"./$.def":71,"./$.iter":81,"./$.own-keys":85,"./$.set-proto":90,"./$.uid":98,"./$.wks":100}],123:[function(require,module,exports){
+},{"./$":86,"./$.assert":67,"./$.def":75,"./$.iter":85,"./$.own-keys":89,"./$.set-proto":94,"./$.uid":102,"./$.wks":104}],127:[function(require,module,exports){
 var $       = require('./$')
   , cof     = require('./$.cof')
   , $RegExp = $.g.RegExp
@@ -5842,7 +7054,7 @@ if($.FW && $.DESC){
   });
 }
 require('./$.species')($RegExp);
-},{"./$":82,"./$.cof":65,"./$.redef":87,"./$.replacer":88,"./$.species":92}],124:[function(require,module,exports){
+},{"./$":86,"./$.cof":69,"./$.redef":91,"./$.replacer":92,"./$.species":96}],128:[function(require,module,exports){
 'use strict';
 var strong = require('./$.collection-strong');
 
@@ -5855,7 +7067,7 @@ require('./$.collection')('Set', function(get){
     return strong.def(this, value = value === 0 ? 0 : value, value);
   }
 }, strong);
-},{"./$.collection":69,"./$.collection-strong":66}],125:[function(require,module,exports){
+},{"./$.collection":73,"./$.collection-strong":70}],129:[function(require,module,exports){
 'use strict';
 var $def = require('./$.def')
   , $at  = require('./$.string-at')(false);
@@ -5865,7 +7077,7 @@ $def($def.P, 'String', {
     return $at(this, pos);
   }
 });
-},{"./$.def":71,"./$.string-at":93}],126:[function(require,module,exports){
+},{"./$.def":75,"./$.string-at":97}],130:[function(require,module,exports){
 'use strict';
 var $    = require('./$')
   , cof  = require('./$.cof')
@@ -5885,7 +7097,7 @@ $def($def.P + $def.F * !require('./$.throws')(function(){ 'q'.endsWith(/./); }),
     return that.slice(end - searchString.length, end) === searchString;
   }
 });
-},{"./$":82,"./$.cof":65,"./$.def":71,"./$.throws":97}],127:[function(require,module,exports){
+},{"./$":86,"./$.cof":69,"./$.def":75,"./$.throws":101}],131:[function(require,module,exports){
 var $def    = require('./$.def')
   , toIndex = require('./$').toIndex
   , fromCharCode = String.fromCharCode
@@ -5909,7 +7121,7 @@ $def($def.S + $def.F * (!!$fromCodePoint && $fromCodePoint.length != 1), 'String
     } return res.join('');
   }
 });
-},{"./$":82,"./$.def":71}],128:[function(require,module,exports){
+},{"./$":86,"./$.def":75}],132:[function(require,module,exports){
 'use strict';
 var $    = require('./$')
   , cof  = require('./$.cof')
@@ -5922,7 +7134,7 @@ $def($def.P, 'String', {
     return !!~String($.assertDefined(this)).indexOf(searchString, arguments[1]);
   }
 });
-},{"./$":82,"./$.cof":65,"./$.def":71}],129:[function(require,module,exports){
+},{"./$":86,"./$.cof":69,"./$.def":75}],133:[function(require,module,exports){
 var set   = require('./$').set
   , $at   = require('./$.string-at')(true)
   , ITER  = require('./$.uid').safe('iter')
@@ -5943,7 +7155,7 @@ require('./$.iter-define')(String, 'String', function(iterated){
   iter.i += point.length;
   return step(0, point);
 });
-},{"./$":82,"./$.iter":81,"./$.iter-define":79,"./$.string-at":93,"./$.uid":98}],130:[function(require,module,exports){
+},{"./$":86,"./$.iter":85,"./$.iter-define":83,"./$.string-at":97,"./$.uid":102}],134:[function(require,module,exports){
 var $    = require('./$')
   , $def = require('./$.def');
 
@@ -5961,14 +7173,14 @@ $def($def.S, 'String', {
     } return res.join('');
   }
 });
-},{"./$":82,"./$.def":71}],131:[function(require,module,exports){
+},{"./$":86,"./$.def":75}],135:[function(require,module,exports){
 var $def = require('./$.def');
 
 $def($def.P, 'String', {
   // 21.1.3.13 String.prototype.repeat(count)
   repeat: require('./$.string-repeat')
 });
-},{"./$.def":71,"./$.string-repeat":95}],132:[function(require,module,exports){
+},{"./$.def":75,"./$.string-repeat":99}],136:[function(require,module,exports){
 'use strict';
 var $    = require('./$')
   , cof  = require('./$.cof')
@@ -5985,7 +7197,7 @@ $def($def.P + $def.F * !require('./$.throws')(function(){ 'q'.startsWith(/./); }
     return that.slice(index, index + searchString.length) === searchString;
   }
 });
-},{"./$":82,"./$.cof":65,"./$.def":71,"./$.throws":97}],133:[function(require,module,exports){
+},{"./$":86,"./$.cof":69,"./$.def":75,"./$.throws":101}],137:[function(require,module,exports){
 'use strict';
 // ECMAScript 6 symbols shim
 var $        = require('./$')
@@ -6176,7 +7388,7 @@ setTag($Symbol, 'Symbol');
 setTag(Math, 'Math', true);
 // 24.3.3 JSON[@@toStringTag]
 setTag($.g.JSON, 'JSON', true);
-},{"./$":82,"./$.assert":63,"./$.cof":65,"./$.def":71,"./$.enum-keys":73,"./$.get-names":76,"./$.keyof":83,"./$.redef":87,"./$.shared":91,"./$.uid":98,"./$.wks":100}],134:[function(require,module,exports){
+},{"./$":86,"./$.assert":67,"./$.cof":69,"./$.def":75,"./$.enum-keys":77,"./$.get-names":80,"./$.keyof":87,"./$.redef":91,"./$.shared":95,"./$.uid":102,"./$.wks":104}],138:[function(require,module,exports){
 'use strict';
 var $         = require('./$')
   , weak      = require('./$.collection-weak')
@@ -6220,7 +7432,7 @@ if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
     });
   });
 }
-},{"./$":82,"./$.collection":69,"./$.collection-weak":68,"./$.redef":87}],135:[function(require,module,exports){
+},{"./$":86,"./$.collection":73,"./$.collection-weak":72,"./$.redef":91}],139:[function(require,module,exports){
 'use strict';
 var weak = require('./$.collection-weak');
 
@@ -6233,7 +7445,7 @@ require('./$.collection')('WeakSet', function(get){
     return weak.def(this, value, true);
   }
 }, weak, false, true);
-},{"./$.collection":69,"./$.collection-weak":68}],136:[function(require,module,exports){
+},{"./$.collection":73,"./$.collection-weak":72}],140:[function(require,module,exports){
 'use strict';
 var $def      = require('./$.def')
   , $includes = require('./$.array-includes')(true);
@@ -6244,10 +7456,10 @@ $def($def.P, 'Array', {
   }
 });
 require('./$.unscope')('includes');
-},{"./$.array-includes":61,"./$.def":71,"./$.unscope":99}],137:[function(require,module,exports){
+},{"./$.array-includes":65,"./$.def":75,"./$.unscope":103}],141:[function(require,module,exports){
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 require('./$.collection-to-json')('Map');
-},{"./$.collection-to-json":67}],138:[function(require,module,exports){
+},{"./$.collection-to-json":71}],142:[function(require,module,exports){
 // https://gist.github.com/WebReflection/9353781
 var $       = require('./$')
   , $def    = require('./$.def')
@@ -6263,7 +7475,7 @@ $def($def.S, 'Object', {
     return result;
   }
 });
-},{"./$":82,"./$.def":71,"./$.own-keys":85}],139:[function(require,module,exports){
+},{"./$":86,"./$.def":75,"./$.own-keys":89}],143:[function(require,module,exports){
 // http://goo.gl/XkBrjD
 var $    = require('./$')
   , $def = require('./$.def');
@@ -6284,16 +7496,16 @@ $def($def.S, 'Object', {
   values:  createObjectToArray(false),
   entries: createObjectToArray(true)
 });
-},{"./$":82,"./$.def":71}],140:[function(require,module,exports){
-// https://gist.github.com/kangax/9698100
+},{"./$":86,"./$.def":75}],144:[function(require,module,exports){
+// https://github.com/benjamingr/RexExp.escape
 var $def = require('./$.def');
 $def($def.S, 'RegExp', {
-  escape: require('./$.replacer')(/([\\\-[\]{}()*+?.,^$|])/g, '\\$1', true)
+  escape: require('./$.replacer')(/[\/\\^$*+?.()|[\]{}]/g, '\\$&', true)
 });
-},{"./$.def":71,"./$.replacer":88}],141:[function(require,module,exports){
+},{"./$.def":75,"./$.replacer":92}],145:[function(require,module,exports){
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 require('./$.collection-to-json')('Set');
-},{"./$.collection-to-json":67}],142:[function(require,module,exports){
+},{"./$.collection-to-json":71}],146:[function(require,module,exports){
 // https://github.com/mathiasbynens/String.prototype.at
 'use strict';
 var $def = require('./$.def')
@@ -6303,7 +7515,7 @@ $def($def.P, 'String', {
     return $at(this, pos);
   }
 });
-},{"./$.def":71,"./$.string-at":93}],143:[function(require,module,exports){
+},{"./$.def":75,"./$.string-at":97}],147:[function(require,module,exports){
 'use strict';
 var $def = require('./$.def')
   , $pad = require('./$.string-pad');
@@ -6312,7 +7524,7 @@ $def($def.P, 'String', {
     return $pad(this, n, arguments[1], true);
   }
 });
-},{"./$.def":71,"./$.string-pad":94}],144:[function(require,module,exports){
+},{"./$.def":75,"./$.string-pad":98}],148:[function(require,module,exports){
 'use strict';
 var $def = require('./$.def')
   , $pad = require('./$.string-pad');
@@ -6321,7 +7533,7 @@ $def($def.P, 'String', {
     return $pad(this, n, arguments[1], false);
   }
 });
-},{"./$.def":71,"./$.string-pad":94}],145:[function(require,module,exports){
+},{"./$.def":75,"./$.string-pad":98}],149:[function(require,module,exports){
 // JavaScript 1.6 / Strawman array statics shim
 var $       = require('./$')
   , $def    = require('./$.def')
@@ -6338,7 +7550,7 @@ setStatics('indexOf,every,some,forEach,map,filter,find,findIndex,includes', 3);
 setStatics('join,slice,concat,push,splice,unshift,sort,lastIndexOf,' +
            'reduce,reduceRight,copyWithin,fill,turn');
 $def($def.S, 'Array', statics);
-},{"./$":82,"./$.ctx":70,"./$.def":71}],146:[function(require,module,exports){
+},{"./$":86,"./$.ctx":74,"./$.def":75}],150:[function(require,module,exports){
 require('./es6.array.iterator');
 var $           = require('./$')
   , Iterators   = require('./$.iter').Iterators
@@ -6353,14 +7565,14 @@ if($.FW){
   if(HTC && !(ITERATOR in HTCProto))$.hide(HTCProto, ITERATOR, ArrayValues);
 }
 Iterators.NodeList = Iterators.HTMLCollection = ArrayValues;
-},{"./$":82,"./$.iter":81,"./$.wks":100,"./es6.array.iterator":107}],147:[function(require,module,exports){
+},{"./$":86,"./$.iter":85,"./$.wks":104,"./es6.array.iterator":111}],151:[function(require,module,exports){
 var $def  = require('./$.def')
   , $task = require('./$.task');
 $def($def.G + $def.B, {
   setImmediate:   $task.set,
   clearImmediate: $task.clear
 });
-},{"./$.def":71,"./$.task":96}],148:[function(require,module,exports){
+},{"./$.def":75,"./$.task":100}],152:[function(require,module,exports){
 // ie9- setTimeout & setInterval additional parameters fix
 var $         = require('./$')
   , $def      = require('./$.def')
@@ -6381,7 +7593,7 @@ $def($def.G + $def.B + $def.F * MSIE, {
   setTimeout:  wrap($.g.setTimeout),
   setInterval: wrap($.g.setInterval)
 });
-},{"./$":82,"./$.def":71,"./$.invoke":77,"./$.partial":86}],149:[function(require,module,exports){
+},{"./$":86,"./$.def":75,"./$.invoke":81,"./$.partial":90}],153:[function(require,module,exports){
 require('./modules/es5');
 require('./modules/es6.symbol');
 require('./modules/es6.object.assign');
@@ -6432,7 +7644,7 @@ require('./modules/web.immediate');
 require('./modules/web.dom.iterable');
 module.exports = require('./modules/$').core;
 
-},{"./modules/$":82,"./modules/es5":101,"./modules/es6.array.copy-within":102,"./modules/es6.array.fill":103,"./modules/es6.array.find":105,"./modules/es6.array.find-index":104,"./modules/es6.array.from":106,"./modules/es6.array.iterator":107,"./modules/es6.array.of":108,"./modules/es6.array.species":109,"./modules/es6.function.has-instance":110,"./modules/es6.function.name":111,"./modules/es6.map":112,"./modules/es6.math":113,"./modules/es6.number.constructor":114,"./modules/es6.number.statics":115,"./modules/es6.object.assign":116,"./modules/es6.object.is":117,"./modules/es6.object.set-prototype-of":118,"./modules/es6.object.statics-accept-primitives":119,"./modules/es6.object.to-string":120,"./modules/es6.promise":121,"./modules/es6.reflect":122,"./modules/es6.regexp":123,"./modules/es6.set":124,"./modules/es6.string.code-point-at":125,"./modules/es6.string.ends-with":126,"./modules/es6.string.from-code-point":127,"./modules/es6.string.includes":128,"./modules/es6.string.iterator":129,"./modules/es6.string.raw":130,"./modules/es6.string.repeat":131,"./modules/es6.string.starts-with":132,"./modules/es6.symbol":133,"./modules/es6.weak-map":134,"./modules/es6.weak-set":135,"./modules/es7.array.includes":136,"./modules/es7.map.to-json":137,"./modules/es7.object.get-own-property-descriptors":138,"./modules/es7.object.to-array":139,"./modules/es7.regexp.escape":140,"./modules/es7.set.to-json":141,"./modules/es7.string.at":142,"./modules/es7.string.lpad":143,"./modules/es7.string.rpad":144,"./modules/js.array.statics":145,"./modules/web.dom.iterable":146,"./modules/web.immediate":147,"./modules/web.timers":148}],150:[function(require,module,exports){
+},{"./modules/$":86,"./modules/es5":105,"./modules/es6.array.copy-within":106,"./modules/es6.array.fill":107,"./modules/es6.array.find":109,"./modules/es6.array.find-index":108,"./modules/es6.array.from":110,"./modules/es6.array.iterator":111,"./modules/es6.array.of":112,"./modules/es6.array.species":113,"./modules/es6.function.has-instance":114,"./modules/es6.function.name":115,"./modules/es6.map":116,"./modules/es6.math":117,"./modules/es6.number.constructor":118,"./modules/es6.number.statics":119,"./modules/es6.object.assign":120,"./modules/es6.object.is":121,"./modules/es6.object.set-prototype-of":122,"./modules/es6.object.statics-accept-primitives":123,"./modules/es6.object.to-string":124,"./modules/es6.promise":125,"./modules/es6.reflect":126,"./modules/es6.regexp":127,"./modules/es6.set":128,"./modules/es6.string.code-point-at":129,"./modules/es6.string.ends-with":130,"./modules/es6.string.from-code-point":131,"./modules/es6.string.includes":132,"./modules/es6.string.iterator":133,"./modules/es6.string.raw":134,"./modules/es6.string.repeat":135,"./modules/es6.string.starts-with":136,"./modules/es6.symbol":137,"./modules/es6.weak-map":138,"./modules/es6.weak-set":139,"./modules/es7.array.includes":140,"./modules/es7.map.to-json":141,"./modules/es7.object.get-own-property-descriptors":142,"./modules/es7.object.to-array":143,"./modules/es7.regexp.escape":144,"./modules/es7.set.to-json":145,"./modules/es7.string.at":146,"./modules/es7.string.lpad":147,"./modules/es7.string.rpad":148,"./modules/js.array.statics":149,"./modules/web.dom.iterable":150,"./modules/web.immediate":151,"./modules/web.timers":152}],154:[function(require,module,exports){
 (function (process,global){
 /**
  * Copyright (c) 2014, Facebook, Inc.
@@ -7063,17 +8275,17 @@ module.exports = require('./modules/$').core;
 );
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":161}],151:[function(require,module,exports){
+},{"_process":165}],155:[function(require,module,exports){
 module.exports = require("./lib/babel/polyfill");
 
-},{"./lib/babel/polyfill":60}],152:[function(require,module,exports){
+},{"./lib/babel/polyfill":64}],156:[function(require,module,exports){
 module.exports = require("babel-core/polyfill");
 
-},{"babel-core/polyfill":151}],153:[function(require,module,exports){
+},{"babel-core/polyfill":155}],157:[function(require,module,exports){
 
-},{}],154:[function(require,module,exports){
-arguments[4][153][0].apply(exports,arguments)
-},{"dup":153}],155:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
+arguments[4][157][0].apply(exports,arguments)
+},{"dup":157}],159:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -8489,7 +9701,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":156,"ieee754":157,"is-array":158}],156:[function(require,module,exports){
+},{"base64-js":160,"ieee754":161,"is-array":162}],160:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -8615,16 +9827,16 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],157:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
-  var e, m,
-      eLen = nBytes * 8 - mLen - 1,
-      eMax = (1 << eLen) - 1,
-      eBias = eMax >> 1,
-      nBits = -7,
-      i = isLE ? (nBytes - 1) : 0,
-      d = isLE ? -1 : 1,
-      s = buffer[offset + i]
+  var e, m
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
 
   i += d
 
@@ -8650,14 +9862,14 @@ exports.read = function (buffer, offset, isLE, mLen, nBytes) {
 }
 
 exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
-  var e, m, c,
-      eLen = nBytes * 8 - mLen - 1,
-      eMax = (1 << eLen) - 1,
-      eBias = eMax >> 1,
-      rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0),
-      i = isLE ? 0 : (nBytes - 1),
-      d = isLE ? 1 : -1,
-      s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+  var e, m, c
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
 
   value = Math.abs(value)
 
@@ -8701,7 +9913,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],158:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 
 /**
  * isArray
@@ -8736,7 +9948,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],159:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -9039,7 +10251,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],160:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -9267,7 +10479,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":161}],161:[function(require,module,exports){
+},{"_process":165}],165:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -9359,7 +10571,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],162:[function(require,module,exports){
+},{}],166:[function(require,module,exports){
 /*jshint browser:true, node:true*/
 
 'use strict';
@@ -9790,7 +11002,7 @@ Delegate.prototype.destroy = function() {
   this.root();
 };
 
-},{}],163:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 /*jshint browser:true, node:true*/
 
 'use strict';
@@ -9811,7 +11023,7 @@ module.exports = function(root) {
 
 module.exports.Delegate = Delegate;
 
-},{"./delegate":162}],164:[function(require,module,exports){
+},{"./delegate":166}],168:[function(require,module,exports){
 var Stream = require("stream")
 var writeMethods = ["write", "end", "destroy"]
 var readMethods = ["resume", "pause"]
@@ -9900,7 +11112,7 @@ function duplex(writer, reader) {
     }
 }
 
-},{"stream":195}],165:[function(require,module,exports){
+},{"stream":199}],169:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -9964,7 +11176,7 @@ inst['default'] = inst;
 
 exports['default'] = inst;
 module.exports = exports['default'];
-},{"./handlebars.runtime":166,"./handlebars/compiler/ast":168,"./handlebars/compiler/base":169,"./handlebars/compiler/compiler":171,"./handlebars/compiler/javascript-compiler":173,"./handlebars/compiler/visitor":176,"./handlebars/no-conflict":179}],166:[function(require,module,exports){
+},{"./handlebars.runtime":170,"./handlebars/compiler/ast":172,"./handlebars/compiler/base":173,"./handlebars/compiler/compiler":175,"./handlebars/compiler/javascript-compiler":177,"./handlebars/compiler/visitor":180,"./handlebars/no-conflict":183}],170:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -10025,7 +11237,7 @@ inst['default'] = inst;
 
 exports['default'] = inst;
 module.exports = exports['default'];
-},{"./handlebars/base":167,"./handlebars/exception":178,"./handlebars/no-conflict":179,"./handlebars/runtime":180,"./handlebars/safe-string":181,"./handlebars/utils":182}],167:[function(require,module,exports){
+},{"./handlebars/base":171,"./handlebars/exception":182,"./handlebars/no-conflict":183,"./handlebars/runtime":184,"./handlebars/safe-string":185,"./handlebars/utils":186}],171:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -10299,7 +11511,7 @@ function createFrame(object) {
 }
 
 /* [args, ]options */
-},{"./exception":178,"./utils":182}],168:[function(require,module,exports){
+},{"./exception":182,"./utils":186}],172:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -10452,7 +11664,7 @@ var AST = {
 // must modify the object to operate properly.
 exports['default'] = AST;
 module.exports = exports['default'];
-},{}],169:[function(require,module,exports){
+},{}],173:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -10499,7 +11711,7 @@ function parse(input, options) {
   var strip = new _WhitespaceControl2['default']();
   return strip.accept(_parser2['default'].parse(input));
 }
-},{"../utils":182,"./ast":168,"./helpers":172,"./parser":174,"./whitespace-control":177}],170:[function(require,module,exports){
+},{"../utils":186,"./ast":172,"./helpers":176,"./parser":178,"./whitespace-control":181}],174:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -10664,7 +11876,7 @@ exports['default'] = CodeGen;
 module.exports = exports['default'];
 
 /* NOP */
-},{"../utils":182,"source-map":184}],171:[function(require,module,exports){
+},{"../utils":186,"source-map":188}],175:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -11192,7 +12404,7 @@ function transformLiteralToPath(sexpr) {
     sexpr.path = new _AST2['default'].PathExpression(false, 0, [literal.original + ''], literal.original + '', literal.loc);
   }
 }
-},{"../exception":178,"../utils":182,"./ast":168}],172:[function(require,module,exports){
+},{"../exception":182,"../utils":186,"./ast":172}],176:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -11324,7 +12536,7 @@ function prepareBlock(openBlock, program, inverseAndProgram, close, inverted, lo
 
   return new this.BlockStatement(openBlock.path, openBlock.params, openBlock.hash, program, inverse, openBlock.strip, inverseStrip, close && close.strip, this.locInfo(locInfo));
 }
-},{"../exception":178}],173:[function(require,module,exports){
+},{"../exception":182}],177:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -12387,7 +13599,7 @@ function strictLookup(requireTerminal, compiler, parts, type) {
 
 exports['default'] = JavaScriptCompiler;
 module.exports = exports['default'];
-},{"../base":167,"../exception":178,"../utils":182,"./code-gen":170}],174:[function(require,module,exports){
+},{"../base":171,"../exception":182,"../utils":186,"./code-gen":174}],178:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -13066,7 +14278,7 @@ var handlebars = (function () {
     return new Parser();
 })();exports["default"] = handlebars;
 module.exports = exports["default"];
-},{}],175:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -13232,7 +14444,7 @@ PrintVisitor.prototype.HashPair = function (pair) {
   return pair.key + '=' + this.accept(pair.value);
 };
 /*eslint-enable new-cap */
-},{"./visitor":176}],176:[function(require,module,exports){
+},{"./visitor":180}],180:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -13365,7 +14577,7 @@ Visitor.prototype = {
 exports['default'] = Visitor;
 module.exports = exports['default'];
 /* content */ /* comment */ /* path */ /* string */ /* number */ /* bool */ /* literal */ /* literal */
-},{"../exception":178,"./ast":168}],177:[function(require,module,exports){
+},{"../exception":182,"./ast":172}],181:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -13578,7 +14790,7 @@ function omitLeft(body, i, multiple) {
 
 exports['default'] = WhitespaceControl;
 module.exports = exports['default'];
-},{"./visitor":176}],178:[function(require,module,exports){
+},{"./visitor":180}],182:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13617,7 +14829,7 @@ Exception.prototype = new Error();
 
 exports['default'] = Exception;
 module.exports = exports['default'];
-},{}],179:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -13638,7 +14850,7 @@ exports['default'] = function (Handlebars) {
 
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],180:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -13871,7 +15083,7 @@ function initData(context, data) {
   }
   return data;
 }
-},{"./base":167,"./exception":178,"./utils":182}],181:[function(require,module,exports){
+},{"./base":171,"./exception":182,"./utils":186}],185:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13886,7 +15098,7 @@ SafeString.prototype.toString = SafeString.prototype.toHTML = function () {
 
 exports['default'] = SafeString;
 module.exports = exports['default'];
-},{}],182:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14001,7 +15213,7 @@ function blockParams(params, ids) {
 function appendContextPath(contextPath, id) {
   return (contextPath ? contextPath + '.' : '') + id;
 }
-},{}],183:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 // USAGE:
 // var handlebars = require('handlebars');
 /* eslint-disable no-var */
@@ -14028,7 +15240,7 @@ if (typeof require !== 'undefined' && require.extensions) {
   require.extensions['.hbs'] = extension;
 }
 
-},{"../dist/cjs/handlebars":165,"../dist/cjs/handlebars/compiler/printer":175,"fs":153}],184:[function(require,module,exports){
+},{"../dist/cjs/handlebars":169,"../dist/cjs/handlebars/compiler/printer":179,"fs":157}],188:[function(require,module,exports){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
  * Licensed under the New BSD license. See LICENSE.txt or:
@@ -14038,7 +15250,7 @@ exports.SourceMapGenerator = require('./source-map/source-map-generator').Source
 exports.SourceMapConsumer = require('./source-map/source-map-consumer').SourceMapConsumer;
 exports.SourceNode = require('./source-map/source-node').SourceNode;
 
-},{"./source-map/source-map-consumer":190,"./source-map/source-map-generator":191,"./source-map/source-node":192}],185:[function(require,module,exports){
+},{"./source-map/source-map-consumer":194,"./source-map/source-map-generator":195,"./source-map/source-node":196}],189:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -14137,7 +15349,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":193,"amdefine":194}],186:[function(require,module,exports){
+},{"./util":197,"amdefine":198}],190:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -14281,7 +15493,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./base64":187,"amdefine":194}],187:[function(require,module,exports){
+},{"./base64":191,"amdefine":198}],191:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -14325,7 +15537,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":194}],188:[function(require,module,exports){
+},{"amdefine":198}],192:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -14407,7 +15619,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":194}],189:[function(require,module,exports){
+},{"amdefine":198}],193:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2014 Mozilla Foundation and contributors
@@ -14495,7 +15707,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":193,"amdefine":194}],190:[function(require,module,exports){
+},{"./util":197,"amdefine":198}],194:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -15072,7 +16284,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":185,"./base64-vlq":186,"./binary-search":188,"./util":193,"amdefine":194}],191:[function(require,module,exports){
+},{"./array-set":189,"./base64-vlq":190,"./binary-search":192,"./util":197,"amdefine":198}],195:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -15474,7 +16686,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":185,"./base64-vlq":186,"./mapping-list":189,"./util":193,"amdefine":194}],192:[function(require,module,exports){
+},{"./array-set":189,"./base64-vlq":190,"./mapping-list":193,"./util":197,"amdefine":198}],196:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -15890,7 +17102,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./source-map-generator":191,"./util":193,"amdefine":194}],193:[function(require,module,exports){
+},{"./source-map-generator":195,"./util":197,"amdefine":198}],197:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -16211,7 +17423,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":194}],194:[function(require,module,exports){
+},{"amdefine":198}],198:[function(require,module,exports){
 (function (process,__filename){
 /** vim: et:ts=4:sw=4:sts=4
  * @license amdefine 0.1.0 Copyright (c) 2011, The Dojo Foundation All Rights Reserved.
@@ -16516,7 +17728,7 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/node_modules/handlebars/node_modules/source-map/node_modules/amdefine/amdefine.js")
-},{"_process":161,"path":160}],195:[function(require,module,exports){
+},{"_process":165,"path":164}],199:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -16645,7 +17857,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":159,"inherits":196,"readable-stream/duplex.js":197,"readable-stream/passthrough.js":206,"readable-stream/readable.js":207,"readable-stream/transform.js":208,"readable-stream/writable.js":209}],196:[function(require,module,exports){
+},{"events":163,"inherits":200,"readable-stream/duplex.js":201,"readable-stream/passthrough.js":210,"readable-stream/readable.js":211,"readable-stream/transform.js":212,"readable-stream/writable.js":213}],200:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -16670,10 +17882,10 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],197:[function(require,module,exports){
+},{}],201:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":198}],198:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":202}],202:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -16766,7 +17978,7 @@ function forEach (xs, f) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_readable":200,"./_stream_writable":202,"_process":161,"core-util-is":203,"inherits":196}],199:[function(require,module,exports){
+},{"./_stream_readable":204,"./_stream_writable":206,"_process":165,"core-util-is":207,"inherits":200}],203:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -16814,7 +18026,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":201,"core-util-is":203,"inherits":196}],200:[function(require,module,exports){
+},{"./_stream_transform":205,"core-util-is":207,"inherits":200}],204:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -17769,7 +18981,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":198,"_process":161,"buffer":155,"core-util-is":203,"events":159,"inherits":196,"isarray":204,"stream":195,"string_decoder/":205,"util":154}],201:[function(require,module,exports){
+},{"./_stream_duplex":202,"_process":165,"buffer":159,"core-util-is":207,"events":163,"inherits":200,"isarray":208,"stream":199,"string_decoder/":209,"util":158}],205:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -17980,7 +19192,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":198,"core-util-is":203,"inherits":196}],202:[function(require,module,exports){
+},{"./_stream_duplex":202,"core-util-is":207,"inherits":200}],206:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -18461,7 +19673,7 @@ function endWritable(stream, state, cb) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":198,"_process":161,"buffer":155,"core-util-is":203,"inherits":196,"stream":195}],203:[function(require,module,exports){
+},{"./_stream_duplex":202,"_process":165,"buffer":159,"core-util-is":207,"inherits":200,"stream":199}],207:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -18571,12 +19783,12 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":155}],204:[function(require,module,exports){
+},{"buffer":159}],208:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],205:[function(require,module,exports){
+},{}],209:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -18799,10 +20011,10 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":155}],206:[function(require,module,exports){
+},{"buffer":159}],210:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":199}],207:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":203}],211:[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = require('stream');
 exports.Readable = exports;
@@ -18811,13 +20023,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":198,"./lib/_stream_passthrough.js":199,"./lib/_stream_readable.js":200,"./lib/_stream_transform.js":201,"./lib/_stream_writable.js":202,"stream":195}],208:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":202,"./lib/_stream_passthrough.js":203,"./lib/_stream_readable.js":204,"./lib/_stream_transform.js":205,"./lib/_stream_writable.js":206,"stream":199}],212:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":201}],209:[function(require,module,exports){
+},{"./lib/_stream_transform.js":205}],213:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":202}],210:[function(require,module,exports){
+},{"./lib/_stream_writable.js":206}],214:[function(require,module,exports){
 'use strict';
 
 var ip = require('ip-regex').v4().source;
@@ -18850,7 +20062,7 @@ module.exports = function (opts) {
 						new RegExp('(?:^|\\s)(["\'])?' + regex + '\\1', 'ig');
 };
 
-},{"./tlds.json":212,"ip-regex":211}],211:[function(require,module,exports){
+},{"./tlds.json":216,"ip-regex":215}],215:[function(require,module,exports){
 'use strict';
 
 var v4 = '(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])(?:\\.(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])){3}';
@@ -18872,9 +20084,9 @@ ip.v6 = function (opts) {
 	return opts.exact ? new RegExp('^' + v6 + '$') : new RegExp(v6, 'g');
 };
 
-},{}],212:[function(require,module,exports){
+},{}],216:[function(require,module,exports){
 module.exports=["vermögensberatung","vermögensberater","cancerresearch","international","versicherung","construction","contractors","engineering","motorcycles","சிங்கப்பூர்","accountants","investments","enterprises","williamhill","photography","blackfriday","productions","properties","healthcare","immobilien","university","republican","consulting","technology","industries","creditcard","cuisinella","foundation","restaurant","bnpparibas","associates","management","vlaanderen","furniture","bloomberg","equipment","melbourne","financial","education","directory","solutions","allfinanz","institute","christmas","community","vacations","marketing","training","capetown","pharmacy","partners","delivery","democrat","diamonds","software","discount","السعودية","saarland","catering","airforce","mortgage","attorney","services","engineer","supplies","cleaning","property","clothing","lighting","exchange","feedback","boutique","flsmidth","brussels","plumbing","budapest","computer","builders","business","yokohama","bargains","holdings","ventures","graphics","pictures","whoswho","dentist","recipes","digital","neustar","schmidt","realtor","shiksha","domains","network","support","android","youtube","college","cologne","surgery","capital","company","caravan","இந்தியா","abogado","academy","limited","careers","spiegel","lacaixa","exposed","cooking","finance","country","fishing","fitness","flights","florist","reviews","kitchen","channel","forsale","cricket","frogans","cruises","systems","الجزائر","gallery","science","auction","organic","okinawa","hosting","holiday","website","wedding","hamburg","rentals","singles","guitars","travel","google","hiphop","global","онлайн","москва","insure","futbol","joburg","juegos","kaufen","امارات","expert","lawyer","events","london","estate","luxury","maison","الاردن","market","energy","emerck","monash","moscow","المغرب","museum","nagoya","durban","direct","dental","degree","webcam","مليسيا","voyage","dating","otsuka","gratis","credit","photos","physio","condos","coffee","clinic","quebec","claims","reisen","vision","church","repair","report","chrome","center","villas","viajes","ryukyu","career","camera","இலங்கை","schule","فلسطين","yachts","social","yandex","berlin","bayern","supply","suzuki","sydney","alsace","taipei","tattoo","agency","active","tienda","voting","globo","mango","ایران","pizza","place","سورية","poker","praxi","press","jetzt","codes","media","vodka","homes","click","miami","citic","rehab","reise","works","horse","email","భారత్","بھارت","house","cheap","koeln","world","संगठन","rocks","rodeo","glass","nexus","cards","lease","gives","ninja","build","deals","black","shoes","بازار","watch","loans","solar","wales","vegas","space","guide","autos","lotto","audio","archi","green","gifts","paris","dance","tatar","parts","gripe","actor","cymru","photo","tirol","today","tokyo","tools","gmail","trade","party","aero","ভারত","شبكة","kiwi","pics","club","pink","army","kred","casa","pohl","land","post","cash","ਭਾਰਤ","vote","prod","lgbt","prof","life","भारत","ભારત","qpon","limo","link","buzz","ලංකා","arpa","تونس","luxe","reit","cern","fail","farm","desi","blue","rest","guru","diet","rich","meet","haus","meme","menu","rsvp","ruhr","fish","help","sarl","mini","mobi","moda","work","here","scot","beer","sexy","дети","asia","camp","best","cool","sohu","name","navy","wiki","host","coop","wien","yoga","dvag","surf","сайт","immo","city","عمان","info","bike","wang","fund","zone","voto","组织机构","tips","موقع","band","care","gbiz","jobs","town","toys","gent","gift","ltda","top","tel","uno","uol","tax","soy","scb","sca","vet","rip","rio","ren","red","pub","pro","ovh","org","ooo","onl","ong","nyc","nrw","nra","wed","nhk","ngo","new","net","mov","wme","moe","mil","krd","wtc","wtf","kim","int","我爱你","ink","қаз","ing","ibm","срб","орг","tui","hiv","мкд","中文网","gov","gop","gmx","gmo","gle","укр","мон","gal","frl","foo","fly","eus","esq","edu","eat","dnp","day","dad","crs","ไทย","com","рус","ceo","みんな","cat","cal","cab","مصر","قطر","bzh","boo","新加坡","bmw","xxx","xyz","biz","bio","bid","bar","axa","zip","how","pk","pl","er","hr","pm","pn","ht","hu","es","pr","id","ie","il","im","ca","ae","in","et","ps","pt","eu","pw","py","qa","as","al","re","bf","bg","bh","bi","zw","io","iq","ir","is","it","je","at","jm","jo","fi","af","jp","cr","ro","au","ke","rs","kg","ru","kh","rw","ki","sa","bj","am","sb","sc","fj","km","kn","fk","kp","kr","sd","se","an","ag","sg","sh","kw","ky","si","kz","sj","sk","sl","sm","sn","so","la","cu","aw","fm","lb","lc","fo","cv","sr","st","su","li","cw","cx","fr","cy","cc","sv","sx","sy","lk","cz","sz","cd","bm","lr","ls","tc","td","lt","ga","tf","tg","th","lu","ax","bn","tj","tk","tl","tm","tn","to","lv","ly","ac","gb","de","gd","tp","tr","ge","cf","mc","tt","md","tv","tw","tz","ua","ug","uk","me","gf","gg","us","uy","uz","va","gh","vc","ve","gi","cg","mg","mh","vg","vi","ch","ao","gl","mk","vn","ml","mm","mn","mo","bo","vu","az","ba","br","gm","ci","aq","bs","wf","mp","mq","mr","ms","mt","mu","gn","mv","ws","mw","mx","佛山","集团","在线","한국","my","八卦","mz","公益","公司","移动","na","ck","cl","dj","nc","ne","gp","삼성","gq","商标","商城","gr","dk","dm","中信","中国","中國","nf","ng","bt","do","ni","网络","gs","香港","台湾","台灣","手机","nl","no","np","nr","gt","gu","nu","ar","nz","ad","om","ai","გე","机构","gw","gy","dz","bb","рф","ec","bd","世界","pa","网址","游戏","cm","ee","企业","eg","hk","广东","pe","pf","pg","ph","政务","hm","hn","cn","co","ye","bv","bw","by","yt","za","bz","zm","be","ma"]
-},{}],213:[function(require,module,exports){
+},{}],217:[function(require,module,exports){
 (function (global){
 
 var rng;
@@ -18909,7 +20121,7 @@ module.exports = rng;
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],214:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 //     uuid.js
 //
 //     Copyright (c) 2010-2012 Robert Kieffer
@@ -19094,7 +20306,7 @@ uuid.unparse = unparse;
 
 module.exports = uuid;
 
-},{"./rng":213}],215:[function(require,module,exports){
+},{"./rng":217}],219:[function(require,module,exports){
 module.exports = extend
 
 function extend() {

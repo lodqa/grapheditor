@@ -55,13 +55,6 @@
   border-color: #ff0000;
   color: white;
 }
-.node.selected path:nth-child(2) {
-  stroke: #ff0000;
-}
-.node.selected path:nth-child(3) {
-  stroke: #ff0000;
-  fill: #ff0000;
-}
 .nodeDragHover {
   border: 2px solid orange;
 }
@@ -83,6 +76,10 @@
   box-shadow: 0 0 6px black;
 }
 /* graph edge */
+.edgeLabel.node_hover {
+  background-color: #fcc3cd;
+  border-color: #ffc0cb;
+}
 .edgeLabel._jsPlumb_hover {
   background-color: #fcc3cd;
   border-color: #ffc0cb;
@@ -91,13 +88,6 @@
   background-color: #df2020;
   border-color: #ff0000;
   color: white;
-}
-.edgeLabel.selected path:nth-child(2) {
-  stroke: #ff0000;
-}
-.edgeLabel.selected path:nth-child(3) {
-  stroke: #ff0000;
-  fill: #ff0000;
 }
 ._jsPlumb_source_hover {
   background-color: #fcc3cd;
@@ -115,15 +105,22 @@
   opacity: 0.8;
   padding: 0.3em;
 }
-path {
+._jsPlumb_connector path {
   cursor: pointer;
 }
-.selected path:nth-child(2) {
+._jsPlumb_connector.selected path:nth-child(2) {
   stroke: #ff0000;
 }
-.selected path:nth-child(3) {
+._jsPlumb_connector.selected path:nth-child(3) {
   stroke: #ff0000;
   fill: #ff0000;
+}
+._jsPlumb_connector.node_hover path:nth-child(2) {
+  stroke: #ffc0cb;
+}
+._jsPlumb_connector.node_hover path:nth-child(3) {
+  stroke: #ffc0cb;
+  fill: #ffc0cb;
 }
 ._jsPlumb_hover path:nth-child(2) {
   stroke: #ffc0cb;

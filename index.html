@@ -2,6 +2,8 @@
 
 <head>
   <link rel="stylesheet" href="index.css">
+  <script src="dom.jsPlumb-1.7.5.js"></script>
+  <script src="index.js"></script>
 </head>
 
 <body>
@@ -17,6 +19,7 @@
       <input class="label" placeholder="label"></input>
       <input class="url" placeholder="url"></input>
       <button class="button" disabled>+</button>
+      <button class="delete-button">delete</button>
       <button class="cancel-button">cancel</button>
     </div>
     <div class="edit-edge hidden">
@@ -29,7 +32,7 @@
     </div>
     <span class="warn"></span>
   </div>
-  <div id="jsPlumb-container">
+  <div class="jsPlumb-container">
   </div>
   <div class="table">
     <div class="node-table">
@@ -38,6 +41,5 @@
     </div>
   </div>
 
-  <script src="dom.jsPlumb-1.7.5.js"></script>
-  <script src="bundle.js"></script>
+  <script src="demo.js"></script>
 </body>

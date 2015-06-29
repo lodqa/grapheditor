@@ -1,24 +1,32 @@
 {
-  "name": "graph-editor",
-  "main": "index.js",
-  "version": "1.0.0",
-  "authors": [
-    "shigeru.nakajima <shigeru.nakajima@luxiar.com>"
-  ],
-  "description": "graph editor",
-  "keywords": [
-    "graph",
-    "editor"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jsplumb": "~1.7.5"
-  }
+    "name": "graph-editor",
+    "description": "graph editor",
+    "version": "0.0.1",
+    "authors": [
+        "Jin-Dong Kim <jindong.kim@gmail.com>"
+    ],
+    "dependencies": {
+        "jsplumb": "~1.7.5"
+    },
+    "homepage": "https://github.com/lodqa/grapheditor",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests",
+        "lib",
+        ".gitignore",
+        "index.html",
+        "index.js",
+        "index.less",
+        "package.json",
+        "README.md"
+    ],
+    "keywords": [
+        "graph",
+        "editor"
+    ],
+    "license": "MIT",
+    "main": ["graph-editor.js", "graph-editor.css"]
 }

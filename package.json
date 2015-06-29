@@ -29,8 +29,8 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "browserify": "browserify index.js -t babelify -o bundle.js",
-    "less": "lessc index.less > index.css",
+    "browserify": "browserify index.js -t babelify -o graph-editor.js",
+    "less": "lessc index.less > graph-editor.css",
     "start": "npm run browserify && npm run less",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "watchify -d index.js -t babelify -o bundle.js"

@@ -1,3 +1,6 @@
+# Demo
+[demo](http://lodqa.github.io/grapheditor)
+
 # Usage
 
 Install by the bower.

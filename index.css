@@ -15,9 +15,6 @@
 .node-editor .button:disabled {
   box-shadow: none;
 }
-.node-editor .hidden {
-  display: none;
-}
 /* graph */
 .jsPlumb-container {
   height: 200px;
@@ -132,6 +129,11 @@
   fill: #ffc0cb;
 }
 /* node-tabel */
+.table:after {
+  clear: both;
+  content: " ";
+  display: table;
+}
 .table table {
   border-collapse: collapse;
   float: left;
@@ -165,4 +167,7 @@
   border: 1px solid #b9b9b9;
   padding: 3px;
   background-color: #fff;
+}
+.hidden {
+  display: none;
 }

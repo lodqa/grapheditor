@@ -104,7 +104,7 @@ npm run start
 
 ## Run
 ```
-open demo.html
+open index.html
 ```
 
 ## Test

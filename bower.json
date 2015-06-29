@@ -17,9 +17,10 @@
         "tests",
         "lib",
         ".gitignore",
-        "index.html",
-        "index.js",
         "index.less",
+        "graph-editor.js"
+        "index.html",
+        "demo.js"
         "package.json",
         "README.md"
     ],

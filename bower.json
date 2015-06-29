@@ -28,5 +28,5 @@
         "editor"
     ],
     "license": "MIT",
-    "main": ["graph-editor.js", "graph-editor.css"]
+    "main": ["index.js", "index.css"]
 }

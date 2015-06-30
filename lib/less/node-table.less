@@ -6,6 +6,11 @@
   padding: 3px;
 }
 .table {
+  &:after {
+    clear: both;
+    content: " ";
+    display: table;
+  }
   table {
     border-collapse: collapse;
     float: left;
@@ -19,7 +24,7 @@
         background-color: desaturate(@selectedColor, 25%);
       }
       &.hover td {
-          background-color: @hoverColor;
+        background-color: @hoverColor;
       }
     }
     th {

@@ -30,6 +30,7 @@
     "GRPAPH": ".jsPlumb-container",
     "NODE_TABLE": ".node-table",
     "EDGE_TABLE": ".edge-table",
-    "PGP": ".pgp"
+    "PGP": ".pgp",
+    "MAPPINGS": ".mappings"
   }
 }

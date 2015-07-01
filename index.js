@@ -1096,7 +1096,7 @@ var _LayoutActionStream = require('./LayoutActionStream');
 var _LayoutActionStream2 = _interopRequireDefault(_LayoutActionStream);
 
 exports['default'] = function () {
-  var funnel = new _actionStream.FunnelStream(true);
+  var funnel = new _actionStream.FunnelStream(false);
 
   new _InputNodeActionStream2['default'](_const.selector.INPUT_NODE).pipe(funnel);
   new _EditNodeActionStream2['default'](_const.selector.EDIT_NODE).pipe(funnel);
@@ -1467,7 +1467,6 @@ function createNode(nodes, action, push) {
 }
 
 function toView(nodes, action, push) {
-  console.log('aaaaaaaaaaa');
   push({
     target: _const.target.VIEW_NODE
   });
@@ -2113,7 +2112,7 @@ var _MappingsRenderStream2 = _interopRequireDefault(_MappingsRenderStream);
 
 exports['default'] = function () {
   var stream = new _UnselectRenderStream2['default'](),
-      tailStream = new _actionStream.TailStream(true);
+      tailStream = new _actionStream.TailStream(false);
 
   stream.pipe(new _EdgeRenderStream2['default'](_const.selector.GRPAPH)).pipe(new _NodeRenderStream2['default'](_const.selector.GRPAPH)).pipe(new _MessageRenderStream2['default'](_const.selector.MESSAGE)).pipe((0, _nodeEditorStream2['default'])()).pipe(new _NodeTableRenderStream2['default'](_const.selector.NODE_TABLE)).pipe(new _EdgeTableRenderStream2['default'](_const.selector.EDGE_TABLE)).pipe(new _PgpRenderStream2['default'](_const.selector.PGP)).pipe(new _MappingsRenderStream2['default'](_const.selector.MAPPINGS)).pipe(new _LayoutStream2['default']()).pipe(tailStream);
 

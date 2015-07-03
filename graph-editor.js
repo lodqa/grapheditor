@@ -9,11 +9,11 @@ import {
 }
 from './lib/stream/const'
 
-global.graphEditor = function() {
+global.graphEditor = function(lookupUrl) {
   let topStream = actionStream()
 
   topStream
-    .pipe(modelStream())
+    .pipe(modelStream(lookupUrl))
     .pipe(renderStream())
 
   topStream.addNodes = (edges) => addNodes(topStream, edges)
@@ -23,17 +23,15 @@ global.graphEditor = function() {
 }
 
 function addNodes(stream, nodes) {
-  nodes.forEach(n => addNode(stream, n.label, n.url))
+  nodes.forEach(n => addNode(stream, n))
 }
 
-function addNode(stream, label, url) {
-  stream.push({
+function addNode(stream, node) {
+  stream.push(Object.assign({
     source: ['index.js'],
     target: target.MODEL_NODE,
     type: actionType.CREATE,
-    label: label,
-    url: url
-  })
+  }, node))
 }
 
 function addEdges(stream, edges) {

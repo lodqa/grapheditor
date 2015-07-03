@@ -1,50 +1,45 @@
-var editor = graphEditor()
+var editor = graphEditor('http://localhost:9292/lookup')
 
 // Add default nodes.
 editor.addNodes([{
-  label: 'google',
-  url: 'http://google.com'
+  id: 'node-1',
+  label: 'genes'
 }, {
-  label: 'yahoo',
-  url: 'http://yahoo.com'
+  id: 'node-2',
+  label: 'alzheimer disease'
 }, {
-  label: 'bing',
-  url: 'http://bing.com'
+  id: 'node-3',
+  label: 'bing'
 }, {
-  label: 'bang',
-  url: 'http://bang.com'
+  id: 'node-4',
+  label: 'bang'
 }, {
-  label: 'bong',
-  url: 'http://bong.com'
+  id: 'node-5',
+  label: 'bong'
 }, {
-  label: 'song',
-  url: 'http://song.com'
+  id: 'node-6',
+  label: 'song'
 }])
 
 // Add default edges.
 editor.addEdges([{
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://yahoo.com',
-  label: 'path1',
-  url: 'http://github.com/path1'
+  sourceId: 'node-1',
+  targetId: 'node-2',
+  label: 'path1'
 }, {
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://bing.com',
-  label: 'path2',
-  url: 'http://path2.com'
+  sourceId: 'node-1',
+  targetId: 'node-3',
+  label: 'path2'
 }, {
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://bang.com',
-  label: 'path3',
-  url: 'http://path3.com'
+  sourceId: 'node-1',
+  targetId: 'node-4',
+  label: 'path3'
 }, {
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://bong.com',
-  label: 'path4',
-  url: 'http://path4.com'
+  sourceId: 'node-1',
+  targetId: 'node-5',
+  label: 'path4'
 }, {
-  sourceUrl: 'http://bing.com',
-  targetUrl: 'http://song.com',
-  label: 'path5',
-  url: 'http://path5.com'
+  sourceId: 'node-3',
+  targetId: 'node-6',
+  label: 'path5'
 }])

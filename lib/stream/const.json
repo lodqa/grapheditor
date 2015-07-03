@@ -8,6 +8,7 @@
     "DETACH": "detach",
     "HOVER": "hover",
     "INPUT": "input",
+    "LOOKUP": "lookup",
     "MOVE": "move",
     "SELECT": "select",
     "SNAPSHOT": "snapshot",
@@ -17,20 +18,21 @@
     "VALIDATE": "validate"
   },
   "target": {
-    "MODEL_NODE": "model-node",
     "MODEL_EDGE": "model-edge",
-    "VIEW_NODE": "view-node",
-    "VIEW_EDGE": "view-edge"
+    "MODEL_NODE": "model-node",
+    "VIEW_EDGE": "view-edge",
+    "VIEW_NODE": "view-node"
   },
   "selector": {
-    "INPUT_NODE": ".input-node",
+    "EDGE_TABLE": ".edge-table",
     "EDIT_NODE": ".edit-node",
     "EDIT_EDGE": ".edit-edge",
-    "MESSAGE": ".node-editor",
     "GRPAPH": ".jsPlumb-container",
+    "INPUT_NODE": ".input-node",
+    "LOOKUP": ".lookup",
+    "MAPPINGS": ".mappings",
+    "MESSAGE": ".node-editor",
     "NODE_TABLE": ".node-table",
-    "EDGE_TABLE": ".edge-table",
-    "PGP": ".pgp",
-    "MAPPINGS": ".mappings"
+    "PGP": ".pgp"
   }
 }

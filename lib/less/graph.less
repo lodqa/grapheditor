@@ -1,0 +1,124 @@
+@import "transition.less";
+@import "color.less";
+
+/* graph */
+.jsPlumb-container {
+  height: 200px;
+  position: relative;
+  width: 600px;
+}
+.selected() {
+  background-color: desaturate(@selectedColor,25%);
+  border-color: @selectedColor;
+  color: white;
+}
+.hover() {
+  background-color: desaturate(@hoverColor, 10%);
+  border-color: @hoverColor;
+}
+/* graph node */
+.node {
+  border: 1px solid #2e6f9a;
+  border-radius: 8px;
+  box-shadow: 2px 2px 19px #e0e0e0;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 11px;
+  opacity: 0.8;
+  padding: 16px;
+  position: absolute;
+  max-width: 10em;
+  .transition(0.25s ,background-color);
+  .transition(0.25s ,color);
+  z-index: 4;
+  &:hover {
+    .hover;
+  }
+  &.selected {
+    .selected;
+  }
+}
+.nodeDragHover {
+  border: 2px solid orange;
+}
+.endPoint {
+  background-color: orange;
+  bottom: 37%;
+  box-shadow: 0 0 2px black;
+  cursor: pointer;
+  height: 1em;
+  right: 5px;
+  position: absolute;
+  .transition(0.25s, box-shadow);
+  width: 1em;
+  &:hover {
+    box-shadow: 0 0 6px black;
+  }
+}
+/* graph edge */
+.edgeLabel {
+  &.node_hover {
+    .hover;
+  }
+  &._jsPlumb_hover {
+    .hover;
+  }
+  &.selected {
+    .selected;
+  }
+}
+._jsPlumb_source_hover {
+  .hover;
+}
+._jsPlumb_target_hover {
+  .hover;
+}
+.edgeLabel {
+  background-color: white;
+  border: 1px solid #346789;
+  border-color: orange;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-size: 11px;
+  opacity: 0.8;
+  padding: 0.3em;
+}
+._jsPlumb_connector{
+  path {
+    cursor: pointer;
+  }
+  &.selected {
+    path:nth-child(2) {
+      stroke: @selectedColor;
+    }
+    path:nth-child(3) {
+      stroke: @selectedColor;
+      fill: @selectedColor;
+    }
+  }
+  &.node_hover {
+    path:nth-child(2) {
+      stroke: @hoverColor;
+    }
+    path:nth-child(3) {
+      stroke: @hoverColor;
+      fill: @hoverColor;
+    }
+  }
+}
+._jsPlumb_hover {
+  path:nth-child(2) {
+    stroke: @hoverColor;
+  }
+  path:nth-child(3) {
+    stroke: @hoverColor;
+    fill: @hoverColor;
+  }
+}
+
+// to debug
+// ._jsPlumb_endpoint {
+//   background-color: red;
+//   width: 20px !important;
+//   height: 20px !important;
+// }

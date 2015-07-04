@@ -1,0 +1,36 @@
+{
+  "actionType": {
+    "AFTER_CREATE": "afterCreate",
+    "DELETE": "delete",
+    "CANCEL": "cancel",
+    "CREATE": "create",
+    "DRAG": "drag",
+    "DETACH": "detach",
+    "HOVER": "hover",
+    "INPUT": "input",
+    "MOVE": "move",
+    "SELECT": "select",
+    "SNAPSHOT": "snapshot",
+    "UNHOVER": "unhover",
+    "UNSELECT": "unselect",
+    "UPDATE": "update",
+    "VALIDATE": "validate"
+  },
+  "target": {
+    "MODEL_NODE": "model-node",
+    "MODEL_EDGE": "model-edge",
+    "VIEW_NODE": "view-node",
+    "VIEW_EDGE": "view-edge"
+  },
+  "selector": {
+    "INPUT_NODE": ".input-node",
+    "EDIT_NODE": ".edit-node",
+    "EDIT_EDGE": ".edit-edge",
+    "MESSAGE": ".node-editor",
+    "GRPAPH": ".jsPlumb-container",
+    "NODE_TABLE": ".node-table",
+    "EDGE_TABLE": ".edge-table",
+    "PGP": ".pgp",
+    "MAPPINGS": ".mappings"
+  }
+}

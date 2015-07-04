@@ -1,0 +1,46 @@
+@import "color.less";
+
+/* node-tabel */
+.cell() {
+  border: 1px solid #b9b9b9;
+  padding: 3px;
+}
+.table {
+  &:after {
+    clear: both;
+    content: " ";
+    display: table;
+  }
+  table {
+    border-collapse: collapse;
+    float: left;
+    font-size: 0.9em;
+    margin-right: 10px;
+    width: 300px;
+    tr {
+      height: 30px;
+      &.selected td {
+        color: white;
+        background-color: desaturate(@selectedColor, 25%);
+      }
+      &.hover td {
+        background-color: @hoverColor;
+      }
+    }
+    th {
+      .cell;
+      background-color: #ddd;
+      color: #333;
+      &.label {
+        width: 32px;
+      }
+      &.url {
+        width: 50px;
+      }
+    }
+    td {
+      .cell;
+      background-color: #fff;
+    }
+  }
+}

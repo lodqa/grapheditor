@@ -1,0 +1,17 @@
+@import "transition.less";
+/* node editor */
+.node-editor {
+  label {
+    font-size: 13px;
+  }
+  .url {
+    width: 260px;
+  }
+  .button {
+    box-shadow: 0 0 15px 4px #42ffb2;
+    .transition(0.3s, box-shadow);
+    &:disabled {
+      box-shadow: none;
+    }
+  }
+}

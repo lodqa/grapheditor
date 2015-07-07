@@ -44,6 +44,6 @@
     "server": "gulp",
     "start": "npm run browserify && npm run less",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "watchrpify -d graph-editor -t babelify -o index.js"
+    "watch": "watchify -d graph-editor -t babelify -o index.js"
   }
 }

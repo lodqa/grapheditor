@@ -126,6 +126,12 @@ Compile less files.
 npm run less
 ```
 
+Start a stub server.
+
+```
+npm run server
+```
+
 See other commands.
 
 ```

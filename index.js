@@ -3076,7 +3076,7 @@ exports["default"] = function (selector) {
 
 function setNode(component, nodes) {
   var mappings = nodes.reduce(function (ret, node) {
-    ret[node.label] = [node.url];
+    ret[node.label] = node.url;
     return ret;
   }, {});
 

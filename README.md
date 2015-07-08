@@ -111,7 +111,7 @@ open index.html
 ```
 
 ## Test
-[User Acceptance Test](https://developer.luxiar.jp/dbcls/graph-editor/wikis/home)
+[User Acceptance Test](https://github.com/lodqa/grapheditor/wiki)
 
 ## Commands for Development
 Watch JavaScript files.

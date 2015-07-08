@@ -51,42 +51,47 @@ Write in a html.
 </div>
 <div class="jsPlumb-container">
 </div>
+<div class="pgp hidden">
+</div>
+<div class="lookup">
+    <button class="button">lookup all node</button>
+</div>
 <div class="table">
   <div class="node-table">
   </div>
   <div class="edge-table">
   </div>
 </div>
+<div class="mappings hidden">
+</div>
 ```
 
 Write in JavaScript.
 
 ```js
-var editor = graphEditor()
+var editor = graphEditor('http://localhost:9292/lookup') // Set API URL to lookup term of labels.
 
 // Add default nodes.
 editor.addNodes([{
-  label: 'google',
-  url: 'http://google.com'
+  id: 'node-1',
+  label: 'genes'
 }, {
-  label: 'yahoo',
-  url: 'http://yahoo.com'
+  id: 'node-2',
+  label: 'alzheimer disease'
 }, {
-  label: 'bing',
-  url: 'http://bing.com'
+  id: 'node-3',
+  label: 'bing'
 }])
 
 // Add default edges.
 editor.addEdges([{
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://yahoo.com',
-  label: 'path1',
-  url: 'http://github.com/path1'
+  sourceId: 'node-1',
+  targetId: 'node-2',
+  label: 'path1'
 }, {
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://bing.com',
-  label: 'path2',
-  url: 'http://path2.com'
+  sourceId: 'node-1',
+  targetId: 'node-3',
+  label: 'path2'
 }])
 ```
 

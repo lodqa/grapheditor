@@ -129,7 +129,7 @@ npm run less
 Start a stub server.
 
 ```
-npm run server
+npm run stub
 ```
 
 See other commands.

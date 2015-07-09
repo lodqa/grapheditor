@@ -18,7 +18,8 @@ gulp.task('connect', () => connect.server({
         if (req.method === 'POST') {
           let response = {
             "genes": ["http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/genes"],
-            "alzheimer disease": ["http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseases/74"]
+            "alzheimer disease": ["http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseases/74"],
+            "bing": ["http://example.com/bing", "text:bing"]
           }
 
           res.setHeader('Content-Type', 'application/json')

@@ -13,6 +13,7 @@
     "duplexer": "^0.1.1",
     "global": "^4.3.0",
     "handlebars": "^3.0.3",
+    "ractive": "^0.7.3",
     "springy": "^2.7.1",
     "stream-browserify": "^2.0.0",
     "superagent": "^1.2.0",

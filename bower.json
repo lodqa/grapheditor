@@ -6,7 +6,8 @@
     "Jin-Dong Kim <jindong.kim@gmail.com>"
   ],
   "dependencies": {
-    "jsplumb": "~1.7.5"
+    "jsplumb": "~1.7.5",
+    "font-awesome": "~4.3.0"
   },
   "homepage": "https://github.com/lodqa/grapheditor",
   "ignore": [

@@ -2,6 +2,7 @@
 
 <head>
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
   <script src="bower_components/jsplumb/dist/js/dom.jsPlumb-1.7.5.js"></script>
   <script src="index.js"></script>
 </head>
@@ -11,14 +12,14 @@
     <div class="input-node">
       <label>Input Node</label><br>
       <input class="label" placeholder="label"></input>
-      <button class="button" disabled>+</button>
+      <button class="button" title="add" disabled><i class="fa fa-plus"></i></button>
     </div>
     <div class="edit-edge hidden">
       <label>Edit Edge</label><br>
       <input class="label" placeholder="label"></input>
-      <button class="button" disabled>+</button>
-      <button class="delete-button">delete</button>
-      <button class="cancel-button">cancel</button>
+      <button class="button" title="ok" disabled><i class="fa fa-floppy-o"></i></button>
+      <button class="delete-button" title="delete"><i class="fa fa-trash-o"></i></button>
+      <button class="cancel-button" title="cancel"><i class="fa fa-minus-circle"></i></button>
     </div>
     <span class="warn"></span>
   </div>

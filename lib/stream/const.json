@@ -29,7 +29,6 @@
     "EDIT_EDGE": ".edit-edge",
     "GRPAPH": ".jsPlumb-container",
     "INPUT_NODE": ".input-node",
-    "LOOKUP": ".lookup",
     "MAPPINGS": ".mappings",
     "MESSAGE": ".node-editor",
     "NODE_TABLE": ".node-table",

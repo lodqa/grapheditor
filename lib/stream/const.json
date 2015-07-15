@@ -26,7 +26,6 @@
     "VIEW_NODE": "view-node"
   },
   "selector": {
-    "EDGE_TABLE": ".edge-table",
     "EDIT_EDGE": ".edit-edge",
     "GRPAPH": ".jsPlumb-container",
     "INPUT_NODE": ".input-node",

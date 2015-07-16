@@ -7,7 +7,8 @@
   ],
   "dependencies": {
     "jsplumb": "~1.7.5",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "js-polyfills": "~0.1.6"
   },
   "homepage": "https://github.com/lodqa/grapheditor",
   "ignore": [

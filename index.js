@@ -2900,7 +2900,8 @@ exports['default'] = {
   ConnectionOverlays: [['Arrow', {
     location: 1,
     id: 'arrow',
-    length: 14,
+    length: 6,
+    width: 6,
     foldback: 0.8
   }]],
   Connector: ['StateMachine', {
@@ -3370,7 +3371,7 @@ var _ractive = require('ractive');
 
 var _ractive2 = _interopRequireDefault(_ractive);
 
-var TEMPLATE = '\n{{#if nodes}}\n<table>\n  <thead>\n    <tr>\n      <th class="label">\n        nodes\n        <button class="lookup-all-button" title="lookup all node"><i class="fa fa-search"></i></button>\n        <button class="delete-all-button" title="delete all node"><i class="fa fa-trash-o"></i></button>\n      </th>\n      <th class="url">term</th>\n    </tr>\n  </thead>\n  <tbody>\n    {{#nodes}}\n    <tr data-id="{{id}}" data-index={{@index}} class="node {{#if selected}}selected{{/if}} {{#if hover}}hover{{/if}}">\n      <td class="label">\n        <input value="{{label}}">\n        <button class="lookup-button" title="lookup"><i class="fa fa-search"></i></button>\n        <button class="delete-button" title="delete"><i class="fa fa-trash-o"></i></button>\n      </td>\n      <td class="term">\n          {{#terms}}\n          <div>\n            <input type="checkbox" checked="{{enable}}">\n            <input class="term" value="{{value}}">\n            <button class="delete-button" title="delete"><i class="fa fa-trash-o"></i></button>\n          </div>\n          {{/terms}}\n          <div class="add">\n            <input class="term">\n            <button class="add-button" title="add"><i class="fa fa-plus"></i></button>\n          </div>\n      </td>\n    </tr>\n    {{/nodes}}\n</tbody>\n\n</table>\n{{/if}}';
+var TEMPLATE = '\n{{#if nodes}}\n<table>\n  <thead>\n    <tr>\n      <th class="label">\n        <span class="title">nodes</span>\n        <button class="lookup-all-button" title="lookup all node"><i class="fa fa-search"></i></button>\n        <button class="delete-all-button" title="delete all node"><i class="fa fa-trash-o"></i></button>\n      </th>\n      <th class="url">term</th>\n    </tr>\n  </thead>\n  <tbody>\n    {{#nodes}}\n    <tr data-id="{{id}}" data-index={{@index}} class="node {{#if selected}}selected{{/if}} {{#if hover}}hover{{/if}}">\n      <td class="label">\n        <input value="{{label}}">\n        <button class="lookup-button" title="lookup"><i class="fa fa-search"></i></button>\n        <button class="delete-button" title="delete"><i class="fa fa-trash-o"></i></button>\n      </td>\n      <td class="term">\n          {{#terms}}\n          <div>\n            <input type="checkbox" checked="{{enable}}">\n            <input class="term" value="{{value}}">\n            <button class="delete-button" title="delete"><i class="fa fa-trash-o"></i></button>\n          </div>\n          {{/terms}}\n          <div class="add">\n            <input type="checkbox">\n            <input class="term">\n            <button class="add-button" title="add"><i class="fa fa-plus"></i></button>\n          </div>\n      </td>\n    </tr>\n    {{/nodes}}\n</tbody>\n\n</table>\n{{/if}}';
 
 // To be singleton.
 var ractive = undefined;

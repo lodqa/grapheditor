@@ -158,6 +158,10 @@
 .table table th.label {
   width: 32px;
 }
+.table table th.label .title {
+  display: inline-block;
+  width: 116px;
+}
 .table table th.url {
   width: 50px;
 }
@@ -180,8 +184,8 @@
 .table table td.term input.term {
   width: 400px;
 }
-.table table td.term .add {
-  margin-left: 23px;
+.table table td.term .add [type="checkbox"] {
+  visibility: hidden;
 }
 .hidden {
   display: none;

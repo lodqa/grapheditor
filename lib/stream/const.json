@@ -14,7 +14,6 @@
     "SNAPSHOT": "snapshot",
     "UNHOVER": "unhover",
     "UNSELECT": "unselect",
-    "UPDATE": "update",
     "UPDATE_LABEL": "update-label",
     "UPDATE_TERM": "update-term",
     "VALIDATE": "validate"

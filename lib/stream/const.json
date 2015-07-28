@@ -19,6 +19,8 @@
     "VALIDATE": "validate"
   },
   "target": {
+    "LAYOUT_EDGE": "layout-edge",
+    "LAYOUT_NODE": "layout-node",
     "MODEL_EDGE": "model-edge",
     "MODEL_NODE": "model-node",
     "VIEW_EDGE": "view-edge",

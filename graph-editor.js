@@ -35,10 +35,26 @@ function addNode(stream, node) {
 }
 
 function addEdges(stream, edges) {
-  stream.push({
-    source: ['index.js'],
-    target: target.MODEL_EDGE,
-    type: actionType.CREATE,
-    edges: edges
+  checkDuplicate(edges)
+
+  edges.forEach(e => {
+    stream.push({
+      source: ['index.js'],
+      target: target.VIEW_EDGE,
+      type: actionType.CREATE,
+      sourceId: e.sourceId,
+      targetId: e.targetId
+    })
   })
+}
+
+function checkDuplicate(edges) {
+  edges.reduce((exists, edge) => {
+    let id = edge.sourceId + edge.targetId
+
+    console.assert(!exists[id], 'Same edge exists already.', exists[id], edge)
+    exists[id] = edge
+
+    return exists
+  }, {})
 }

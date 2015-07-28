@@ -16,7 +16,7 @@ global.graphEditor = function(lookupUrl) {
     .pipe(modelStream(lookupUrl))
     .pipe(renderStream())
 
-  topStream.addNodes = (edges) => addNodes(topStream, edges)
+  topStream.addNodes = (nodes) => addNodes(topStream, nodes)
   topStream.addEdges = (edges) => addEdges(topStream, edges)
 
   return topStream

@@ -42,7 +42,6 @@
   -moz-transition: color 0.25s ease-in;
   -o-transition: color 0.25s ease-in;
   transition: color 0.25s ease-in;
-  z-index: 4;
 }
 .jsPlumb-container .node:hover {
   background-color: #fcc3cd;
@@ -60,7 +59,7 @@
 .jsPlumb-container .nodeDragHover {
   border: 2px solid orange;
 }
-.jsPlumb-container .endPoint {
+.jsPlumb-container .sourcePoint {
   background-color: orange;
   bottom: 37%;
   box-shadow: 0 0 2px black;
@@ -74,7 +73,7 @@
   transition: box-shadow 0.25s ease-in;
   width: 1em;
 }
-.jsPlumb-container .endPoint:hover {
+.jsPlumb-container .sourcePoint:hover {
   box-shadow: 0 0 6px black;
 }
 .jsPlumb-container .edgeLabel.hover {
@@ -131,6 +130,9 @@
 .jsPlumb-container ._jsPlumb_hover path:nth-child(3) {
   stroke: #ffc0cb;
   fill: #ffc0cb;
+}
+.jsPlumb-container ._jsPlumb_endpoint {
+  cursor: pointer;
 }
 /* node-tabel */
 .table table {

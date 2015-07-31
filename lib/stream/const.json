@@ -2,7 +2,6 @@
   "actionType": {
     "AFTER_CREATE": "afterCreate",
     "DELETE": "delete",
-    "CANCEL": "cancel",
     "CREATE": "create",
     "DRAG": "drag",
     "HOVER": "hover",

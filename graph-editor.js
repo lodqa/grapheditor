@@ -17,7 +17,6 @@ global.graphEditor = function(lookupUrl) {
     .pipe(renderStream())
 
   topStream.addNodes = (nodes) => addNodes(topStream, nodes)
-  topStream.addEdges = (edges) => addEdges(topStream, edges)
 
   return topStream
 }
@@ -32,29 +31,4 @@ function addNode(stream, node) {
     target: target.MODEL_NODE,
     type: actionType.CREATE,
   }, node))
-}
-
-function addEdges(stream, edges) {
-  checkDuplicate(edges)
-
-  edges.forEach(e => {
-    stream.push({
-      source: ['index.js'],
-      target: target.VIEW_EDGE,
-      type: actionType.CREATE,
-      sourceId: e.sourceId,
-      targetId: e.targetId
-    })
-  })
-}
-
-function checkDuplicate(edges) {
-  edges.reduce((exists, edge) => {
-    let id = edge.sourceId + edge.targetId
-
-    console.assert(!exists[id], 'Same edge exists already.', exists[id], edge)
-    exists[id] = edge
-
-    return exists
-  }, {})
 }

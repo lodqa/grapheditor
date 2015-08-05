@@ -18,28 +18,6 @@ editor.addNodes([{
   label: 'bong'
 }, {
   id: 'node-6',
-  label: 'song'
-}])
-
-// Add default edges.
-editor.addEdges([{
-  sourceId: 'node-1',
-  targetId: 'node-2',
-  label: 'path1'
-}, {
-  sourceId: 'node-1',
-  targetId: 'node-3',
-  label: 'path2'
-}, {
-  sourceId: 'node-1',
-  targetId: 'node-4',
-  label: 'path3'
-}, {
-  sourceId: 'node-1',
-  targetId: 'node-5',
-  label: 'path4'
-}, {
-  sourceId: 'node-3',
-  targetId: 'node-6',
-  label: 'path5'
+  label: 'song',
+  createEdge: 'chain'
 }])

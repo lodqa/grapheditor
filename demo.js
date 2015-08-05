@@ -1,50 +1,23 @@
-var editor = graphEditor()
+var editor = graphEditor('http://localhost:9292/lookup')
 
 // Add default nodes.
 editor.addNodes([{
-  label: 'google',
-  url: 'http://google.com'
+  id: 'node-1',
+  label: 'genes'
 }, {
-  label: 'yahoo',
-  url: 'http://yahoo.com'
+  id: 'node-2',
+  label: 'alzheimer disease'
 }, {
-  label: 'bing',
-  url: 'http://bing.com'
+  id: 'node-3',
+  label: 'bing'
 }, {
-  label: 'bang',
-  url: 'http://bang.com'
+  id: 'node-4',
+  label: 'bang'
 }, {
-  label: 'bong',
-  url: 'http://bong.com'
+  id: 'node-5',
+  label: 'bong'
 }, {
+  id: 'node-6',
   label: 'song',
-  url: 'http://song.com'
-}])
-
-// Add default edges.
-editor.addEdges([{
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://yahoo.com',
-  label: 'path1',
-  url: 'http://github.com/path1'
-}, {
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://bing.com',
-  label: 'path2',
-  url: 'http://path2.com'
-}, {
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://bang.com',
-  label: 'path3',
-  url: 'http://path3.com'
-}, {
-  sourceUrl: 'http://google.com',
-  targetUrl: 'http://bong.com',
-  label: 'path4',
-  url: 'http://path4.com'
-}, {
-  sourceUrl: 'http://bing.com',
-  targetUrl: 'http://song.com',
-  label: 'path5',
-  url: 'http://path5.com'
+  createEdge: 'chain'
 }])

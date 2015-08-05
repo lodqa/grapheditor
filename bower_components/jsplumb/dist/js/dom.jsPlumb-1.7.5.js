@@ -453,7 +453,7 @@
  */
 ;(function() {
 
-
+	
 	"use strict";
 
 	var Biltong = this.Biltong = {};
@@ -461,7 +461,7 @@
 	var _isa = function(a) { return Object.prototype.toString.call(a) === "[object Array]"; },
 		_pointHelper = function(p1, p2, fn) {
 		    p1 = _isa(p1) ? p1 : [p1.x, p1.y];
-		    p2 = _isa(p2) ? p2 : [p2.x, p2.y];
+		    p2 = _isa(p2) ? p2 : [p2.x, p2.y];    
 		    return fn(p1, p2);
 		},
 		/**
@@ -473,14 +473,14 @@
 		* @return {Float} The gradient of a line between the two points.
 		*/
 		_gradient = Biltong.gradient = function(p1, p2) {
-		    return _pointHelper(p1, p2, function(_p1, _p2) {
+		    return _pointHelper(p1, p2, function(_p1, _p2) { 
 		        if (_p2[0] == _p1[0])
 		            return _p2[1] > _p1[1] ? Infinity : -Infinity;
-		        else if (_p2[1] == _p1[1])
+		        else if (_p2[1] == _p1[1]) 
 		            return _p2[0] > _p1[0] ? 0 : -0;
-		        else
-		            return (_p2[1] - _p1[1]) / (_p2[0] - _p1[0]);
-		    });
+		        else 
+		            return (_p2[1] - _p1[1]) / (_p2[0] - _p1[0]); 
+		    });		
 		},
 		/**
 		* @name Biltong.normal
@@ -503,13 +503,13 @@
 		*/
 		_lineLength = Biltong.lineLength = function(p1, p2) {
 		    return _pointHelper(p1, p2, function(_p1, _p2) {
-		        return Math.sqrt(Math.pow(_p2[1] - _p1[1], 2) + Math.pow(_p2[0] - _p1[0], 2));
+		        return Math.sqrt(Math.pow(_p2[1] - _p1[1], 2) + Math.pow(_p2[0] - _p1[0], 2));			
 		    });
 		},
 		/**
 		* @name Biltong.quadrant
 		* @function
-		* @desc Calculates the quadrant in which the angle between the two points lies.
+		* @desc Calculates the quadrant in which the angle between the two points lies. 
 		* @param {Point} p1 First point, either as a 2 entry array or object with `left` and `top` properties.
 		* @param {Point} p2 Second point, either as a 2 entry array or object with `left` and `top` properties.
 		* @return {Integer} The quadrant - 1 for upper right, 2 for lower right, 3 for lower left, 4 for upper left.
@@ -520,7 +520,7 @@
 		            return (_p2[1] > _p1[1]) ? 2 : 1;
 		        }
 		        else if (_p2[0] == _p1[0]) {
-		            return _p2[1] > _p1[1] ? 2 : 1;
+		            return _p2[1] > _p1[1] ? 2 : 1;    
 		        }
 		        else {
 		            return (_p2[1] > _p1[1]) ? 3 : 4;
@@ -530,7 +530,7 @@
 		/**
 		* @name Biltong.theta
 		* @function
-		* @desc Calculates the angle between the two points.
+		* @desc Calculates the angle between the two points. 
 		* @param {Point} p1 First point, either as a 2 entry array or object with `left` and `top` properties.
 		* @param {Point} p2 Second point, either as a 2 entry array or object with `left` and `top` properties.
 		* @return {Float} The angle between the two points.
@@ -542,7 +542,7 @@
 		            s = _quadrant(_p1, _p2);
 		        if ((s == 4 || s== 3)) t += Math.PI;
 		        if (t < 0) t += (2 * Math.PI);
-
+		    
 		        return t;
 		    });
 		},
@@ -557,11 +557,11 @@
 		_intersects = Biltong.intersects = function(r1, r2) {
 		    var x1 = r1.x, x2 = r1.x + r1.w, y1 = r1.y, y2 = r1.y + r1.h,
 		        a1 = r2.x, a2 = r2.x + r2.w, b1 = r2.y, b2 = r2.y + r2.h;
-
+		
 			return  ( (x1 <= a1 && a1 <= x2) && (y1 <= b1 && b1 <= y2) ) ||
 			        ( (x1 <= a2 && a2 <= x2) && (y1 <= b1 && b1 <= y2) ) ||
 			        ( (x1 <= a1 && a1 <= x2) && (y1 <= b2 && b2 <= y2) ) ||
-			        ( (x1 <= a2 && a1 <= x2) && (y1 <= b2 && b2 <= y2) ) ||
+			        ( (x1 <= a2 && a1 <= x2) && (y1 <= b2 && b2 <= y2) ) ||	
 			        ( (a1 <= x1 && x1 <= a2) && (b1 <= y1 && y1 <= b2) ) ||
 			        ( (a1 <= x2 && x2 <= a2) && (b1 <= y1 && y1 <= b2) ) ||
 			        ( (a1 <= x1 && x1 <= a2) && (b1 <= y2 && y2 <= b2) ) ||
@@ -580,7 +580,7 @@
 			var x1 = r1.x, x2 = r1.x + r1.w, y1 = r1.y, y2 = r1.y + r1.h,
 		        a1 = r2.x, a2 = r2.x + r2.w, b1 = r2.y, b2 = r2.y + r2.h,
 				c = function(v1, v2, v3, v4) { return allowSharedEdges ? v1 <= v2 && v3>= v4 : v1 < v2 && v3 > v4; };
-
+				
 			return c(x1,a1,x2,a2) && c(y1,b1,y2,b2);
 		},
 		_segmentMultipliers = [null, [1, -1], [1, 1], [-1, 1], [-1, -1] ],
@@ -609,14 +609,14 @@
 		* @param {Point} p1 First point, either as a 2 entry array or object with `left` and `top` properties.
 		* @param {Point} p2 Second point, either as a 2 entry array or object with `left` and `top` properties.
 		* @return {Line} Perpendicular line, in the form `[ { x:..., y:... }, { x:..., y:... } ]`.
-		*/
+		*/        
 		_perpendicularLineTo = Biltong.perpendicularLineTo = function(fromPoint, toPoint, length) {
 		    var m = _gradient(fromPoint, toPoint),
 		        theta2 = Math.atan(-1 / m),
 		        y =  length / 2 * Math.sin(theta2),
 		        x =  length / 2 * Math.cos(theta2);
 		    return [{x:toPoint.x + x, y:toPoint.y + y}, {x:toPoint.x - x, y:toPoint.y - y}];
-		};
+		};	
 }).call(this);
 ;
 (function () {
@@ -1288,7 +1288,7 @@
         _classes = {
             draggable:"katavorio-draggable",    // draggable elements
             droppable:"katavorio-droppable",    // droppable elements
-            drag : "katavorio-drag",            // elements currently being dragged
+            drag : "katavorio-drag",            // elements currently being dragged            
             selected:"katavorio-drag-selected", // elements in current drag selection
             active : "katavorio-drag-active",   // droppables that are targets of a currently dragged element
             hover : "katavorio-drag-hover",     // droppables over which a matching drag element is hovering
@@ -2509,18 +2509,18 @@
 
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the core code.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 (function () {
@@ -2892,7 +2892,7 @@
         },
         setHoverPaintStyle: function (style, doNotRepaint) {
             //this._jsPlumb.hoverPaintStyle = jsPlumb.extend({}, style);
-// TODO figure out if we want components to clone paintStyle so as not to share it.
+// TODO figure out if we want components to clone paintStyle so as not to share it.		    	
             this._jsPlumb.hoverPaintStyle = style;
             _updateHoverStyle(this);
             if (!doNotRepaint) this.repaint();
@@ -4564,7 +4564,7 @@
             return new jsPlumb.DynamicAnchor({anchors: anchors, selector: anchorSelector, elementId: null, jsPlumbInstance: _currentInstance});
         };
 
-// --------------------- makeSource/makeTarget ----------------------------------------------
+// --------------------- makeSource/makeTarget ---------------------------------------------- 
 
         this.targetEndpointDefinitions = {};
         var _setEndpointPaintStylesAndAnchor = function (ep, epIndex, _instance) {
@@ -5103,7 +5103,7 @@
             return _setEnabled("target", el, state);
         };
 
-// --------------------- end makeSource/makeTarget ----------------------------------------------
+// --------------------- end makeSource/makeTarget ---------------------------------------------- 				
 
         this.ready = function (fn) {
             _currentInstance.bind("ready", fn);
@@ -5459,9 +5459,9 @@
         }
     });
 
-// --------------------- static instance + AMD registration -------------------------------------------
+// --------------------- static instance + AMD registration -------------------------------------------	
 
-// create static instance and assign to window if window exists.
+// create static instance and assign to window if window exists.	
     var jsPlumb = new jsPlumbInstance();
     // register on window if defined (lets us run on server)
     if (typeof window != 'undefined') window.jsPlumb = jsPlumb;
@@ -5486,7 +5486,7 @@
     }
 
 
-// --------------------- end static instance + AMD registration -------------------------------------------
+// --------------------- end static instance + AMD registration -------------------------------------------		
 
 }).call(this);
 
@@ -6328,18 +6328,18 @@
 }).call(this);
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the code for Endpoints.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 (function () {
@@ -6617,7 +6617,7 @@
                 _jsPlumb.deleteObject({
                     endpoint: this,
                     fireEvent: false,
-                    deleteAttachedObjects: true
+                    deleteAttachedObjects: false
                 });
             }
         };
@@ -6873,21 +6873,21 @@
                     // first time.
                     if (this.parentAnchor) this.anchor = _jsPlumb.makeAnchor(this.parentAnchor, this.elementId, _jsPlumb);
 
-                    // store the id of the dragging div and the source element. the drop function will pick these up.
+                    // store the id of the dragging div and the source element. the drop function will pick these up.                   
                     _jsPlumb.setAttributes(this.canvas, {
                         "dragId": placeholderInfo.id,
                         "elId": this.elementId
                     });
 
                     this._jsPlumb.floatingEndpoint = _makeFloatingEndpoint(this.getPaintStyle(), this.anchor, this.endpoint, this.canvas, placeholderInfo.element, _jsPlumb, _newEndpoint, this.scope);
-                    // TODO we should not know about DOM here. make the library adapter do this (or the
+                    // TODO we should not know about DOM here. make the library adapter do this (or the 
                     // dom adapter)
                     this.canvas.style.visibility = "hidden";
 
                     if (jpc == null) {
                         this.anchor.locked = true;
                         this.setHover(false, false);
-                        // create a connection. one end is this endpoint, the other is a floating endpoint.
+                        // create a connection. one end is this endpoint, the other is a floating endpoint.                    
                         jpc = _newConnection({
                             sourceEndpoint: this,
                             targetEndpoint: this._jsPlumb.floatingEndpoint,
@@ -7465,19 +7465,19 @@
 
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the code for Connections.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://jsplumb.org
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 ;
@@ -7528,7 +7528,7 @@
         this.previousConnection = params.previousConnection;
         this.source = _jp.getDOMElement(params.source);
         this.target = _jp.getDOMElement(params.target);
-        // sourceEndpoint and targetEndpoint override source/target, if they are present. but
+        // sourceEndpoint and targetEndpoint override source/target, if they are present. but 
         // source is not overridden if the Endpoint has declared it is not the final target of a connection;
         // instead we use the source that the Endpoint declares will be the final source element.
         if (params.sourceEndpoint) this.source = params.sourceEndpoint.getElement();
@@ -7538,7 +7538,7 @@
 
         this.sourceId = this._jsPlumb.instance.getId(this.source);
         this.targetId = this._jsPlumb.instance.getId(this.target);
-        this.scope = params.scope; // scope may have been passed in to the connect call. if it wasn't, we will pull it from the source endpoint, after having initialised the endpoints.
+        this.scope = params.scope; // scope may have been passed in to the connect call. if it wasn't, we will pull it from the source endpoint, after having initialised the endpoints.            
         this.endpoints = [];
         this.endpointStyles = [];
 
@@ -7690,7 +7690,7 @@
 
         this.updateConnectedClass();
 
-// END PAINTING
+// END PAINTING    
     };
 
     _ju.extend(_jp.Connection, _jp.OverlayCapableJsPlumbUIComponent, {
@@ -7980,23 +7980,23 @@
             return e;
         }
 
-    }); // END Connection class
+    }); // END Connection class            
 }).call(this);
 
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the code for creating and manipulating anchors.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 ;
@@ -8237,7 +8237,7 @@
             removeConnection(1, ep[1], ep[1].anchor, sourceId, connection);
             removeConnection(0, ep[0], ep[0].anchor, targetId, connection);
 
-            // remove from anchorLists
+            // remove from anchorLists            
             removeEndpointFromAnchorLists(connection.endpoints[0]);
             removeEndpointFromAnchorLists(connection.endpoints[1]);
 
@@ -8344,7 +8344,7 @@
         //
         // find the entry in an endpoint's list for this connection and update its target endpoint
         // with the current target in the connection.
-        //
+        // 
         //
         this.updateOtherEndpoint = function (elId, oldTargetId, newTargetId, connection) {
             var sIndex = _ju.findWithFunction(connectionsByElementId[elId], function (i) {
@@ -8824,14 +8824,14 @@
         return anchor.constructor == _jp.Anchor ? anchor : jsPlumbInstance.makeAnchor(anchor, elementId, jsPlumbInstance);
     };
 
-    /*
+    /* 
      * A DynamicAnchor is an Anchor that contains a list of other Anchors, which it cycles
      * through at compute time to find the one that is located closest to
      * the center of the target element, and returns that Anchor's compute
      * method result. this causes endpoints to follow each other with
      * respect to the orientation of their target elements, which is a useful
      * feature for some applications.
-     *
+     * 
      */
     _jp.DynamicAnchor = function (params) {
         _jp.Anchor.apply(this, arguments);
@@ -8929,7 +8929,7 @@
     };
     _ju.extend(_jp.DynamicAnchor, _jp.Anchor);
 
-// -------- basic anchors ------------------
+// -------- basic anchors ------------------    
     var _curryAnchor = function (x, y, ox, oy, type, fnInit) {
         _jp.Anchors[type] = function (params) {
             var a = params.jsPlumbInstance.makeAnchor([ x, y, ox, oy, 0, 0 ], params.elementId, params.jsPlumbInstance);
@@ -8954,7 +8954,7 @@
     _curryAnchor(0, 0, 0, -1, "TopLeft");
     _curryAnchor(0, 1, 0, 1, "BottomLeft");
 
-// ------- dynamic anchors -------------------
+// ------- dynamic anchors -------------------    
 
     // default dynamic anchors chooses from Top, Right, Bottom, Left
     _jp.Defaults.DynamicAnchors = function (params) {
@@ -8968,7 +8968,7 @@
         return a;
     };
 
-// ------- continuous anchors -------------------
+// ------- continuous anchors -------------------    
 
     var _curryContinuousAnchor = function (type, faces) {
         _jp.Anchors[type] = function (params) {
@@ -8987,7 +8987,7 @@
     _curryContinuousAnchor("ContinuousBottom", ["bottom"]);
     _curryContinuousAnchor("ContinuousRight", ["right"]);
 
-// ------- position assign anchors -------------------
+// ------- position assign anchors -------------------    
 
     // this anchor type lets you assign the position at connection time.
     _curryAnchor(0, 0, 0, 0, "Assign", function (anchor, params) {
@@ -9016,7 +9016,7 @@
         }
     };
 
-// ------- perimeter anchors -------------------
+// ------- perimeter anchors -------------------    
 
     _jp.Anchors.Perimeter = function (params) {
         params = params || {};
@@ -9131,18 +9131,18 @@
 }).call(this);
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the default Connectors, Endpoint and Overlay definitions.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 ;
@@ -9161,7 +9161,7 @@
          * much easier to do now.
          *
          * A Segment is responsible for providing coordinates for painting it, and also must be able to report its length.
-         *
+         * 
          */
         AbstractSegment: function (params) {
             this.params = params;
@@ -9310,7 +9310,7 @@
                     out.y = within(y1, y2, y) ? y : closest(y1, y2, y);
                 }
                 else {
-                    // closest point lies on normal from given point to this line.
+                    // closest point lies on normal from given point to this line.  
                     var b = y1 - (m * x1),
                         b2 = y - (m2 * x),
                     // y1 = m.x1 + b and y1 = m2.x1 + b2
@@ -9396,7 +9396,7 @@
             if (this.endAngle < 0) this.endAngle += TWO_PI;
             if (this.startAngle < 0) this.startAngle += TWO_PI;
 
-            // segment is used by vml
+            // segment is used by vml     
             this.segment = _jg.quadrant([this.x1, this.y1], [this.x2, this.y2]);
 
             // we now have startAngle and endAngle as positive numbers, meaning the
@@ -10086,7 +10086,7 @@
 // ********************************* END OF ENDPOINT TYPES *******************************************************************
 
 
-// ********************************* OVERLAY DEFINITIONS ***********************************************************************
+// ********************************* OVERLAY DEFINITIONS ***********************************************************************    
 
     var AbstractOverlay = _jp.Overlays.AbstractOverlay = function (params) {
         this.visible = true;
@@ -10266,7 +10266,7 @@
 
     /*
      * Class: Overlays.Diamond
-     *
+     * 
      * A diamond. Like PlainArrow, this is a concrete case of the more generic case of the tail points converging on some point...it just
      * happens that in this case, that point is greater than the length of the the arrow.
      *
@@ -10384,7 +10384,7 @@
     };
     _ju.extend(AbstractDOMOverlay, [_jp.jsPlumbUIComponent, AbstractOverlay], {
         getDimensions: function () {
-// still support the old way, for now, for IE8. But from 2.0.0 this whole method will be gone.
+// still support the old way, for now, for IE8. But from 2.0.0 this whole method will be gone. 
             return _ju.oldIE ? _jp.getSize(this.getElement()) : [1, 1];
         },
         setVisible: function (state) {
@@ -10450,12 +10450,12 @@
      */
     /*
      * Function: Constructor
-     *
+     * 
      * Parameters:
      * 	create - function for jsPlumb to call that returns a DOM element.
      * 	location - distance (as a decimal from 0 to 1 inclusive) marking where the label should sit on the connector. defaults to 0.5.
      * 	id - optional id to use for later retrieval of this overlay.
-     *
+     * 	
      */
     _jp.Overlays.Custom = function (params) {
         this.type = "Custom";
@@ -10500,7 +10500,7 @@
      */
     /*
      * Function: Constructor
-     *
+     * 
      * Parameters:
      * 	cssClass - optional css class string to append to css class. This string is appended "as-is", so you can of course have multiple classes
      *             defined.  This parameter is preferred to using labelStyle, borderWidth and borderStyle.
@@ -10508,8 +10508,8 @@
      *         label function returns null.  empty strings _will_ be painted.
      * 	location - distance (as a decimal from 0 to 1 inclusive) marking where the label should sit on the connector. defaults to 0.5.
      * 	id - optional id to use for later retrieval of this overlay.
-     *
-     *
+     * 
+     * 	
      */
     _jp.Overlays.Label = function (params) {
         this.labelStyle = params.labelStyle;
@@ -10643,18 +10643,18 @@
 }).call(this);
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the 'flowchart' connectors, consisting of vertical and horizontal line segments.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 ;
@@ -11029,18 +11029,18 @@
 }).call(this);
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the state machine connectors.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 ;
@@ -11208,18 +11208,18 @@
 }).call(this);
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the code for the Bezier connector type.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 ;
@@ -11295,24 +11295,24 @@
 }).call(this);
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the SVG renderers.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 ;
 (function () {
 
-// ************************** SVG utility methods ********************************************
+// ************************** SVG utility methods ********************************************	
 
     "use strict";
     var root = this, _jp = root.jsPlumb, _ju = root.jsPlumbUtil;
@@ -11641,7 +11641,7 @@
     };
     _ju.extend(_jp.ConnectorRenderers.svg, SvgComponent);
 
-// ******************************* svg segment renderer *****************************************************
+// ******************************* svg segment renderer *****************************************************	
 
     _jp.Segments.svg = {
         SegmentRenderer: {
@@ -11904,18 +11904,18 @@
 
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the VML renderers.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 
@@ -12221,7 +12221,7 @@
     };
     _ju.extend(VmlEndpoint, VmlComponent);
 
-// ******************************* vml segments *****************************************************
+// ******************************* vml segments *****************************************************	
 
     _jp.Segments.vml = {
         SegmentRenderer: {
@@ -12283,7 +12283,7 @@
         }
     };
 
-// ******************************* /vml segments *****************************************************
+// ******************************* /vml segments *****************************************************	
 
 // ******************************* vml endpoints *****************************************************
 
@@ -12315,7 +12315,7 @@
      */
     _jp.Endpoints.vml.Blank = _jp.Endpoints.Blank;
 
-// ******************************* /vml endpoints *****************************************************
+// ******************************* /vml endpoints *****************************************************	
 
 // ******************************* vml overlays *****************************************************
 
@@ -12417,24 +12417,24 @@
     };
     _ju.extend(_jp.Overlays.vml.Diamond, [ _jp.Overlays.Diamond, AbstractVmlArrowOverlay ]);
 
-// ******************************* /vml overlays *****************************************************
+// ******************************* /vml overlays *****************************************************    
 
 }).call(this);
 
 /*
  * jsPlumb
- *
+ * 
  * Title:jsPlumb 1.7.5
- *
- * Provides a way to visually connect elements on an HTML page, using SVG or VML.
- *
+ * 
+ * Provides a way to visually connect elements on an HTML page, using SVG or VML.  
+ * 
  * This file contains the 'vanilla' adapter - having no external dependencies other than bundled libs.
  *
  * Copyright (c) 2010 - 2015 jsPlumb (hello@jsplumbtoolkit.com)
- *
+ * 
  * http://jsplumbtoolkit.com
  * http://github.com/sporritt/jsplumb
- *
+ * 
  * Dual licensed under the MIT and GPL2 licenses.
  */
 ;

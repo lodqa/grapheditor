@@ -13,11 +13,14 @@ Include a css.
 
 ```html
 <link href="bower/grapheditor/index.css">
+<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 ```
 
 Include a JavaScript.
 
 ```html
+<script src="bower_components/jsplumb/dist/js/dom.jsPlumb-1.7.5.js"></script>
+<script src="bower_components/js-polyfills/keyboard.js"></script>
 <script src="bower/grapheditor/index.js"></script>
 ```
 
@@ -26,26 +29,16 @@ Write in a html.
 ```html
 <div class="node-editor">
   <div class="input-node">
-    <label>Input Node</label><br>
-    <input class="label" placeholder="label"></input>
-    <input class="url" placeholder="url"></input>
-    <button class="button" disabled>+</button>
-  </div>
-  <div class="edit-node hidden">
-    <label>Edit Node</label><br>
-    <input class="label" placeholder="label"></input>
-    <input class="url" placeholder="url"></input>
-    <button class="button" disabled>+</button>
-    <button class="delete-button">delete</button>
-    <button class="cancel-button">cancel</button>
+    <input class="label" placeholder="New Node"></input>
+    <button class="button" disabled title="create"><i class="fa fa-plus"></i></button> to be connected as
+    <label>
+      <i>chain</i><input checked/ name="create-edge" type="radio" value="chain"></label> or
+    <label>
+      <i>star</i><input name="create-edge" type="radio" value="star"/></label>.
   </div>
   <div class="edit-edge hidden">
-    <label>Edit Edge</label><br>
-    <input class="label" placeholder="label"></input>
-    <input class="url" placeholder="url"></input>
-    <button class="button" disabled>+</button>
-    <button class="delete-button">delete</button>
-    <button class="cancel-button">cancel</button>
+    <label>Delete Edge</label>
+    <button class="delete-button" title="delete"><i class="fa fa-trash-o"></i></button>
   </div>
   <span class="warn"></span>
 </div>
@@ -53,13 +46,8 @@ Write in a html.
 </div>
 <div class="pgp hidden">
 </div>
-<div class="lookup">
-    <button class="button">lookup all node</button>
-</div>
 <div class="table">
   <div class="node-table">
-  </div>
-  <div class="edge-table">
   </div>
 </div>
 <div class="mappings hidden">
@@ -81,17 +69,16 @@ editor.addNodes([{
 }, {
   id: 'node-3',
   label: 'bing'
-}])
-
-// Add default edges.
-editor.addEdges([{
-  sourceId: 'node-1',
-  targetId: 'node-2',
-  label: 'path1'
 }, {
-  sourceId: 'node-1',
-  targetId: 'node-3',
-  label: 'path2'
+  id: 'node-4',
+  label: 'bang'
+}, {
+  id: 'node-5',
+  label: 'bong'
+}, {
+  id: 'node-6',
+  label: 'song',
+  createEdge: 'chain'
 }])
 ```
 

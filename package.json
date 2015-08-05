@@ -9,6 +9,7 @@
   "dependencies": {
     "action-stream": "^0.3.1",
     "babel": "^5.8.20",
+    "bluebird": "^2.9.34",
     "clone": "^1.0.2",
     "debounce": "^1.0.0",
     "dom-delegate": "^2.0.3",

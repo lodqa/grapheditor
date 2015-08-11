@@ -3,7 +3,8 @@
   "description": "graph editor",
   "version": "0.0.19",
   "authors": [
-    "Jin-Dong Kim <jindong.kim@gmail.com>"
+    "Jin-Dong Kim <jindong.kim@gmail.com>",
+    "Shigeru Nakajima <shigeru.nakajima@luxiar.com>"
   ],
   "dependencies": {
     "jsplumb": "1.7.5",

@@ -4,6 +4,7 @@
     "DELETE": "delete",
     "CREATE": "create",
     "DRAG": "drag",
+    "FOCUS": "focus",
     "HOVER": "hover",
     "INPUT": "input",
     "LOOKUP": "lookup",

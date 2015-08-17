@@ -52,8 +52,17 @@
       }
       &.term {
         width: 460px;
+        .term {
+          &.hover {
+            input.term {
+              background-color: rgba(255,0,0,0.5);
+              text-decoration: line-through;
+            }
+          }
+        }
         input.term {
           width: 400px;
+
           // For Firefox
           box-sizing: border-box;
         }

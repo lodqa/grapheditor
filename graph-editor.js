@@ -33,7 +33,7 @@ function addPgp(stream, pgp) {
   }
 
   // Wait for creations of nodes.
-  requestAnimationFrame(() => {
+  global.setTimeout(() => {
     for (let edge of pgp.edges) {
       stream.push({
         source: ['graph-editor.js'],
@@ -43,5 +43,5 @@ function addPgp(stream, pgp) {
         targetId: edge.object
       })
     }
-  })
+  }, 1)
 }

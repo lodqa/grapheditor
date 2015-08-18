@@ -48,39 +48,48 @@ function addPgp(stream, pgp) {
     });
   }
 
-  // Wait for creations of nodes.
-  requestAnimationFrame(function () {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = pgp.edges[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var edge = _step.value;
-
-        stream.push({
-          source: ['graph-editor.js'],
-          target: _libStreamConst.target.VIEW_EDGE,
-          type: _libStreamConst.actionType.CREATE,
-          sourceId: edge.subject,
-          targetId: edge.object
-        });
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator['return']) {
-          _iterator['return']();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
+  stream.push({
+    source: ['graph-editor.js'],
+    target: _libStreamConst.target.MODEL_NODE,
+    type: _libStreamConst.actionType.FOCUS,
+    id: pgp.focus
   });
+
+  if (pgp.edges) {
+    // Wait for creations of nodes.
+    _global2['default'].setTimeout(function () {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = pgp.edges[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var edge = _step.value;
+
+          stream.push({
+            source: ['graph-editor.js'],
+            target: _libStreamConst.target.VIEW_EDGE,
+            type: _libStreamConst.actionType.CREATE,
+            sourceId: edge.subject,
+            targetId: edge.object
+          });
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator['return']) {
+            _iterator['return']();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+    }, 1);
+  }
 }
 
 },{"./lib/stream/actionStream":15,"./lib/stream/const":17,"./lib/stream/modelStream":25,"./lib/stream/renderStream":32,"babel/polyfill":230,"global":245}],2:[function(require,module,exports){

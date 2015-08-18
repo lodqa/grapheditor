@@ -16,19 +16,32 @@ global.graphEditor = function(lookupUrl) {
     .pipe(modelStream(lookupUrl))
     .pipe(renderStream())
 
-  topStream.addNodes = (nodes) => addNodes(topStream, nodes)
+  topStream.addPgp = (pgp) => addPgp(topStream, pgp)
 
   return topStream
 }
 
-function addNodes(stream, nodes) {
-  nodes.forEach(n => addNode(stream, n))
-}
+function addPgp(stream, pgp) {
+  for (let id in pgp.nodes) {
+    stream.push({
+      source: ['graph-editor.js'],
+      target: target.MODEL_NODE,
+      type: actionType.CREATE,
+      id: id,
+      label: pgp.nodes[id].text
+    })
+  }
 
-function addNode(stream, node) {
-  stream.push(Object.assign({
-    source: ['index.js'],
-    target: target.MODEL_NODE,
-    type: actionType.CREATE,
-  }, node))
+  // Wait for creations of nodes.
+  requestAnimationFrame(() => {
+    for (let edge of pgp.edges) {
+      stream.push({
+        source: ['graph-editor.js'],
+        target: target.VIEW_EDGE,
+        type: actionType.CREATE,
+        sourceId: edge.subject,
+        targetId: edge.object
+      })
+    }
+  })
 }

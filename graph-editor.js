@@ -32,16 +32,25 @@ function addPgp(stream, pgp) {
     })
   }
 
-  // Wait for creations of nodes.
-  global.setTimeout(() => {
-    for (let edge of pgp.edges) {
-      stream.push({
-        source: ['graph-editor.js'],
-        target: target.VIEW_EDGE,
-        type: actionType.CREATE,
-        sourceId: edge.subject,
-        targetId: edge.object
-      })
-    }
-  }, 1)
+  stream.push({
+    source: ['graph-editor.js'],
+    target: target.MODEL_NODE,
+    type: actionType.FOCUS,
+    id: pgp.focus
+  })
+
+  if (pgp.edges) {
+    // Wait for creations of nodes.
+    global.setTimeout(() => {
+      for (let edge of pgp.edges) {
+        stream.push({
+          source: ['graph-editor.js'],
+          target: target.VIEW_EDGE,
+          type: actionType.CREATE,
+          sourceId: edge.subject,
+          targetId: edge.object
+        })
+      }
+    }, 1)
+  }
 }

@@ -36,5 +36,6 @@ editor.addPgp({
   }, {
     "object": "node-6",
     "subject": "node-5"
-  }]
+  }],
+  "focus": "node-2"
 })

@@ -26,8 +26,7 @@
     "babelify": "^6.2.0",
     "body-parser": "^1.13.3",
     "browserify": "^11.0.1",
-    "gulp": "^3.9.0",
-    "gulp-connect": "^2.2.0",
+    "connect": "^3.4.0",
     "less": "^2.5.1",
     "watchify": "^3.3.1"
   },
@@ -47,7 +46,7 @@
     "browserify": "browserify graph-editor -t babelify -o index.js",
     "less": "lessc index.less > index.css",
     "start": "npm run browserify && npm run less",
-    "stub": "gulp",
+    "stub": "babel-node dev/stub.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "watchify -d graph-editor -t babelify -o index.js"
   }

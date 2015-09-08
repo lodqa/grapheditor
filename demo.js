@@ -1,4 +1,4 @@
-var editor = graphEditor('http://localhost:9292/lookup')
+var editor = graphEditor('http://localhost:9292/termfinder')
 
 editor.addPgp({
   "nodes": {
@@ -40,4 +40,4 @@ editor.addPgp({
   "focus": "node-2"
 })
 
-editor.setDictionaryUrl('http://exapmle.com/aaaa')
+editor.setDictionaryUrl('http://pubdictionaries.org:80/dictionaries/id_mapping?dictionaries=%5B%22qald-drugbank%22%2C%22qald-diseasome%22%2C%22qald-sider%22%5D&output_format=simple&threshold=0.5&top_n=0')

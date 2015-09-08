@@ -10,7 +10,9 @@
     border-collapse: collapse;
     font-size: 0.9em;
     margin-right: 10px;
+    width: 100%;
     min-width: 300px;
+    max-width: 600px;
     tr {
       height: 30px;
       &.selected td {
@@ -25,15 +27,15 @@
       .cell;
       background-color: #ddd;
       color: #333;
+      &.focus {
+        width: 16px;
+      }
       &.label {
-        width: 32px;
+        width: 180px;
         .title {
           display: inline-block;
-          width: 116px;
+          width: 106px;
         }
-      }
-      &.url {
-        width: 50px;
       }
     }
     td {
@@ -45,13 +47,11 @@
       &.label {
         text-align: center;
         vertical-align: top;
-        width: 185px;
         input {
-          width: 110px;
+          width: 100px;
         }
       }
-      &.term {
-        width: 460px;
+      &.url {
         .term {
           &.hover {
             input.term {
@@ -61,7 +61,7 @@
           }
         }
         input.term {
-          width: 400px;
+          width: 80%;
 
           // For Firefox
           box-sizing: border-box;

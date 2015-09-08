@@ -9,16 +9,26 @@ import {
 }
 from './lib/stream/const'
 
-global.graphEditor = function(lookupUrl) {
+global.graphEditor = function(lookupUrl, dictionaryUrl) {
   let topStream = actionStream()
 
   topStream
-    .pipe(modelStream(lookupUrl))
+    .pipe(modelStream(lookupUrl, dictionaryUrl))
     .pipe(renderStream())
 
   topStream.addPgp = (pgp) => addPgp(topStream, pgp)
+  topStream.setDictionaryUrl = (dictionaryUrl) => setDictionaryUrl(topStream, dictionaryUrl)
 
   return topStream
+}
+
+function setDictionaryUrl(stream, dictionaryUrl) {
+  stream.push({
+    source: ['graph-editor.js'],
+    target: target.MODEL_NODE,
+    type: actionType.SET_DICTIONARY_URL,
+    dictionaryUrl: dictionaryUrl
+  })
 }
 
 function addPgp(stream, pgp) {

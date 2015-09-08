@@ -39,3 +39,5 @@ editor.addPgp({
   }],
   "focus": "node-2"
 })
+
+editor.setDictionaryUrl('http://exapmle.com/aaaa')

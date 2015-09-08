@@ -25,7 +25,7 @@ let app = connect()
   }).use((req, res, next) => {
     if (req.method === 'POST') {
       // Return matched mappings only.
-      let response = req.body.reduce((mappings, label) => {
+      let response = req.body.keywords.reduce((mappings, label) => {
         if (MAPPINGS_MASTER[label]) {
           mappings[label] = MAPPINGS_MASTER[label]
         } else {

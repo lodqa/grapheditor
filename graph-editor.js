@@ -32,11 +32,7 @@ function setDictionaryUrl(stream, dictionaryUrl) {
 }
 
 function addPgp(stream, pgp) {
-<<<<<<< HEAD
   if (pgp && pgp.nodes) {
-=======
-  if (pgp.nodes) {
->>>>>>> dcd086d6555d26d6b7b85811ba19930bf1d53b02
     for (let id in pgp.nodes) {
       stream.push({
         source: ['graph-editor.js'],
@@ -55,11 +51,7 @@ function addPgp(stream, pgp) {
     })
   }
 
-<<<<<<< HEAD
   if (pgp && pgp.edges) {
-=======
-  if (pgp.edges) {
->>>>>>> dcd086d6555d26d6b7b85811ba19930bf1d53b02
     // Wait for creations of nodes.
     global.setTimeout(() => {
       for (let edge of pgp.edges) {

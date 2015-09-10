@@ -32,22 +32,24 @@ function setDictionaryUrl(stream, dictionaryUrl) {
 }
 
 function addPgp(stream, pgp) {
-  for (let id in pgp.nodes) {
+  if (pgp.nodes) {
+    for (let id in pgp.nodes) {
+      stream.push({
+        source: ['graph-editor.js'],
+        target: target.MODEL_NODE,
+        type: actionType.CREATE,
+        id: id,
+        label: pgp.nodes[id].text
+      })
+    }
+
     stream.push({
       source: ['graph-editor.js'],
       target: target.MODEL_NODE,
-      type: actionType.CREATE,
-      id: id,
-      label: pgp.nodes[id].text
+      type: actionType.FOCUS,
+      id: pgp.focus
     })
   }
-
-  stream.push({
-    source: ['graph-editor.js'],
-    target: target.MODEL_NODE,
-    type: actionType.FOCUS,
-    id: pgp.focus
-  })
 
   if (pgp.edges) {
     // Wait for creations of nodes.

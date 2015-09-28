@@ -22,7 +22,16 @@ let app = connect()
       res.end()
     }
     return next()
-  }).use((req, res, next) => {
+  })
+  .use((req, res, next) => {
+    if (req.method === 'POST' && req.url === '/testURLtoReturnNull') {
+      res.setHeader('Content-Type', 'application/json')
+      res.end(JSON.stringify(null))
+      return
+    }
+    return next()
+  })
+  .use((req, res, next) => {
     if (req.method === 'POST') {
       // Return matched mappings only.
       let response = req.body.keywords.reduce((mappings, label) => {
@@ -43,3 +52,5 @@ let app = connect()
 
 http.createServer(app)
   .listen(9292)
+
+console.log('Listening on 9292')

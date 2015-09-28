@@ -7,6 +7,7 @@
     "Shigeru Nakajima <shigeru.nakajima@luxiar.com>"
   ],
   "dependencies": {
+    "Element.closest": "closest#~1.0.3",
     "font-awesome": "~4.3.0",
     "js-polyfills": "~0.1.6",
     "jsplumb": "1.7.8"

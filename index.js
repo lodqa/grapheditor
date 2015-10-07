@@ -1292,7 +1292,7 @@ var _default = (function (_ActionReadable) {
         return pushNodeId(e, component, _const.actionType.DELETE, push);
       });
 
-      // urls
+      // term
       component.ractive.observe('nodes.*.terms.*.enable nodes.*.terms.*.value', (0, _debounce2['default'])(function (newValue, oldValue, keypath, nodeIndex) {
         return updateTerm(component, nodeIndex, push);
       }, 200));
@@ -3582,10 +3582,10 @@ exports['default'] = function (selector) {
       var nodeElement = getNode(element);
 
       if (nodeElement) {
-        return nodeElement.getAttribute('data-index');
+        return parseInt(nodeElement.getAttribute('data-index'));
       }
 
-      return '';
+      return null;
     },
     getNodeValue: function getNodeValue(index) {
       console.assert(ractive.get('nodes.' + index), 'The node is not in tabel. index :', index, ractive.get('nodes'));
@@ -3595,10 +3595,10 @@ exports['default'] = function (selector) {
       var termElement = element.closest('.term');
 
       if (termElement) {
-        return termElement.getAttribute('data-index');
+        return parseInt(termElement.getAttribute('data-index'));
       }
 
-      return '';
+      return null;
     },
     has: function has(index) {
       return ractive.get('nodes.' + index);

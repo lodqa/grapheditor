@@ -60,7 +60,8 @@ function addPgp(stream, pgp) {
           target: target.VIEW_EDGE,
           type: actionType.CREATE,
           sourceId: edge.subject,
-          targetId: edge.object
+          targetId: edge.object,
+          text: edge.text
         })
       }
     }, 1)

@@ -24,7 +24,8 @@ editor.addPgp({
   },
   edges: [{
     object: 'node-2',
-    subject: 'node-1'
+    subject: 'node-1',
+    text: 'hoge'
   }, {
     object: 'node-3',
     subject: 'node-1'

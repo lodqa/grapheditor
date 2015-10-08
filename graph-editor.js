@@ -1,5 +1,5 @@
+import 'babel/polyfill'
 import global from 'global'
-import polyfill from 'babel/polyfill'
 
 import actionStream from './lib/stream/actionStream'
 import modelStream from './lib/stream/modelStream'
@@ -9,7 +9,7 @@ import {
 }
 from './lib/stream/const'
 
-global.graphEditor = function(lookupUrl, dictionaryUrl) {
+global.graphEditor = function graphEditor(lookupUrl, dictionaryUrl) {
   let topStream = actionStream()
 
   topStream
@@ -27,18 +27,18 @@ function setDictionaryUrl(stream, dictionaryUrl) {
     source: ['graph-editor.js'],
     target: target.MODEL_NODE,
     type: actionType.SET_DICTIONARY_URL,
-    dictionaryUrl: dictionaryUrl
+    dictionaryUrl
   })
 }
 
 function addPgp(stream, pgp) {
   if (pgp && pgp.nodes) {
-    for (let id in pgp.nodes) {
+    for (let id of Object.keys(pgp.nodes)) {
       stream.push({
         source: ['graph-editor.js'],
         target: target.MODEL_NODE,
         type: actionType.CREATE,
-        id: id,
+        id,
         label: pgp.nodes[id].text
       })
     }

@@ -16,7 +16,7 @@
     "UNHOVER": "unhover",
     "UNHOVER_TERM": "unhover-term",
     "UNSELECT": "unselect",
-    "UPDATE_LABEL": "update-label",
+    "UPDATE_TEXT": "update-text",
     "UPDATE_TERM": "update-term",
     "VALIDATE": "validate"
   },

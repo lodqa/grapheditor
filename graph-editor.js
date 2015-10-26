@@ -39,7 +39,7 @@ function addPgp(stream, pgp) {
         target: target.MODEL_NODE,
         type: actionType.CREATE,
         id,
-        label: pgp.nodes[id].text
+        text: pgp.nodes[id].text
       })
     }
 

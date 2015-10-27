@@ -25,7 +25,7 @@ global.graphEditor = function graphEditor(lookupUrl, dictionaryUrl) {
 function setDictionaryUrl(stream, dictionaryUrl) {
   stream.push({
     source: ['graph-editor.js'],
-    target: target.MODEL_NODE,
+    target: target.MODEL,
     type: actionType.SET_DICTIONARY_URL,
     dictionaryUrl
   })

@@ -9,11 +9,11 @@ import {
 }
 from './lib/stream/const'
 
-global.graphEditor = function graphEditor(lookupUrl, dictionaryUrl) {
+global.graphEditor = function graphEditor(lookupUrl) {
   let topStream = actionStream()
 
   topStream
-    .pipe(modelStream(lookupUrl, dictionaryUrl))
+    .pipe(modelStream(lookupUrl))
     .pipe(renderStream())
 
   topStream.addPgp = (pgp) => addPgp(topStream, pgp)

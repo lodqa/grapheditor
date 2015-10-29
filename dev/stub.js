@@ -5,7 +5,8 @@ import bodyParser from 'body-parser'
 const MAPPINGS_MASTER = {
   genes: ['http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/genes'],
   'alzheimer disease': ['http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseases/74'],
-  bing: ['http://example.com/bing', 'text:bing']
+  bing: ['http://example.com/bing', 'text:bing'],
+  hoge: ['http://hoge.com/hoge', 'text:hoge']
 }
 
 let app = connect()

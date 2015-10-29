@@ -14,7 +14,7 @@
     "dom-delegate": "^2.0.3",
     "duplexer": "^0.1.1",
     "global": "^4.3.0",
-    "handlebars": "^3.0.3",
+    "handlebars": "^4.0.4",
     "ractive": "^0.7.3",
     "springy": "^2.7.1",
     "stream-browserify": "^2.0.0",
@@ -24,11 +24,11 @@
   "devDependencies": {
     "babelify": "^6.2.0",
     "body-parser": "^1.13.3",
-    "browserify": "^11.0.1",
+    "browserify": "^12.0.1",
     "connect": "^3.4.0",
-    "eslint": "^1.6.0",
+    "eslint": "^1.7.3",
     "less": "^2.5.1",
-    "watchify": "^3.3.1"
+    "watchify": "^3.6.0"
   },
   "homepage": "https://github.com/lodqa/grapheditor",
   "keywords": [

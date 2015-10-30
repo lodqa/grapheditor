@@ -13,7 +13,7 @@
       "unix"
     ],
     "semi": [
-      2,
+      1,
       "never"
     ],
     "no-console": 0,
@@ -151,7 +151,7 @@
     "no-restricted-syntax": 2,
     "no-spaced-func": 2,
     "operator-assignment": 2,
-    "no-trailing-spaces": 2,
+    "no-trailing-spaces": 1,
     "object-curly-spacing": 2,
     "no-unneeded-ternary": 2,
     "require-yield": 2,

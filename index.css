@@ -171,7 +171,7 @@
   color: #333;
 }
 .table table th.focus {
-  width: 18px;
+  width: 21px;
 }
 .table table th.text {
   width: 180px;
@@ -187,7 +187,7 @@
 }
 .table table td.focus {
   text-align: center;
-  width: 18px;
+  width: 21px;
 }
 .table table td.text {
   text-align: center;

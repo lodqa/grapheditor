@@ -29,6 +29,7 @@
     "eslint": "^1.7.3",
     "estraverse": "^4.1.1",
     "less": "^2.5.1",
+    "superagent-promise": "^1.0.3",
     "watchify": "^3.6.0"
   },
   "homepage": "https://github.com/lodqa/grapheditor",

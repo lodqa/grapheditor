@@ -6,7 +6,8 @@ const MAPPINGS_MASTER = {
   genes: ['http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseasome/genes'],
   'alzheimer disease': ['http://www4.wiwiss.fu-berlin.de/diseasome/resource/diseases/74'],
   bing: ['http://example.com/bing', 'text:bing'],
-  hoge: ['http://hoge.com/hoge', 'text:hoge']
+  hoge: ['http://hoge.com/hoge', 'text:hoge'],
+  'side effects': ['http://purl.obolibrary.org/obo/MFO_0002040']
 }
 
 let app = connect()
@@ -48,6 +49,18 @@ let app = connect()
 
       res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify(response))
+    }
+    return next()
+  })
+  .use((req, res, next) => {
+    if (req.method === 'GET' && req._parsedUrl.pathname === '/proxy') {
+      res.setHeader('Content-Type', 'application/json')
+      res.end(`{
+        "head": { "link": [], "vars": ["label"] },
+        "results": { "distinct": false, "ordered": true, "bindings": [
+          { "label": { "type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#string", "value": "use proxy" }}
+        ] }
+      }`)
     }
     return next()
   })

@@ -12,6 +12,7 @@
     "MOVE": "move",
     "SELECT": "select",
     "SET_DICTIONARY_URL": "set-dictionary-url",
+    "SET_ENDPOINT": "set-endpoint",
     "SNAPSHOT": "snapshot",
     "UNHOVER": "unhover",
     "UNHOVER_TERM": "unhover-term",

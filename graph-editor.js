@@ -9,6 +9,8 @@ import {
 }
 from './lib/stream/const'
 
+const source = ['graph-editor.js']
+
 global.graphEditor = function graphEditor(lookupUrl) {
   let topStream = actionStream()
 
@@ -18,16 +20,27 @@ global.graphEditor = function graphEditor(lookupUrl) {
 
   topStream.addPgp = (pgp) => addPgp(topStream, pgp)
   topStream.setDictionaryUrl = (dictionaryUrl) => setDictionaryUrl(topStream, dictionaryUrl)
+  topStream.setEndpoint = (endpoint, proxy) => setEndpoint(topStream, endpoint, proxy)
 
   return topStream
 }
 
 function setDictionaryUrl(stream, dictionaryUrl) {
   stream.push({
-    source: ['graph-editor.js'],
+    source,
     target: target.MODEL,
     type: actionType.SET_DICTIONARY_URL,
     dictionaryUrl
+  })
+}
+
+function setEndpoint(stream, endpoint, proxy) {
+  stream.push({
+    source,
+    target: target.MODEL,
+    type: actionType.SET_ENDPOINT,
+    endpoint,
+    proxy
   })
 }
 
@@ -35,7 +48,7 @@ function addPgp(stream, pgp) {
   if (pgp && pgp.nodes) {
     for (let id of Object.keys(pgp.nodes)) {
       stream.push({
-        source: ['graph-editor.js'],
+        source,
         target: target.MODEL_NODE,
         type: actionType.CREATE,
         id,
@@ -44,7 +57,7 @@ function addPgp(stream, pgp) {
     }
 
     stream.push({
-      source: ['graph-editor.js'],
+      source,
       target: target.MODEL_NODE,
       type: actionType.FOCUS,
       id: pgp.focus
@@ -56,7 +69,7 @@ function addPgp(stream, pgp) {
     global.setTimeout(() => {
       for (let edge of pgp.edges) {
         stream.push({
-          source: ['graph-editor.js'],
+          source,
           target: target.VIEW_EDGE,
           type: actionType.CREATE,
           sourceId: edge.subject,

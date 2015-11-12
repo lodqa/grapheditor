@@ -43,3 +43,4 @@ editor.addPgp({
 })
 
 editor.setDictionaryUrl('http://pubdictionaries.org:80/dictionaries/id_mapping?dictionaries=%5B%22qald-drugbank%22%2C%22qald-diseasome%22%2C%22qald-sider%22%5D&output_format=simple&threshold=0.5&top_n=0')
+editor.setEndpoint('http://rdf.pubannotation.org/sparql')

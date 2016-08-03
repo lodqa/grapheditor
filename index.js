@@ -1570,7 +1570,7 @@ function add(component, input, target, push) {
 
     (0, _pushUpdateTerm2['default'])(target, text.id, text.terms.concat({
       enable: true,
-      value: newValue
+      url: newValue
     }), push);
 
     input.value = '';
@@ -3852,7 +3852,7 @@ function updateDisplay(component, texts) {
   }).reduce(function (ret, text) {
     ret[text.text] = text.terms.reduce(function (a, b) {
       if (b.enable) {
-        a.push(b.value);
+        a.push(b.url);
       }
 
       return a;

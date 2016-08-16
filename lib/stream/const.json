@@ -32,12 +32,12 @@
   },
   "selector": {
     "EDGE_TABLE": ".edge-table",
-    "EDIT_EDGE": ".edit-edge",
     "GRPAPH": ".jsPlumb-container",
     "INPUT_NODE": ".input-node",
     "MAPPINGS": ".mappings",
-    "MESSAGE": ".node-editor",
+    "NODE_EDITOR": ".node-editor",
     "NODE_TABLE": ".node-table",
-    "PGP": ".pgp"
+    "PGP": ".pgp",
+    "TABLE": ".table"
   }
 }

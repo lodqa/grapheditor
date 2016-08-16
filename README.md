@@ -41,7 +41,7 @@ Write in a html.
     <label>Delete Edge</label>
     <button class="delete-button" title="delete"><i class="fa fa-trash-o"></i></button>
   </div>
-  <span class="warn"></span>
+  <span class="message"></span>
 </div>
 <div class="jsPlumb-container">
 </div>

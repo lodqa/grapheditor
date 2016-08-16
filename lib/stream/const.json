@@ -18,6 +18,7 @@
     "UNSELECT": "unselect",
     "UPDATE_TEXT": "update-text",
     "UPDATE_TERM": "update-term",
+    "UPDATE_STATE": "update-state",
     "VALIDATE": "validate"
   },
   "target": {
@@ -27,6 +28,7 @@
     "MODEL": "model",
     "MODEL_EDGE": "model-edge",
     "MODEL_NODE": "model-node",
+    "TABLE": "table",
     "VIEW_EDGE": "view-edge",
     "VIEW_NODE": "view-node"
   },
@@ -39,5 +41,10 @@
     "NODE_TABLE": ".node-table",
     "PGP": ".pgp",
     "TABLE": ".table"
+  },
+  "state": {
+    "SEARCHING": "searching",
+    "DONE": "done",
+    "NO_RESULT": "no-result"
   }
 }

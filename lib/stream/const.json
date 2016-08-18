@@ -43,8 +43,9 @@
     "TABLE": ".table"
   },
   "state": {
-    "SEARCHING": "searching",
     "DONE": "done",
-    "NO_RESULT": "no-result"
+    "ERROR": "error",
+    "NO_RESULT": "no-result",
+    "SEARCHING": "searching"
   }
 }

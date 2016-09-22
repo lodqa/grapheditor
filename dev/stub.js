@@ -46,10 +46,15 @@ let app = connect()
         return mappings
       }, {})
 
-      res.setHeader('Content-Type', 'application/json')
-      res.end(JSON.stringify(response))
+      // Wait to confirm appearance for during searaching terms.
+      setTimeout(() => {
+        res.setHeader('Content-Type', 'application/json')
+        res.end(JSON.stringify(response))
+        return next()
+      }, 1000)
+    } else {
+      return next()
     }
-    return next()
   })
 
 http.createServer(app)

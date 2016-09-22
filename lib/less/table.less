@@ -9,6 +9,12 @@
   border: solid 1px #cccccc;
   max-width: 600px;
   min-height: 60px;
+  button {
+    .button
+  }
+  input {
+    .input
+  }
   .placeholder {
     color: @placeholderColor;
   }
@@ -31,7 +37,7 @@
     }
     th {
       .cell;
-      background-color: #ddd;
+      background-color: rgba(92, 150, 188, 0.9);
       color: #333;
       &.focus {
         width: 21px;
@@ -56,11 +62,16 @@
         vertical-align: top;
         width: 180px;
         input {
-          width: 88px;
+          width: 96px;
         }
       }
       &.terms {
         .term {
+          [type="checkbox"] {
+            font-size: 16px;
+            margin: 0 3px;
+            vertical-align: text-top;
+          }
           &.hover {
             input.term {
               background-color: rgba(255,0,0,0.5);
@@ -76,7 +87,9 @@
         }
         .add {
           [type="checkbox"] {
+            margin: 0 3px;
             visibility: hidden;
+            width: 13px;
           }
         }
       }

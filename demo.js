@@ -42,4 +42,7 @@ editor.addPgp({
   focus: 'node-2'
 })
 
-editor.setDictionaryUrl('http://pubdictionaries.org/find_ids.json?dictionary=DrugBank-QALD,SIDER-QALD,Diseasome-QALD&threshold=0.55')
+editor.setDictionaryUrl(
+  'http://pubdictionaries.org/find_ids.json?dictionary=DrugBank-QALD,SIDER-QALD,Diseasome-QALD&threshold=0.55',
+  'http://pubdictionaries.org/find_ids.json?dictionary=UBERON-AE'
+)

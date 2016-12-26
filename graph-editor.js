@@ -17,17 +17,18 @@ global.graphEditor = function graphEditor(lookupUrl) {
     .pipe(renderStream())
 
   topStream.addPgp = (pgp) => addPgp(topStream, pgp)
-  topStream.setDictionaryUrl = (dictionaryUrl) => setDictionaryUrl(topStream, dictionaryUrl)
+  topStream.setDictionaryUrl = (dictionaryUrl, predDictionaryUrl) => setDictionaryUrl(topStream, dictionaryUrl, predDictionaryUrl)
 
   return topStream
 }
 
-function setDictionaryUrl(stream, dictionaryUrl) {
+function setDictionaryUrl(stream, dictionaryUrl, predDictionaryUrl) {
   stream.push({
     source: ['graph-editor.js'],
     target: target.MODEL,
     type: actionType.SET_DICTIONARY_URL,
-    dictionaryUrl
+    dictionaryUrl,
+    predDictionaryUrl
   })
 }
 

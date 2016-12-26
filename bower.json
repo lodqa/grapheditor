@@ -1,12 +1,16 @@
 {
-  "name": "graph-editor",
+  "name": "grapheditor",
   "description": "graph editor",
-  "version": "0.0.10",
+  "version": "0.4.10",
   "authors": [
-    "Jin-Dong Kim <jindong.kim@gmail.com>"
+    "Jin-Dong Kim <jindong.kim@gmail.com>",
+    "Shigeru Nakajima <shigeru.nakajima@luxiar.com>"
   ],
   "dependencies": {
-    "jsplumb": "~1.7.5"
+    "Element.closest": "closest#~1.0.3",
+    "font-awesome": "~4.3.0",
+    "js-polyfills": "~0.1.6",
+    "jsplumb": "1.7.8"
   },
   "homepage": "https://github.com/lodqa/grapheditor",
   "ignore": [
@@ -15,6 +19,7 @@
     "bower_components",
     "test",
     "tests",
+    "dev",
     "lib",
     ".gitignore",
     "index.less",
@@ -22,7 +27,9 @@
     "index.html",
     "demo.js",
     "package.json",
-    "README.md"
+    "README.md",
+    "gulpfile.js",
+    "gulpfile.es6"
   ],
   "keywords": [
     "graph",
@@ -32,5 +39,9 @@
   "main": [
     "index.js",
     "index.css"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lodqa/grapheditor.git"
+  }
 }

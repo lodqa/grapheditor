@@ -1,0 +1,98 @@
+@import "color.less";
+
+/* node-tabel */
+.cell() {
+  border: 1px solid #b9b9b9;
+  padding: 3px;
+}
+.table {
+  border: solid 1px #cccccc;
+  max-width: 600px;
+  min-height: 60px;
+  button {
+    .button
+  }
+  input {
+    .input
+  }
+  .placeholder {
+    color: @placeholderColor;
+  }
+  table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    margin-right: 10px;
+    width: 100%;
+    min-width: 300px;
+    max-width: 600px;
+    tr {
+      height: 30px;
+      &.selected td {
+        color: white;
+        background-color: desaturate(@selectedColor, 25%);
+      }
+      &.hover td {
+        background-color: @hoverColor;
+      }
+    }
+    th {
+      .cell;
+      background-color: rgba(92, 150, 188, 0.9);
+      color: #333;
+      &.focus {
+        width: 21px;
+      }
+      &.text {
+        width: 180px;
+        .title {
+          display: inline-block;
+          width: 96px;
+        }
+      }
+    }
+    td {
+      .cell;
+      background-color: #fff;
+      &.focus {
+        text-align: center;
+        width: 21px;
+      }
+      &.text {
+        text-align: center;
+        vertical-align: top;
+        width: 180px;
+        input {
+          width: 96px;
+        }
+      }
+      &.terms {
+        .term {
+          [type="checkbox"] {
+            font-size: 16px;
+            margin: 0 3px;
+            vertical-align: text-top;
+          }
+          &.hover {
+            input.term {
+              background-color: rgba(255,0,0,0.5);
+              text-decoration: line-through;
+            }
+          }
+        }
+        input.term {
+          width: 80%;
+
+          // For Firefox
+          box-sizing: border-box;
+        }
+        .add {
+          [type="checkbox"] {
+            margin: 0 3px;
+            visibility: hidden;
+            width: 13px;
+          }
+        }
+      }
+    }
+  }
+}

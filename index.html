@@ -1,46 +1,37 @@
 <!doctype html>
+<meta charset="UTF-8">
 
 <head>
   <link rel="stylesheet" href="index.css">
-  <script src="bower_components/jsPlumb/dist/js/dom.jsPlumb-1.7.5.js"></script>
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+  <script src="bower_components/jsplumb/dist/js/dom.jsPlumb-1.7.8.js"></script>
+  <script src="bower_components/js-polyfills/keyboard.js"></script>
+  <script src="bower_components/Element.closest/closest.js"></script>
   <script src="index.js"></script>
 </head>
 
 <body>
   <div class="node-editor">
     <div class="input-node">
-      <label>Input Node</label><br>
-      <input class="label" placeholder="label"></input>
-      <button class="button" disabled>+</button>
+      <input placeholder="New Node"></input>
+      <button title="create" disabled><i class="fa fa-plus"></i></button> to be connected as
+      <label>
+        <i>chain</i><input name="create-edge" type="radio" value="chain" checked></label> or
+      <label>
+        <i>star</i><input name="create-edge" type="radio" value="star"/></label>.
     </div>
-    <div class="edit-node hidden">
-      <label>Edit Node</label><br>
-      <input class="label" placeholder="label"></input>
-      <button class="button" disabled>+</button>
-      <button class="delete-button">delete</button>
-      <button class="cancel-button">cancel</button>
-    </div>
-    <div class="edit-edge hidden">
-      <label>Edit Edge</label><br>
-      <input class="label" placeholder="label"></input>
-      <button class="button" disabled>+</button>
-      <button class="delete-button">delete</button>
-      <button class="cancel-button">cancel</button>
-    </div>
-    <span class="warn"></span>
+    <span class="message"></span>
   </div>
   <div class="jsPlumb-container">
+    <span class="placeholder hidden">Compose a  graph.</span>
   </div>
   <div class="pgp hidden">
   </div>
-  <div class="lookup">
-      <button class="button">lookup all node</button>
-  </div>
   <div class="table">
-    <div class="node-table">
-    </div>
-    <div class="edge-table">
-    </div>
+    <span class="placeholder hidden">There is no graph yet.</span>
+    <span class="message"></span>
+    <div class="node-table"></div>
+    <div class="edge-table"></div>
   </div>
   <div class="mappings hidden">
   </div>

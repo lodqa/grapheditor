@@ -23,6 +23,9 @@ global.graphEditor = function graphEditor(lookupUrl) {
 }
 
 function setDictionaryUrl(stream, dictionaryUrl, predDictionaryUrl) {
+  if (predDictionaryUrl == null) {
+    predDictionaryUrl = dictionaryUrl
+  }
   stream.push({
     source: ['graph-editor.js'],
     target: target.MODEL,

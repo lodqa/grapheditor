@@ -23,15 +23,12 @@ global.graphEditor = function graphEditor(lookupUrl) {
 }
 
 function setDictionaryUrl(stream, dictionaryUrl, predDictionaryUrl) {
-  if (!predDictionaryUrl) {
-    predDictionaryUrl = dictionaryUrl
-  }
   stream.push({
     source: ['graph-editor.js'],
     target: target.MODEL,
     type: actionType.SET_DICTIONARY_URL,
     dictionaryUrl,
-    predDictionaryUrl
+    predDictionaryUrl: predDictionaryUrl || dictionaryUrl
   })
 }
 

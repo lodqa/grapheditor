@@ -1,6 +1,7 @@
 import 'babel/polyfill'
 import global from 'global'
 
+import createHtmlElement from './lib/createHtmlElement'
 import actionStream from './lib/stream/actionStream'
 import modelStream from './lib/stream/modelStream'
 import renderStream from './lib/stream/renderStream'
@@ -10,6 +11,8 @@ import {
 from './lib/stream/const'
 
 global.graphEditor = function graphEditor(lookupUrl) {
+  createHtmlElement()
+
   let topStream = actionStream()
 
   topStream

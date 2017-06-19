@@ -26,31 +26,8 @@ Include a JavaScript.
 Write in a html.
 
 ```html
-<div class="node-editor">
-  <div class="input-node">
-    <input class="label" placeholder="New Node"></input>
-    <button class="button" disabled title="create"><i class="fa fa-plus"></i></button> to be connected as
-    <label>
-      <i>chain</i><input checked/ name="create-edge" type="radio" value="chain"></label> or
-    <label>
-      <i>star</i><input name="create-edge" type="radio" value="star"/></label>.
-  </div>
-  <div class="edit-edge hidden">
-    <label>Delete Edge</label>
-    <button class="delete-button" title="delete"><i class="fa fa-trash-o"></i></button>
-  </div>
-  <span class="message"></span>
-</div>
-<div class="jsPlumb-container">
-</div>
-<div class="pgp hidden">
-</div>
-<div class="table">
-  <div class="node-table">
-  </div>
-</div>
-<div class="mappings hidden">
-</div>
+<div id="graph-editor-graph"></div>
+<div id="graph-editor-table"></div>
 ```
 
 Write in JavaScript.

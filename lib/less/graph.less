@@ -66,18 +66,9 @@
     &.hover {
       .hover;
     }
-    &._jsPlumb_hover {
-      .hover;
-    }
     &.selected {
       .selected;
     }
-  }
-  ._jsPlumb_source_hover {
-    .hover;
-  }
-  ._jsPlumb_target_hover {
-    .hover;
   }
   .edgeLabel {
     background-color: white;
@@ -89,7 +80,7 @@
     opacity: 0.8;
     padding: 0.3em;
   }
-  ._jsPlumb_connector {
+  .jtk-connector {
     path {
       cursor: pointer;
     }
@@ -112,22 +103,13 @@
       }
     }
   }
-  ._jsPlumb_hover {
-    path:nth-child(2) {
-      stroke: @hoverColor;
-    }
-    path:nth-child(3) {
-      stroke: @hoverColor;
-      fill: @hoverColor;
-    }
-  }
-  ._jsPlumb_endpoint {
+  .jtk-endpoint {
     cursor: pointer;
   }
 }
 
 // to debug
-// ._jsPlumb_endpoint {
+// .jtk-endpoint {
 //   background-color: red;
 //   width: 20px !important;
 //   height: 20px !important;

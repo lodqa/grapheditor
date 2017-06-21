@@ -19,7 +19,6 @@ Include a css.
 Include a JavaScript.
 
 ```html
-<script src="bower_components/jsplumb/dist/js/dom.jsPlumb-1.7.5.js"></script>
 <script src="bower/grapheditor/index.js"></script>
 ```
 

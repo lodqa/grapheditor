@@ -194,8 +194,5 @@
   "extends": "eslint:recommended",
   "ecmaFeatures": {
     "modules": true
-  },
-  "globals": {
-    "jsPlumb": true
   }
 }

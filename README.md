@@ -75,9 +75,21 @@ editor.addPgp({
   "focus": "node-2"
 })
 ```
-## other API
+## setDictionaryUrl API
+
+Set dictionary url option used with when finding terms of label.
+
 ```js
 editor.setDictionaryUrl('http://pubdictionaries.org:80/dictionaries/id_mapping?dictionaries=%5B%22qald-drugbank%22%2C%22qald-diseasome%22%2C%22qald-sider%22%5D&output_format=simple&threshold=0.5&top_n=0')
+```
+
+This API can set second dictionary url . That is for label of edges.
+
+```js
+editor.setDictionaryUrl(
+  'http://pubdictionaries.org:80/dictionaries/id_mapping?dictionaries=%5B%22qald-drugbank%22%2C%22qald-diseasome%22%2C%22qald-sider%22%5D&output_format=simple&threshold=0.5&top_n=0',
+  'http://pubdictionaries.org/find_ids.json?dictionary=UBERON-AE'
+)
 ```
 
 # For developer
@@ -100,7 +112,7 @@ open index.html
 ```
 
 ## Test
-[User Acceptance Test](https://github.com/lodqa/grapheditor/wiki)
+[User Acceptance Test](https://github.com/lodqa/grapheditor/wiki) (Japanese)
 
 ## Commands for Development
 Watch JavaScript files.

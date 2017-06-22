@@ -1,27 +1,45 @@
 /* node editor */
+.node-editor {
+  min-width: 480px;
+}
 .node-editor label {
   font-size: 13px;
 }
-.node-editor .url {
-  width: 260px;
-}
-.node-editor .button {
+.node-editor button {
   box-shadow: 0 0 15px 4px #42ffb2;
   -webkit-transition: box-shadow 0.3s ease-in;
   -moz-transition: box-shadow 0.3s ease-in;
   -o-transition: box-shadow 0.3s ease-in;
   transition: box-shadow 0.3s ease-in;
+  background-color: #f9f9f9;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.25em;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  width: 26px;
+  font-size: 11px;
 }
-.node-editor .button:disabled {
+.node-editor button:disabled {
   box-shadow: none;
+}
+.node-editor input {
+  box-sizing: border-box;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 /* graph */
 .jsPlumb-container {
-  height: 200px;
+  margin: 3px 0;
+  border: solid 1px #cccccc;
+  height: 150px;
   position: relative;
-  width: 600px;
+  width: 100%;
   /* graph node */
   /* graph edge */
+}
+.jsPlumb-container .placeholder {
+  color: #aaa;
 }
 .jsPlumb-container .node {
   border: 1px solid #2e6f9a;
@@ -53,7 +71,7 @@
 }
 .jsPlumb-container .node.selected {
   background-color: #df2020;
-  border-color: #ff0000;
+  border-color: #f00;
   color: white;
 }
 .jsPlumb-container .nodeDragHover {
@@ -80,22 +98,10 @@
   background-color: #fcc3cd;
   border-color: #ffc0cb;
 }
-.jsPlumb-container .edgeLabel._jsPlumb_hover {
-  background-color: #fcc3cd;
-  border-color: #ffc0cb;
-}
 .jsPlumb-container .edgeLabel.selected {
   background-color: #df2020;
-  border-color: #ff0000;
+  border-color: #f00;
   color: white;
-}
-.jsPlumb-container ._jsPlumb_source_hover {
-  background-color: #fcc3cd;
-  border-color: #ffc0cb;
-}
-.jsPlumb-container ._jsPlumb_target_hover {
-  background-color: #fcc3cd;
-  border-color: #ffc0cb;
 }
 .jsPlumb-container .edgeLabel {
   background-color: white;
@@ -107,39 +113,55 @@
   opacity: 0.8;
   padding: 0.3em;
 }
-.jsPlumb-container ._jsPlumb_connector path {
+.jsPlumb-container .jtk-connector path {
   cursor: pointer;
 }
-.jsPlumb-container ._jsPlumb_connector.selected path:nth-child(2) {
-  stroke: #ff0000;
+.jsPlumb-container .jtk-connector.selected path:nth-child(2) {
+  stroke: #f00;
 }
-.jsPlumb-container ._jsPlumb_connector.selected path:nth-child(3) {
-  stroke: #ff0000;
-  fill: #ff0000;
+.jsPlumb-container .jtk-connector.selected path:nth-child(3) {
+  stroke: #f00;
+  fill: #f00;
 }
-.jsPlumb-container ._jsPlumb_connector.hover path:nth-child(2) {
+.jsPlumb-container .jtk-connector.hover path:nth-child(2) {
   stroke: #ffc0cb;
 }
-.jsPlumb-container ._jsPlumb_connector.hover path:nth-child(3) {
-  stroke: #ffc0cb;
-  fill: #ffc0cb;
-}
-.jsPlumb-container ._jsPlumb_hover path:nth-child(2) {
-  stroke: #ffc0cb;
-}
-.jsPlumb-container ._jsPlumb_hover path:nth-child(3) {
+.jsPlumb-container .jtk-connector.hover path:nth-child(3) {
   stroke: #ffc0cb;
   fill: #ffc0cb;
 }
-.jsPlumb-container ._jsPlumb_endpoint {
+.jsPlumb-container .jtk-endpoint {
   cursor: pointer;
 }
 /* node-tabel */
+.table {
+  border: solid 1px #cccccc;
+  min-height: 60px;
+}
+.table button {
+  background-color: #f9f9f9;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.25em;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  width: 26px;
+  font-size: 11px;
+}
+.table input {
+  box-sizing: border-box;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.table .placeholder {
+  color: #aaa;
+}
 .table table {
   border-collapse: collapse;
   font-size: 0.9em;
   margin-right: 10px;
-  min-width: 300px;
+  width: 100%;
+  min-width: 520px;
 }
 .table table tr {
   height: 30px;
@@ -154,40 +176,53 @@
 .table table th {
   border: 1px solid #b9b9b9;
   padding: 3px;
-  background-color: #ddd;
+  background-color: rgba(92, 150, 188, 0.9);
   color: #333;
 }
-.table table th.label {
-  width: 32px;
+.table table th.focus {
+  width: 26px;
 }
-.table table th.label .title {
+.table table th.text {
+  width: 180px;
+}
+.table table th.text .title {
   display: inline-block;
-  width: 116px;
-}
-.table table th.url {
-  width: 50px;
+  width: 96px;
 }
 .table table td {
   border: 1px solid #b9b9b9;
   padding: 3px;
   background-color: #fff;
 }
-.table table td.label {
+.table table td.focus {
   text-align: center;
-  vertical-align: top;
-  width: 185px;
+  width: 26px;
 }
-.table table td.label input {
-  width: 110px;
+.table table td.text {
+  text-align: center;
+  vertical-align: middle;
+  width: 180px;
 }
-.table table td.term {
-  width: 460px;
+.table table td.text input {
+  width: 96px;
 }
-.table table td.term input.term {
-  width: 400px;
+.table table td.terms .term [type="checkbox"] {
+  font-size: 16px;
+  margin: 0 3px;
+  vertical-align: text-top;
 }
-.table table td.term .add [type="checkbox"] {
+.table table td.terms .term.hover input.term {
+  background-color: rgba(255, 0, 0, 0.5);
+  text-decoration: line-through;
+}
+.table table td.terms input.term {
+  width: calc(100% - 56px);
+  box-sizing: border-box;
+}
+.table table td.terms .add [type="checkbox"] {
+  margin: 0 3px;
   visibility: hidden;
+  width: 13px;
 }
 .hidden {
   display: none;

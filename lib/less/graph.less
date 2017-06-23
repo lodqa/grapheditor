@@ -1,5 +1,17 @@
 @import "transition.less";
 @import "color.less";
+@import "hidden.less";
+
+// icon mixin
+.icon {
+  color: black;
+  cursor: pointer;
+  display: block;
+  padding: 0 5px;
+  position: absolute;
+  text-align: center;
+  top: -16px;
+}
 
 /* graph */
 .jsPlumb-container {
@@ -40,20 +52,36 @@
     &.hover {
       .hover;
     }
+    .name {
+      display: inline;
+    }
+    .editInput {
+      .hidden
+    }
+    .editIcon {
+      .hidden
+    }
     .deleteIcon {
-      display: none;
+      .hidden
     }
     &.selected {
       .selected;
+      .editIcon {
+        .icon;
+        right: 15px;
+      }
       .deleteIcon {
-        color: black;
-        cursor: pointer;
-        display: block;
-        padding: 0 5px;
-        position: absolute;
+        .icon;
         right: -4px;
-        text-align: center;
-        top: -16px;
+      }
+      &.editing {
+        max-width: initial;
+        .name {
+          display: none;
+        }
+        .editInput {
+          display: block;
+        }
       }
     }
   }

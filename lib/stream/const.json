@@ -42,7 +42,8 @@
     "NODE_EDITOR": ".node-editor",
     "NODE_TABLE": ".node-table",
     "PGP": ".pgp",
-    "TABLE": ".table"
+    "TABLE": ".table",
+    "ADD_EMPTY_NODE": ".add-empty-node"
   },
   "state": {
     "DONE": "done",

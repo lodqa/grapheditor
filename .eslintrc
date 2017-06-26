@@ -23,7 +23,7 @@
     "no-dupe-keys": 2,
     "no-duplicate-case": 2,
     "no-empty-character-class": 2,
-    "no-empty": 2,
+    "no-empty": 1,
     "no-ex-assign": 2,
     "no-extra-boolean-cast": 2,
     "prefer-reflect": 2,
@@ -117,7 +117,7 @@
     "no-sync": 2,
     "array-bracket-spacing": 2,
     "block-spacing": 2,
-    "brace-style": 2,
+    "brace-style": 1,
     "camelcase": 2,
     "comma-spacing": 2,
     "comma-style": 2,
@@ -179,7 +179,7 @@
     "newline-after-var": 2,
     "sort-vars": 0,
     "curly": 2,
-    "object-shorthand": 2,
+    "object-shorthand": 1,
     "prefer-const": 1
   },
   "env": {

@@ -1,20 +1,27 @@
 @import "transition.less";
 @import "input.less";
+
 /* node editor */
 .node-editor {
+    display: flex;
+    justify-content: space-between;
+    line-height: 2em;
     min-width: 480px;
 
     label {
         font-size: 13px;
     }
 
-    button {
+    .node-text {
         box-shadow: 0 0 15px 4px #42ffb2;
         .transition(0.3s, box-shadow);
 
         &:disabled {
             box-shadow: none;
         }
+    }
+
+    button {
         .button;
     }
 

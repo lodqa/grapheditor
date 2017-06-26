@@ -164,7 +164,7 @@
     "no-param-reassign": 2,
     "no-else-return": 2,
     "func-names": 2,
-    "one-var": 0,
+    "one-var": [1, never],
     "padded-blocks": [2, "never"],
     "quote-props": [2, "as-needed"],
     "space-before-function-paren": [2, "never"],
@@ -179,7 +179,8 @@
     "newline-after-var": 2,
     "sort-vars": 0,
     "curly": 2,
-    "object-shorthand": 2
+    "object-shorthand": 2,
+    "prefer-const": 1
   },
   "env": {
     "es6": true,

@@ -7,17 +7,17 @@
     "url": "https://github.com/lodqa/grapheditor/issues"
   },
   "dependencies": {
-    "action-stream": "^0.3.3",
+    "action-stream": "^0.3.4",
     "babel-polyfill": "^6.23.0",
     "clone": "^2.1.1",
-    "debounce": "^1.0.0",
+    "debounce": "^1.0.2",
     "dom-delegate": "^2.0.3",
     "duplexer": "^0.1.1",
-    "global": "^4.3.0",
+    "global": "^4.3.2",
     "jsplumb": "^2.4.3",
     "ractive": "^0.9.1",
     "springy": "^2.7.1",
-    "stream-browserify": "^2.0.0",
+    "stream-browserify": "^2.0.1",
     "superagent": "^3.5.2",
     "uuid": "^3.1.0"
   },
@@ -27,13 +27,13 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-plugin-transform-es2015-object-super": "^6.24.1",
     "babelify": "^7.3.0",
-    "body-parser": "^1.13.3",
+    "body-parser": "^1.17.2",
     "browserify": "^14.4.0",
-    "connect": "^3.4.0",
-    "eslint": "^4.0.0",
-    "estraverse": "^4.1.1",
-    "less": "^2.5.1",
-    "watchify": "^3.6.0"
+    "connect": "^3.6.2",
+    "eslint": "^4.1.1",
+    "estraverse": "^4.2.0",
+    "less": "^2.7.2",
+    "watchify": "^3.9.0"
   },
   "homepage": "https://github.com/lodqa/grapheditor",
   "keywords": [

@@ -20,8 +20,7 @@
     "UNSELECT": "unselect",
     "UPDATE_TEXT": "update-text",
     "UPDATE_TERM": "update-term",
-    "UPDATE_STATE": "update-state",
-    "VALIDATE": "validate"
+    "UPDATE_STATE": "update-state"
   },
   "target": {
     "EDITOR": "editor",
@@ -38,9 +37,7 @@
     "ADD_EMPTY_NODE": ".add-empty-node",
     "EDGE_TABLE": ".edge-table",
     "GRPAPH": ".jsPlumb-container",
-    "INPUT_NODE": ".input-node",
     "MAPPINGS": ".mappings",
-    "NODE_EDITOR": ".node-editor",
     "NODE_TABLE": ".node-table",
     "PGP": ".pgp",
     "TABLE": ".table"

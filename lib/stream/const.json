@@ -35,6 +35,7 @@
     "VIEW_NODE": "view-node"
   },
   "selector": {
+    "ADD_EMPTY_NODE": ".add-empty-node",
     "EDGE_TABLE": ".edge-table",
     "GRPAPH": ".jsPlumb-container",
     "INPUT_NODE": ".input-node",
@@ -42,8 +43,7 @@
     "NODE_EDITOR": ".node-editor",
     "NODE_TABLE": ".node-table",
     "PGP": ".pgp",
-    "TABLE": ".table",
-    "ADD_EMPTY_NODE": ".add-empty-node"
+    "TABLE": ".table"
   },
   "state": {
     "DONE": "done",

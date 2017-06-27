@@ -13,7 +13,7 @@ from './lib/stream/const'
 global.graphEditor = function graphEditor(lookupUrl) {
   createHtmlElement()
 
-  let topStream = actionStream()
+  const topStream = actionStream()
 
   topStream
     .pipe(modelStream(lookupUrl))
@@ -37,7 +37,7 @@ function setDictionaryUrl(stream, dictionaryUrl, predDictionaryUrl) {
 
 function addPgp(stream, pgp) {
   if (pgp && pgp.nodes) {
-    for (let id of Object.keys(pgp.nodes)) {
+    for (const id of Object.keys(pgp.nodes)) {
       stream.push({
         source: ['graph-editor.js'],
         target: target.MODEL_NODE,
@@ -58,7 +58,7 @@ function addPgp(stream, pgp) {
   if (pgp && pgp.edges) {
     // Wait for creations of nodes.
     global.setTimeout(() => {
-      for (let edge of pgp.edges) {
+      for (const edge of pgp.edges) {
         stream.push({
           source: ['graph-editor.js'],
           target: target.VIEW_EDGE,

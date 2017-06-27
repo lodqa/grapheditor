@@ -1,4 +1,3 @@
-import 'babel-polyfill'
 import global from 'global'
 
 import createHtmlElement from './lib/createHtmlElement'

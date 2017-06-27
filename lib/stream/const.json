@@ -4,7 +4,6 @@
     "DELETE": "delete",
     "CREATE": "create",
     "DRAG": "drag",
-    "END_EDIT": "end-edit",
     "FIND_TERM": "find-term",
     "FOCUS": "focus",
     "HOVER": "hover",

@@ -25,12 +25,12 @@
     min-width: 520px;
     tr {
       height: 30px;
+      &.hover td {
+        background-color: @hoverColor;
+      }
       &.selected td {
         color: white;
         background-color: desaturate(@selectedColor, 25%);
-      }
-      &.hover td {
-        background-color: @hoverColor;
       }
     }
     th {

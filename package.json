@@ -12,7 +12,6 @@
     "debounce": "^1.0.2",
     "dom-delegate": "^2.0.3",
     "duplexer": "^0.1.1",
-    "global": "^4.3.2",
     "jsplumb": "^2.4.3",
     "ractive": "^0.9.1",
     "springy": "^2.7.1",

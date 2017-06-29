@@ -1,5 +1,3 @@
-import global from 'global'
-
 import createHtmlElement from './lib/createHtmlElement'
 import actionStream from './lib/stream/actionStream'
 import modelStream from './lib/stream/modelStream'
@@ -9,7 +7,7 @@ import {
 }
 from './lib/stream/const'
 
-global.graphEditor = function graphEditor(lookupUrl) {
+window.graphEditor = function graphEditor(lookupUrl) {
   createHtmlElement()
 
   const topStream = actionStream()
@@ -56,7 +54,7 @@ function addPgp(stream, pgp) {
 
   if (pgp && pgp.edges) {
     // Wait for creations of nodes.
-    global.setTimeout(() => {
+    setTimeout(() => {
       for (const edge of pgp.edges) {
         stream.push({
           source: ['graph-editor.js'],

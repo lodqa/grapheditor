@@ -36,6 +36,12 @@
   .placeholder {
     color: @placeholderColor;
   }
+  .editIcon {
+    .hidden
+  }
+  .deleteIcon {
+    .hidden
+  }
   /* graph node */
   .node {
     border: 1px solid #2e6f9a;
@@ -60,12 +66,6 @@
       display: inline;
     }
     .editInput {
-      .hidden
-    }
-    .editIcon {
-      .hidden
-    }
-    .deleteIcon {
       .hidden
     }
     &.selected {
@@ -108,22 +108,39 @@
   }
   /* graph edge */
   .edgeLabel {
+    font-size: 11px;
+    .name {
+      background-color: white;
+      border: 1px solid #346789;
+      border-color: orange;
+      border-radius: 0.5em;
+      cursor: pointer;
+      opacity: 0.8;
+      padding: 0.3em;
+    }
+    &.no-text {
+      .name {
+        .hidden
+      }
+    }
     &.hover {
-      .hover;
+      .name {
+        .hover;
+      }
     }
     &.selected {
-      .selected;
+      .name {
+        .selected;
+      }
+      .editIcon {
+        .icon;
+        right: 15px;
+      }
+      .deleteIcon {
+        .icon;
+        right: -4px;
+      }
     }
-  }
-  .edgeLabel {
-    background-color: white;
-    border: 1px solid #346789;
-    border-color: orange;
-    border-radius: 0.5em;
-    cursor: pointer;
-    font-size: 11px;
-    opacity: 0.8;
-    padding: 0.3em;
   }
   .jtk-connector {
     path {

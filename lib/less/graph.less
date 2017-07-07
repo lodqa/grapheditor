@@ -10,7 +10,7 @@
   padding: 0 5px;
   position: absolute;
   text-align: center;
-  top: -16px;
+  top: -18px;
   &:hover {
     background-color: lightgrey;
     border-radius: 2px;
@@ -36,6 +36,9 @@
   .placeholder {
     color: @placeholderColor;
   }
+  .focusIcon {
+    .hidden
+  }
   .editIcon {
     .hidden
   }
@@ -53,6 +56,7 @@
     opacity: 0.8;
     padding: 16px;
     position: absolute;
+    min-width: 6em;
     max-width: 10em;
     .transition(0.25s ,background-color);
     .transition(0.25s ,color);
@@ -68,8 +72,31 @@
     .editInput {
       .hidden
     }
+    .focusIcon {
+      left: -3px;
+    }
+    &.focus {
+      .focusIcon {
+        .icon;
+        color: black;
+        cursor: default;
+        &:hover {
+          background-color: transparent;
+          border-radius: 0;
+        }
+      }
+    }
     &.selected {
       .selected;
+      .focusIcon {
+        .icon;
+        color: gray;
+      }
+      &.focus {
+        .focusIcon {
+          color: black;
+        }
+      }
       .editIcon {
         .icon;
         right: 15px;

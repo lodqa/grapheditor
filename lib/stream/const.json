@@ -23,7 +23,6 @@
     "UPDATE_STATE": "update-state"
   },
   "target": {
-    "EDITOR": "editor",
     "LAYOUT_EDGE": "layout-edge",
     "LAYOUT_NODE": "layout-node",
     "MODEL": "model",

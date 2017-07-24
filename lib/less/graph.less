@@ -16,6 +16,14 @@
     border-radius: 2px;
   }
 }
+.icon--cannot_selectable {
+  color: black;
+  cursor: default;
+  &:hover {
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
 
 /* graph */
 .jsPlumb-container {
@@ -78,12 +86,7 @@
     &.focus {
       .focusIcon {
         .icon;
-        color: black;
-        cursor: default;
-        &:hover {
-          background-color: transparent;
-          border-radius: 0;
-        }
+        .icon--cannot_selectable;
       }
     }
     &.selected {
@@ -94,7 +97,7 @@
       }
       &.focus {
         .focusIcon {
-          color: black;
+          .icon--cannot_selectable
         }
       }
       .editIcon {

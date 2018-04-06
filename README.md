@@ -13,7 +13,7 @@ Include a css.
 
 ```html
 <link href="bower/grapheditor/index.css">
-<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
 ```
 
 Include a JavaScript.

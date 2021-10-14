@@ -28,7 +28,7 @@
     "body-parser": "^1.19.0",
     "browserify": "^17.0.0",
     "connect": "^3.7.0",
-    "eslint": "^4.5.0",
+    "eslint": "^8.0.1",
     "estraverse": "^5.2.0",
     "less": "^4.1.2",
     "watchify": "^4.0.0"

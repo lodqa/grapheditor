@@ -2233,6 +2233,7 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.NodeRenderStream = exports.LayoutStream = exports.EdgeRenderStream = undefined;
 
 var _EdgeRenderStream = require('./EdgeRenderStream');
 
@@ -2248,12 +2249,9 @@ var _NodeRenderStream2 = _interopRequireDefault(_NodeRenderStream);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = {
-  EdgeRenderStream: _EdgeRenderStream2.default,
-  LayoutStream: _LayoutStream2.default,
-  NodeRenderStream: _NodeRenderStream2.default
-};
-module.exports = exports['default'];
+exports.EdgeRenderStream = _EdgeRenderStream2.default;
+exports.LayoutStream = _LayoutStream2.default;
+exports.NodeRenderStream = _NodeRenderStream2.default;
 
 },{"./EdgeRenderStream":37,"./LayoutStream":38,"./NodeRenderStream":39}],41:[function(require,module,exports){
 'use strict';
@@ -2429,6 +2427,7 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.TableMessageRenderStream = exports.PlaceholderRenderStream = exports.NodeTableRenderStream = exports.EdgeTableRenderStream = undefined;
 
 var _EdgeTableRenderStream = require('./EdgeTableRenderStream');
 
@@ -2448,13 +2447,10 @@ var _MessageRenderStream2 = _interopRequireDefault(_MessageRenderStream);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = {
-  EdgeTableRenderStream: _EdgeTableRenderStream2.default,
-  NodeTableRenderStream: _NodeTableRenderStream2.default,
-  PlaceholderRenderStream: _PlaceholderRenderStream2.default,
-  TableMessageRenderStream: _MessageRenderStream2.default
-};
-module.exports = exports['default'];
+exports.EdgeTableRenderStream = _EdgeTableRenderStream2.default;
+exports.NodeTableRenderStream = _NodeTableRenderStream2.default;
+exports.PlaceholderRenderStream = _PlaceholderRenderStream2.default;
+exports.TableMessageRenderStream = _MessageRenderStream2.default;
 
 },{"./EdgeTableRenderStream":42,"./MessageRenderStream":43,"./NodeTableRenderStream":44,"./PlaceholderRenderStream":45}],47:[function(require,module,exports){
 'use strict';

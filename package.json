@@ -49,6 +49,7 @@
     "browserify": "browserify graph-editor -t babelify -o index.js",
     "less": "lessc index.less > index.css",
     "lint": "eslint lib",
+    "preversion": "npm start && git add index.*",
     "start": "npm run browserify && npm run less",
     "stub": "node dev/stub.mjs",
     "test": "echo \"Error: no test specified\" && exit 1",

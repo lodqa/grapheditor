@@ -97,8 +97,6 @@ editor.setDictionaryUrl(
 
 ```
 npm install
-npm install -g bower
-bower install
 ```
 
 ## Build

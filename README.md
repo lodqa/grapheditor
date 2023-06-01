@@ -3,23 +3,23 @@
 
 # Usage
 
-Install by the bower.
+Install by the npm.
 
 ```
-bower install grapheditor
+npm install github:lodqa/grapheditor
 ```
 
 Include a css.
 
 ```html
-<link href="bower/grapheditor/index.css">
+<link href="node_modules/graph-editor/index.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
 ```
 
 Include a JavaScript.
 
 ```html
-<script src="bower/grapheditor/index.js"></script>
+<script src="node_modules/graph-editor/index.js"></script>
 ```
 
 Write in a html.

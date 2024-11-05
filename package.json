@@ -1,7 +1,7 @@
 {
   "name": "graph-editor",
   "description": "grapd editor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "shigeru.nakajima@luxiar.com",
   "bugs": {
     "url": "https://github.com/lodqa/grapheditor/issues"

@@ -10,7 +10,7 @@ var _modelStream2 = _interopRequireDefault(_modelStream);
 var _renderStream = require("./lib/stream/renderStream");
 var _renderStream2 = _interopRequireDefault(_renderStream);
 var _const = require("./lib/stream/const");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 window.graphEditor = function graphEditor(lookupUrl) {
   (0, _createHtmlElement2.default)();
   const topStream = (0, _actionStream2.default)();
@@ -110,7 +110,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var _Model = require("./Model");
 var _Model2 = _interopRequireDefault(_Model);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // Edge has no duplicate edge.
 exports.default = class extends _Model2.default {
   constructor() {
@@ -181,7 +181,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var _toArray = require("./toArray");
 var _toArray2 = _interopRequireDefault(_toArray);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // Model class is base of models.
 // It has key-values of text. The key is text and value is terms.
 // The terms is array of value and enable.
@@ -284,7 +284,7 @@ var _toArray = require("./toArray");
 var _toArray2 = _interopRequireDefault(_toArray);
 var _NodeSnapshot = require("./NodeSnapshot");
 var _NodeSnapshot2 = _interopRequireDefault(_NodeSnapshot);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // Node has one focus node.
 exports.default = class extends _Model2.default {
   constructor() {
@@ -342,7 +342,7 @@ exports.default = function (map) {
 };
 var _clone = require("clone");
 var _clone2 = _interopRequireDefault(_clone);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"clone":93}],8:[function(require,module,exports){
@@ -384,7 +384,7 @@ var _actionStream = require("action-stream");
 var _graphComponent = require("../../view/graphComponent");
 var _graphComponent2 = _interopRequireDefault(_graphComponent);
 var _const = require("../const");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // jsPlumb suppress exceptions.
 exports.default = class extends _actionStream.ActionReadable {
   constructor(selector) {
@@ -515,7 +515,7 @@ var _actionStream = require("action-stream");
 var _graphComponent = require("../../view/graphComponent");
 var _graphComponent2 = _interopRequireDefault(_graphComponent);
 var _const = require("../const");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // jsPlumb suppress exceptions.
 exports.default = class extends _actionStream.ActionReadable {
   constructor(selector) {
@@ -594,7 +594,7 @@ var _actionStream = require("action-stream");
 var _const = require("../const");
 var _forceDirectedLayoutComponent = require("../../view/forceDirectedLayoutComponent");
 var _forceDirectedLayoutComponent2 = _interopRequireDefault(_forceDirectedLayoutComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionReadable {
   constructor() {
     super();
@@ -622,7 +622,7 @@ var _actionStream = require("action-stream");
 var _const = require("../const");
 var _graphComponent = require("../../view/graphComponent");
 var _graphComponent2 = _interopRequireDefault(_graphComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionReadable {
   constructor(selector) {
     super(selector);
@@ -773,7 +773,7 @@ var _EdgeTableActionStream = require("./table/EdgeTableActionStream");
 var _EdgeTableActionStream2 = _interopRequireDefault(_EdgeTableActionStream);
 var _KeyboardActionStream = require("./KeyboardActionStream");
 var _KeyboardActionStream2 = _interopRequireDefault(_KeyboardActionStream);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"../const":20,"./AddEmptyNodeActionStream":8,"./EdgeActionStream":9,"./GraphActionStream":10,"./KeyboardActionStream":11,"./LayoutActionStream":12,"./NodeActionStream":13,"./table/EdgeTableActionStream":15,"./table/NodeTableActionStream":16,"action-stream":82}],15:[function(require,module,exports){
@@ -792,7 +792,7 @@ var _edgeTableComponent2 = _interopRequireDefault(_edgeTableComponent);
 var _const = require("../../const");
 var _Term = require("./Term");
 var _Term2 = _interopRequireDefault(_Term);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionReadable {
   constructor(selector) {
     super(selector);
@@ -877,7 +877,7 @@ var _nodeTableComponent2 = _interopRequireDefault(_nodeTableComponent);
 var _const = require("../../const");
 var _Term = require("./Term");
 var _Term2 = _interopRequireDefault(_Term);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionReadable {
   constructor(selector) {
     super(selector);
@@ -977,7 +977,7 @@ var _pushUpdateTerm = require("./pushUpdateTerm");
 var _pushUpdateTerm2 = _interopRequireDefault(_pushUpdateTerm);
 var _getButton = require("./getButton");
 var _getButton2 = _interopRequireDefault(_getButton);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function addTermButtonClick(e, component, target, push) {
   const button = (0, _getButton2.default)(e.target);
   const input = button.previousElementSibling;
@@ -1187,9 +1187,9 @@ var _pushSnapshot = require("./pushSnapshot");
 var _pushSnapshot2 = _interopRequireDefault(_pushSnapshot);
 var _text = require("./text");
 var text = _interopRequireWildcard(_text);
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(edges) {
     super();
@@ -1253,7 +1253,7 @@ var _updateModels = require("./updateModels");
 var _updateModels2 = _interopRequireDefault(_updateModels);
 var _updateState = require("./updateState");
 var _updateState2 = _interopRequireDefault(_updateState);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const start = {
   target: _const.target.TABLE,
   type: _const.actionType.UPDATE_STATE,
@@ -1335,7 +1335,7 @@ var _toInformation = require("./toInformation");
 var _toInformation2 = _interopRequireDefault(_toInformation);
 var _done = require("./done");
 var _done2 = _interopRequireDefault(_done);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(nodes, edges, findTermUrl) {
     super();
@@ -1380,7 +1380,7 @@ exports.default = function (findTermUrl, dictionaryUrl, texts) {
 };
 var _superagent = require("superagent");
 var _superagent2 = _interopRequireDefault(_superagent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"superagent":151}],29:[function(require,module,exports){
@@ -1399,7 +1399,7 @@ exports.default = function (model, texts, target, findTermUrl, dictionaryUrl) {
 };
 var _findTerm = require("./findTerm");
 var _findTerm2 = _interopRequireDefault(_findTerm);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"./findTerm":28}],30:[function(require,module,exports){
@@ -1414,9 +1414,9 @@ var _pushSnapshot = require("./pushSnapshot");
 var _pushSnapshot2 = _interopRequireDefault(_pushSnapshot);
 var _text = require("./text");
 var text = _interopRequireWildcard(_text);
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(nodes) {
     super();
@@ -1654,7 +1654,7 @@ var _Node = require("../../model/Node");
 var _Node2 = _interopRequireDefault(_Node);
 var _Edge = require("../../model/Edge");
 var _Edge2 = _interopRequireDefault(_Edge);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"../../model/Edge":3,"../../model/Node":5,"./DataModelAssociatedEdgeStream":21,"./DataModelAssociatedNodeStream":22,"./DataModelEdgeStream":23,"./DataModelFindTermStream":27,"./DataModelNodeStream":30,"./SelectionModelStream":31,"duplexer":99}],33:[function(require,module,exports){
@@ -1682,7 +1682,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.updateTerm = exports.update = exports.appendText = undefined;
 var _pushSnapshot = require("./pushSnapshot");
 var _pushSnapshot2 = _interopRequireDefault(_pushSnapshot);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.appendText = appendText;
 exports.update = update;
 exports.updateTerm = updateTerm;
@@ -1716,7 +1716,7 @@ var _actionStream = require("action-stream");
 var _const = require("../const");
 var _mappingsComponent = require("../../view/mappingsComponent");
 var _mappingsComponent2 = _interopRequireDefault(_mappingsComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(selector) {
     super();
@@ -1737,7 +1737,7 @@ var _actionStream = require("action-stream");
 var _const = require("../const");
 var _pgpComponent = require("../../view/pgpComponent");
 var _pgpComponent2 = _interopRequireDefault(_pgpComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(selector) {
     super();
@@ -1758,7 +1758,7 @@ var _actionStream = require("action-stream");
 var _const = require("../../const");
 var _graphComponent = require("../../../view/graphComponent");
 var _graphComponent2 = _interopRequireDefault(_graphComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(selector) {
     super();
@@ -1778,7 +1778,7 @@ var _actionStream = require("action-stream");
 var _const = require("../../const");
 var _forceDirectedLayoutComponent = require("../../../view/forceDirectedLayoutComponent");
 var _forceDirectedLayoutComponent2 = _interopRequireDefault(_forceDirectedLayoutComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor() {
     super();
@@ -1801,7 +1801,7 @@ var _actionStream = require("action-stream");
 var _const = require("../../const");
 var _graphComponent = require("../../../view/graphComponent");
 var _graphComponent2 = _interopRequireDefault(_graphComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(selector) {
     super();
@@ -1824,7 +1824,7 @@ var _LayoutStream = require("./LayoutStream");
 var _LayoutStream2 = _interopRequireDefault(_LayoutStream);
 var _NodeRenderStream = require("./NodeRenderStream");
 var _NodeRenderStream2 = _interopRequireDefault(_NodeRenderStream);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.EdgeRenderStream = _EdgeRenderStream2.default;
 exports.LayoutStream = _LayoutStream2.default;
 exports.NodeRenderStream = _NodeRenderStream2.default;
@@ -1849,7 +1849,7 @@ var _PgpRenderStream = require("./PgpRenderStream");
 var _PgpRenderStream2 = _interopRequireDefault(_PgpRenderStream);
 var _MappingsRenderStream = require("./MappingsRenderStream");
 var _MappingsRenderStream2 = _interopRequireDefault(_MappingsRenderStream);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"../const":20,"./MappingsRenderStream":35,"./PgpRenderStream":36,"./graph":40,"./table":46,"action-stream":82}],42:[function(require,module,exports){
@@ -1862,7 +1862,7 @@ var _actionStream = require("action-stream");
 var _const = require("../../const");
 var _edgeTableComponent = require("../../../view/table/edgeTableComponent");
 var _edgeTableComponent2 = _interopRequireDefault(_edgeTableComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(selector) {
     super();
@@ -1883,7 +1883,7 @@ var _actionStream = require("action-stream");
 var _const = require("../../const");
 var _messageComponent = require("../../../view/messageComponent");
 var _messageComponent2 = _interopRequireDefault(_messageComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(selector) {
     super();
@@ -1921,7 +1921,7 @@ var _actionStream = require("action-stream");
 var _const = require("../../const");
 var _nodeTableComponent = require("../../../view/table/nodeTableComponent");
 var _nodeTableComponent2 = _interopRequireDefault(_nodeTableComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(selector) {
     super();
@@ -1942,7 +1942,7 @@ var _actionStream = require("action-stream");
 var _const = require("../../const");
 var _placeholderComponent = require("../../../view/table/placeholderComponent");
 var _placeholderComponent2 = _interopRequireDefault(_placeholderComponent);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.default = class extends _actionStream.ActionTransform {
   constructor(selector) {
     super();
@@ -1967,7 +1967,7 @@ var _PlaceholderRenderStream = require("./PlaceholderRenderStream");
 var _PlaceholderRenderStream2 = _interopRequireDefault(_PlaceholderRenderStream);
 var _MessageRenderStream = require("./MessageRenderStream");
 var _MessageRenderStream2 = _interopRequireDefault(_MessageRenderStream);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.EdgeTableRenderStream = _EdgeTableRenderStream2.default;
 exports.NodeTableRenderStream = _NodeTableRenderStream2.default;
 exports.PlaceholderRenderStream = _PlaceholderRenderStream2.default;
@@ -1991,7 +1991,7 @@ exports.default = function () {
 };
 var _springy = require("springy");
 var _springy2 = _interopRequireDefault(_springy);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // Singleton.
 const graph = new _springy2.default.Graph();
 const layout = new _springy2.default.Layout.ForceDirected(graph, 400.0, 400.0, 0.5);
@@ -2002,6 +2002,7 @@ let onMove;
 // graph.addGraphListener({
 //   graphChanged: () => console.log('Sprinfy Graph Changed', graph.edges, graph.nodes)
 // })
+
 function addNode(graph, id) {
   graph.addNode(new _springy2.default.Node(id));
 }
@@ -2136,7 +2137,7 @@ exports.default = function (connection, className) {
 };
 var _getEdgeLabel = require("./getEdgeLabel");
 var _getEdgeLabel2 = _interopRequireDefault(_getEdgeLabel);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function addClassToLabel(connection, className) {
   const labelOverlay = connection.getOverlay('label');
   if (labelOverlay) {
@@ -2176,7 +2177,7 @@ var _switchOverlayToLabel = require("./switchOverlayToLabel");
 var _switchOverlayToLabel2 = _interopRequireDefault(_switchOverlayToLabel);
 var _toEditParam = require("./toEditParam");
 var _toEditParam2 = _interopRequireDefault(_toEditParam);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // A wrapper class to utilize 'jsPlumb connection' API
 exports.default = class {
   constructor(instance, sourceId, targetId) {
@@ -2268,7 +2269,7 @@ exports.default = function (connection, selected) {
 };
 var _toLabelParam = require("../toLabelParam");
 var _toLabelParam2 = _interopRequireDefault(_toLabelParam);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"../toLabelParam":59}],54:[function(require,module,exports){
@@ -2298,7 +2299,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = toEditParam;
 var _toOverlayPalameter = require("../toOverlayPalameter");
 var _toOverlayPalameter2 = _interopRequireDefault(_toOverlayPalameter);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function toEditParam(label) {
   return (0, _toOverlayPalameter2.default)('edit', `
     <div class="edgeEdit">
@@ -2319,7 +2320,7 @@ var _toLabelParam = require("./toLabelParam");
 var _toLabelParam2 = _interopRequireDefault(_toLabelParam);
 var _Connection = require("./Connection");
 var _Connection2 = _interopRequireDefault(_Connection);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.register = register;
 exports.unselectAll = unselectAll;
 function register(instance, sourceId, targetId, label = '') {
@@ -2370,9 +2371,9 @@ var _getNameSpan = require("./getNameSpan");
 var _getNameSpan2 = _interopRequireDefault(_getNameSpan);
 var _connectionUtil = require("./connectionUtil");
 var connectionUtil = _interopRequireWildcard(_connectionUtil);
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.afterCreate = afterCreate;
 exports.create = create;
 exports.update = update;
@@ -2473,7 +2474,7 @@ exports.default = function (label, selected = false) {
 };
 var _toOverlayPalameter = require("./toOverlayPalameter");
 var _toOverlayPalameter2 = _interopRequireDefault(_toOverlayPalameter);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"./toOverlayPalameter":60}],60:[function(require,module,exports){
@@ -2545,9 +2546,9 @@ var _nodeApi = require("./nodeApi");
 var nodeApi = _interopRequireWildcard(_nodeApi);
 var _edgeApi = require("./edgeApi");
 var edgeApi = _interopRequireWildcard(_edgeApi);
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 const emitter = new _events.EventEmitter();
 
 // To be singleton.
@@ -2600,7 +2601,7 @@ var _removeClass = require("./removeClass");
 var _removeClass2 = _interopRequireDefault(_removeClass);
 var _throttleit = require("throttleit");
 var _throttleit2 = _interopRequireDefault(_throttleit);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 exports.create = _createNode2.default;
 exports.endEdit = endEdit;
 exports.focus = focus;
@@ -2748,7 +2749,7 @@ exports.default = function (container, selector) {
 };
 var _removeClass = require("./removeClass");
 var _removeClass2 = _interopRequireDefault(_removeClass);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"./removeClass":64}],66:[function(require,module,exports){
@@ -2763,7 +2764,7 @@ exports.default = function (container, selector, excludeId) {
 };
 var _removeClass = require("./removeClass");
 var _removeClass2 = _interopRequireDefault(_removeClass);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"./removeClass":64}],67:[function(require,module,exports){
@@ -2845,7 +2846,7 @@ exports.default = function (selector) {
 };
 var _pgp = require("./pgp");
 var _pgp2 = _interopRequireDefault(_pgp);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function setNode(component, pgp, nodes, focus) {
   pgp.nodes = nodes;
   pgp.focus = focus;
@@ -3014,7 +3015,7 @@ var _unhoverTerm = require("../unhoverTerm");
 var _unhoverTerm2 = _interopRequireDefault(_unhoverTerm);
 var _switchStateSearching = require("../switchStateSearching");
 var _switchStateSearching2 = _interopRequireDefault(_switchStateSearching);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // To be singleton.
 let ractive;
 function select(texts, sourceId, targetId) {
@@ -3216,7 +3217,7 @@ var _unhoverTerm = require("../unhoverTerm");
 var _unhoverTerm2 = _interopRequireDefault(_unhoverTerm);
 var _switchStateSearching = require("../switchStateSearching");
 var _switchStateSearching2 = _interopRequireDefault(_switchStateSearching);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // To be singleton.
 let ractive;
 function select(texts, id) {
@@ -3329,7 +3330,7 @@ var _NodeSnapshot = require("../../../model/NodeSnapshot");
 var _NodeSnapshot2 = _interopRequireDefault(_NodeSnapshot);
 var _transform = require("../transform");
 var _transform2 = _interopRequireDefault(_transform);
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 module.exports = exports.default;
 
 },{"../../../model/NodeSnapshot":6,"../transform":80}],78:[function(require,module,exports){
@@ -8071,13 +8072,17 @@ module.exports = hasPropertyDescriptors;
 'use strict';
 
 var test = {
+	__proto__: null,
 	foo: {}
 };
 
 var $Object = Object;
 
+/** @type {import('.')} */
 module.exports = function hasProto() {
-	return { __proto__: test }.foo === test.foo && !({ __proto__: null } instanceof $Object);
+	// @ts-expect-error: TS errors on an inherited property for some reason
+	return { __proto__: test }.foo === test.foo
+		&& !(test instanceof $Object);
 };
 
 },{}],116:[function(require,module,exports){
